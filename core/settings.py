@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://dsa-gatf.herokuapp.com/']
+ALLOWED_HOSTS = ['dsa-gatf.herokuapp.com']
 
 # Application definition
 
