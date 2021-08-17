@@ -124,8 +124,8 @@ STATICFILES_DIRS = (
     os.path.join(REACT_APP_DIR, 'build',
                  'static'),  # update the STATICFILES_DIRS
 )
-# STATIC_ROOT = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = 'static/'
+
 
 CORS_ALLOW_HEADERS = [
     'accept', 'accept-encoding', 'authorization', 'content-type', 'origin',
