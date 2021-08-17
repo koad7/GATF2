@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['dsa-gatf.herokuapp.com']
 
@@ -120,12 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend')
-STATICFILES_DIRS = (
-    os.path.join(REACT_APP_DIR, 'build',
-                 'static'),  # update the STATICFILES_DIRS
-)
+STATICFILES_DIRS = (os.path.join(REACT_APP_DIR, 'build', 'static'), )
 STATIC_ROOT = 'static/'
-
 
 CORS_ALLOW_HEADERS = [
     'accept', 'accept-encoding', 'authorization', 'content-type', 'origin',
