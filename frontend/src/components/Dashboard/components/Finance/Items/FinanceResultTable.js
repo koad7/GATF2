@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
       padding: theme.spacing(2),
-      textAlign: 'center',
+      textAlign: 'left',
       color: theme.palette.text.secondary,
     },
     formControl: {
@@ -79,14 +79,14 @@ try{
     return (
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
+          <Table stickyHeader aria-label="sticky table" >
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    align="left"
+                    style={{ minWidth: column.minWidth}}
                   >
                     {column.label}
                   </TableCell>
@@ -100,7 +100,7 @@ try{
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align="left">
                           {column.format && typeof value === 'number' ? column.format(value) : value}
                         </TableCell>
                       );

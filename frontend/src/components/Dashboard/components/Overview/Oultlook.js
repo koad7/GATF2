@@ -52,7 +52,7 @@ if(props.filterObj.Project){
     try{
       nextstep=filterByValue (out.data[0].NextSteps, props.filterObj.Quarter)
     }catch(error){ 
-      nextstep=''
+      nextstep=null
     }
   }
 }else{
@@ -64,7 +64,7 @@ if(props.filterObj.Project){
     try{
       nextstep=filterByValue (out.data.NextSteps, props.filterObj.Quarter)
     }catch(error){ 
-      nextstep=''
+      nextstep=null
     }
   }
 }
@@ -79,7 +79,7 @@ return (
             {nextstep ?
             <>
               <Typography variant="h6" align='left'>
-                <b style={{color:'black'}}> {nextstep ? "Next steps" : ""}</b> 
+                <b style={{color:'black'}}> Next steps</b> 
               </Typography>
               <Grid item xs>
                   <Table className={classes.table} stickyHeader size="small" aria-label="sticky table" >
