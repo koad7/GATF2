@@ -88,13 +88,7 @@ function TabPanel(props) {
     };
   }
   
-  const API_URL="http://127.0.0.1:8000/api/"
-  export const REQUEST_STATUS = {
-	LOADING: "loading",
-	SUCCESS: "success",
-	FAILURE: "failure",
-  };
-  
+
 
 function Dashboard(props) {
     const { classes } = props

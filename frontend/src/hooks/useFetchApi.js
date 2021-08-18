@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 
-const API_URL="http://127.0.0.1:8000/api/"
+const API_URL="https://dsa-gatf.herokuapp.com/api/"
 export const REQUEST_STATUS = {
   LOADING: "loading",
   SUCCESS: "success",
