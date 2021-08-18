@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['dsa-gatf.herokuapp.com']
+ALLOWED_HOSTS = ['dsa-gatf.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -129,7 +129,7 @@ USE_TZ = True
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = (os.path.join(REACT_APP_DIR, 'static'), )
+STATICFILES_DIRS = (os.path.join(REACT_APP_DIR, 'build', 'static'), )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATICFILES_DIRS = (os.path.join(REACT_APP_DIR, 'build', 'static'), )
