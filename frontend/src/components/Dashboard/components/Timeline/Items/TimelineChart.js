@@ -132,7 +132,7 @@ let chartOptions ={
                 constructorType="ganttChart"
                 highcharts={Highcharts}
                 options={chartOptions}
-                // callback={chart => setChart(chart)}
+                callback={chart => setChart(chart)}
                 // callback={function(chart) {
                 //     chart.renderer
                 //       .label()

@@ -14,7 +14,7 @@ export default  function PieChart({type, var_x, var_y}) {
   let series={};
 
   
-  const project_consumed_budget_chart_options = {
+  let project_consumed_budget_chart_options = {
     plotOptions: {
         pie: {
             donut: {
@@ -39,18 +39,22 @@ export default  function PieChart({type, var_x, var_y}) {
       showOn: "always",
           name: {
               show: true,
-              color: ['#3288ED', '#84B8F4'],
+              color: ['#00833e', '#a2d45e'],
               fontSize: "15px"
           }
       },
-      // fill: {
-      //   colors: ['#3288ED', '#84B8F4']
-      // },
+      fill: {
+        colors: ['#00833e', '#a2d45e']
+      },
       legend: {
-      position: 'bottom'
+      position: 'bottom',
+      labels: {
+        colors: ['#00833e', '#a2d45e'],
+        useSeriesColors: false
+    },
       }
   }
-  const in_kind_chart_options = {
+  let in_kind_chart_options = {
     plotOptions: {
         pie: {
             donut: {
@@ -80,14 +84,18 @@ export default  function PieChart({type, var_x, var_y}) {
               fontSize: "20px"
           }
       },
-      // fill: {
-      //   colors: ['#3288ED', '#84B8F4']
-      // },
+      fill: {
+        colors: ['#3288ED', '#84B8F4']
+      },
       legend: {
-      position: 'bottom'
+      position: 'bottom',
+      labels: {
+        colors: ['#3288ED', '#84B8F4'],
+        useSeriesColors: false
+    },
       }
   }
-  const portfolio_chart_options = {
+  let portfolio_chart_options = {
     plotOptions: {
             pie: {
                 donut: {
@@ -112,13 +120,13 @@ export default  function PieChart({type, var_x, var_y}) {
     showOn: "always",
         name: {
             show: true,
-            color: ['#3288ED', '#84B8F4'],
+            color: ['#3f4643', '#ff8300'],
             fontSize: "20px"
         }
     },
-    // fill: {
-    //   colors: ['#3288ED', '#84B8F4']
-    // },
+    fill: {
+      colors: ['#3f4643', '#ff8300']
+    },
     legend: {
         position: 'bottom'
       }
