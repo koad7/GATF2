@@ -78,6 +78,30 @@ function a11yProps(index) {
 
 //filteredQuarter={filteredData.Quarter}
 export default function Timelines({props,quarter}) {
+  
+  let initialData = props.data
+  let out={data: ''}
+  let dataSource={};
+  let currentData, local, local1,localMilestone;
+
+  
+if(props.filterObj.Project){
+  try{
+    local1 = initialData.filter(item=> item.Project === props.filterObj.Project);
+    local = local1[0].data
+    localMilestone = local1[0].Milestones;
+    
+    // initial = filterByValue(local[0].Risks, "Initial Risk")
+    // selected = filterByValue(local[0].Risks, props.filterObj.Quarter)
+  }catch(error){
+    local = props.data[0].data
+    localMilestone = props.data[0].Milestones
+  }
+}else{
+  local = props.data[0].data;
+  localMilestone = props.data[0].Milestones;
+}
+
   const classes = useStyles();
 
 
@@ -95,10 +119,10 @@ export default function Timelines({props,quarter}) {
             </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-            <TimelineChart seriesData={props} quarter={quarter}/>
+            {/* <TimelineChart seriesData={props} quarter={quarter}/> */}
         </TabPanel>
         <TabPanel value={value} index={1}>
-            <TimelineInDepth  seriesData={props} quarter={quarter}/>
+            <TimelineInDepth  data={localMilestone} quarter={props.filterObj.Quarter}/>
         </TabPanel>
         
     </div>

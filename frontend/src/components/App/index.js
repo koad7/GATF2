@@ -4,6 +4,7 @@ import HomePage from '../HomePage';
 import Dashboard from '../Dashboard';
 import Register from '../Register';
 import Login from '../Login';
+import LinearBuffer from '../LinearBuffer';
 import firebase from '../firebase'
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import { createTheme } from '@material-ui/core/styles'
@@ -40,7 +41,7 @@ function App(props){
                </Switch>
            </Router>
        </MuiThemeProvider>
-    ):<div id="loader"><CircularProgress/></div>
+    ):<div id="loader"><LinearBuffer/></div>
 }
 
 export default App /*we export to access other files.*/

@@ -64,10 +64,14 @@ var point = this,
         }, '');
     }
     
-
+function  filterByValue (array, string) {
+    return array.filter(o =>
+        Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
+    }
 
 export default function TimelineChart(props,quarter) {
 // let data= filterByValue(props.seriesData.data, props.quarter)
+
 const [chartData, setChart] = useState([]);
 const addOneChild = () => {
     setChart(props.seriesData)

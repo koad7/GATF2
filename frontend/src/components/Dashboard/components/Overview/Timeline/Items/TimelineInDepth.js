@@ -17,9 +17,13 @@ const useStyles = makeStyles({
 
 
 export default function TimelineInDepth(props) {
-  props.seriesData.Milestones.sort(function (a, b) {
+  let local;
+ 
+  local=props.data.sort(function (a, b) {
     return a["Milestone number"].localeCompare(b["Milestone number"]);
 });
+
+
 
   const classes = useStyles();
   return (
@@ -39,7 +43,7 @@ export default function TimelineInDepth(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.seriesData.Milestones.map((row) => (
+          {local.map((row) => (
             <TableRow key={row["Milestone number"]}>
               <TableCell align="left">{`${row["Phase"]}`}</TableCell>
               <TableCell component="th" scope="row">

@@ -72,7 +72,7 @@ export default  function PieChart({type, var_x, var_y}) {
     },
       theme: {
           monochrome: {
-              enabled: true
+              enabled: false
           }
       },
       labels: ['Contributed', 'Estimated'],

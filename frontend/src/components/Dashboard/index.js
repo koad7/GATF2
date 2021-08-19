@@ -16,11 +16,13 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import TimelinePage from './components/Timeline/TimelinePage.js'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import useFetchApi from '../../hooks/useFetchApi';
 import Toolbar from "@material-ui/core/Toolbar";
+import { makeStyles } from '@material-ui/core/styles';
 
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
 	main: {
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
@@ -52,8 +54,11 @@ const styles = theme => ({
     logo: {
       maxWidth: 40,
       marginRight: '10px'
-    }
-})
+    },
+  	linear: {
+		width: '100%',
+	  },
+}));
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -88,10 +93,45 @@ function TabPanel(props) {
     };
   }
   
-
+  function LinearBuffer() {
+	const classes = useStyles();
+	const [progress, setProgress] = React.useState(0);
+	const [buffer, setBuffer] = React.useState(10);
+  
+	const progressRef = React.useRef(() => {});
+	React.useEffect(() => {
+	  progressRef.current = () => {
+		if (progress > 100) {
+		  setProgress(0);
+		  setBuffer(10);
+		} else {
+		  const diff = Math.random() * 10;
+		  const diff2 = Math.random() * 10;
+		  setProgress(progress + diff);
+		  setBuffer(progress + diff + diff2);
+		}
+	  };
+	});
+  
+	React.useEffect(() => {
+	  const timer = setInterval(() => {
+		progressRef.current();
+	  }, 500);
+  
+	  return () => {
+		clearInterval(timer);
+	  };
+	}, []);
+  
+	return (
+	  <div className={classes.linear}>
+		<LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
+	  </div>
+	);
+  }
 
 function Dashboard(props) {
-    const { classes } = props
+    const classes = useStyles();
     const [value, setValue] = React.useState(0);
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -142,7 +182,7 @@ const {projectData,
 
 			<TabPanel value={value} index={0}>
 			  {/* Projet Overviews  */}
-			  {projectData ? <OverviewTable seriesData={projectData.data}/> : <CircularProgress />}
+			  {projectData ? <OverviewTable seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 			  {/* Projet Finances  */}
@@ -164,4 +204,4 @@ const {projectData,
 	// }
 }
 
-export default withRouter(withStyles(styles)(Dashboard))
+export default withRouter((Dashboard))

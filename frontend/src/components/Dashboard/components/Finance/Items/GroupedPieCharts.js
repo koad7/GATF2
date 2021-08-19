@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function GroupedPieCharts({portfolioTotal, props}) {
-  console.log(props)
   let var_x_inkindEstimation;
   let var_x_totalbudget;
   let initialData = props.data
@@ -40,9 +39,6 @@ export default function GroupedPieCharts({portfolioTotal, props}) {
     out.data = internal2.data.filter(item =>
       Object.entries(props.filterObj)
       .every(([k, v]) => !v.length || item[k] === v));// Final Output data 
-      console.log("props.filterObj.Quarter: ",props.filterObj)
-      console.log(out.data)
-      console.log(props) 
       // TODO WHY 2020.Q4 is not working=====???????
 
     var_x_totalbudget = out.data.reduce(function (s, a) {

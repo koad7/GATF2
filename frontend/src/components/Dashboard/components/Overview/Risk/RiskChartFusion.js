@@ -68,20 +68,27 @@ function  filterByValue (array, string) {
 }
 
 
-export default function RiskChartFusion ({props, filteredQuarter}) {
-  const classes = useStyles();
- // Seperate inital and current Data
- let initial, current;
- initial = filterByValue(props, "Initial Risk")
+export default function RiskChartFusion ({props}) {
+  let initialData = props.data
+  let out={data: ''}
+  let dataSource={};
+  let initial, selected, local;
+
+
+  if(props.filterObj.Quarter){
+    try{
+      local = initialData.filter(item=> item.Project === props.filterObj.Project);
+      
+      initial = filterByValue(local[0].Risks, "Initial Risk")
+      selected = filterByValue(local[0].Risks, props.filterObj.Quarter)
+    }catch(error){
+      out.data = props.data
+    }
+  }
+
  
 
- if(filteredQuarter){
-  current = filterByValue(props, filteredQuarter)
- }else{
-  current=props
- }
 
- let dataSource={};
  try {
    dataSource = {
     colorrange: {
@@ -106,8 +113,8 @@ export default function RiskChartFusion ({props, filteredQuarter}) {
           {
             rowid: "CP",
             columnid: "CURRENT",
-            displayvalue: colorCode[current[0]['Country political']].minvalue,
-            colorrangelabel: colorCode[current[0]['Country political']].label
+            displayvalue: colorCode[selected[0]['Country political']].minvalue,
+            colorrangelabel: colorCode[selected[0]['Country political']].label
           },
           {
             rowid: "PT",
@@ -118,8 +125,8 @@ export default function RiskChartFusion ({props, filteredQuarter}) {
           {
             rowid: "PT",
             columnid: "CURRENT",
-            displayvalue: colorCode[current[0]['Project technical']].minvalue,
-            colorrangelabel: colorCode[current[0]['Project technical']].label
+            displayvalue: colorCode[selected[0]['Project technical']].minvalue,
+            colorrangelabel: colorCode[selected[0]['Project technical']].label
           },
           {
             rowid: "PSS",
@@ -130,8 +137,8 @@ export default function RiskChartFusion ({props, filteredQuarter}) {
           {
             rowid: "PSS",
             columnid: "CURRENT",
-            displayvalue: colorCode[current[0]['Private sector support']].minvalue,
-            colorrangelabel: colorCode[current[0]['Private sector support']].label
+            displayvalue: colorCode[selected[0]['Private sector support']].minvalue,
+            colorrangelabel: colorCode[selected[0]['Private sector support']].label
           },
           {
             rowid: "GC",
@@ -142,8 +149,8 @@ export default function RiskChartFusion ({props, filteredQuarter}) {
           {
             rowid: "GC",
             columnid: "CURRENT",
-            displayvalue: colorCode[current[0]['Government commitment']].minvalue,
-            colorrangelabel: colorCode[current[0]['Government commitment']].label
+            displayvalue: colorCode[selected[0]['Government commitment']].minvalue,
+            colorrangelabel: colorCode[selected[0]['Government commitment']].label
           },
           {
             rowid: "PB",
@@ -154,8 +161,8 @@ export default function RiskChartFusion ({props, filteredQuarter}) {
           {
             rowid: "PB",
             columnid: "CURRENT",
-            displayvalue: colorCode[current[0]['Project budget']].minvalue,
-            colorrangelabel: colorCode[current[0]['Project budget']].label
+            displayvalue: colorCode[selected[0]['Project budget']].minvalue,
+            colorrangelabel: colorCode[selected[0]['Project budget']].label
           },
           {
             rowid: "PTL",
@@ -166,8 +173,8 @@ export default function RiskChartFusion ({props, filteredQuarter}) {
           {
             rowid: "PTL",
             columnid: "CURRENT",
-            displayvalue: colorCode[current[0]['Project timelines']].minvalue,
-            colorrangelabel: colorCode[current[0]['Project timelines']].label
+            displayvalue: colorCode[selected[0]['Project timelines']].minvalue,
+            colorrangelabel: colorCode[selected[0]['Project timelines']].label
           }
         ]
       }
@@ -180,7 +187,7 @@ export default function RiskChartFusion ({props, filteredQuarter}) {
         },
         {
           id: "CURRENT",
-          label: "Current"
+          label: `Current (${props.filterObj.Quarter})`
         }
       ]
     },

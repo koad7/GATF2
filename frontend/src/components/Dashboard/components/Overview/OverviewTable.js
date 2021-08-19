@@ -30,9 +30,16 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     
   },
+  circular: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  }
 }));
 
 export default function OverviewTable(props) {
+  
   const classes = useStyles();
   const {
     filteredData,
@@ -41,25 +48,24 @@ export default function OverviewTable(props) {
     handleFilterSelected
   } = useFilteredData(props);
 
-console.log(filteredData.data)
-
+  
   let portfolio, inkindEstimation;
   let textcolor='darkgrey'
 
-let initialData = props.data
+let initialData = props.seriesData
 let out={data: ''}
 
 try{
   initialData.forEach(function(v){ delete v.Quarter }) // Delete Quarter from the main Object
   let internal1={data: ''}
   let internal2={data: ''}
-  internal1.data = initialData.map(x=> ({...x, Finance: x.Finance.filter(y=> y.Quarter === props.filter.Quarter)})) // Filter Finance data with Quarter
+  internal1.data = initialData.map(x=> ({...x, Finance: x.Finance.filter(y=> y.Quarter === filteredData.Quarter)})) // Filter Finance data with Quarter
   internal2.data = internal1.data.map(x=> ({...x, ...x.Finance[0]}))   // Merge Fianance Objects with the main Objects
   out.data = internal2.data.filter(item =>
     Object.entries(props.filter)
     .every(([k, v]) => !v.length || item[k] === v));// Final Output data 
 }catch(error){
-  out.data = props.data
+  out.data = props.seriesData
 }
 
 
@@ -130,7 +136,7 @@ try{
       </Grid>
         
       <Typography variant="h3" gutterBottom align='right'>
-         {filteredData.data[0]['Project']}        {filteredData.Quarter? "- " + filteredData.Quarter: '___________'}
+         {filteredData.filterObj.Project}        {filteredData.filterObj.Quarter? "- " + filteredData.filterObj.Quarter: '___________'}
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -150,7 +156,7 @@ try{
         </Grid>
         <Grid item xs={5}>
           <Typography style={{ color: textcolor }} variant="h5">CONTEXTUAL RISKS</Typography>
-            <RiskChartFusion props={filteredData.data[0].Risks} filteredQuarter={filteredData.Quarter}/> 
+            <RiskChartFusion props={filteredData}/> 
         </Grid>
       </Grid>
    
@@ -158,13 +164,9 @@ try{
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography style={{ color: textcolor }} variant="h5">TIMELINE</Typography>
-            <Timelines props={filteredData.data[0]} quarter={filteredData.Quarter}/> 
+            <Timelines props={filteredData} quarter={filteredData.Quarter}/> 
         </Grid>
-      </Grid> </>: <CircularProgress size={40}
-        left={-20}
-        top={10}
-        status={'loading'}
-        style={{marginLeft: '50%'}}/>}
+      </Grid> </> : <div className={classes.circular}><CircularProgress /></div>}
     </div>
   );
 }
