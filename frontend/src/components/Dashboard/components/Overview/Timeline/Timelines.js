@@ -119,7 +119,7 @@ if(props.filterObj.Project){
             </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-            {/* <TimelineChart seriesData={props} quarter={quarter}/> */}
+            <TimelineChart seriesData={local} quarter={quarter}/>
         </TabPanel>
         <TabPanel value={value} index={1}>
             <TimelineInDepth  data={localMilestone} quarter={props.filterObj.Quarter}/>

@@ -20,6 +20,14 @@ const useStyles = makeStyles((theme) => ({
     },
     details: {
         display: 'flex'
+    },
+    overlookText: {
+      textAlign: "left ! important",
+      color: "black"
+    },
+    table:{
+      fontSize: 12,
+      color: "red"
     }
   }));
 
@@ -71,16 +79,14 @@ if(props.filterObj.Project){
 
 return (
   <div className={classes.root}>
-          <Grid item lg={12}>
-            {outlookText ? <Typography variant="h6" align='left'> <b style={{color:'black'}}>Overall Outlook</b> <br/> {outlookText} </Typography> : '' }
+          <Grid item lg={12} className={classes.overlookText}>
+            {outlookText ?  <><b>Overall Outlook</b> <br/>  {outlookText}</> : '' }
             <br/>
-            {toBeMonitored ? <Typography variant="h6" align='left'> <b style={{color:'black'}}>To be monitored</b> <br/> {toBeMonitored} </Typography> : '' }
+            {toBeMonitored ?  <><b>To be monitored</b> <br/> {toBeMonitored}</> : '' }
             <br/>
             {nextstep ?
             <>
-              <Typography variant="h6" align='left'>
                 <b style={{color:'black'}}> Next steps</b> 
-              </Typography>
               <Grid item xs>
                   <Table className={classes.table} stickyHeader size="small" aria-label="sticky table" >
                       <TableHead>
@@ -92,7 +98,7 @@ return (
                       </TableHead>
                       <TableBody>
                         {nextstep.map(a =>
-                        <TableRow>
+                        <TableRow className={classes.table}>
                           <TableCell align="left" >{a.Deadline}</TableCell>
                           <TableCell align="left" >{a['Next step']}</TableCell>
                           <TableCell align="left" >{a.Status}</TableCell>

@@ -71,7 +71,7 @@ function  filterByValue (array, string) {
 
 export default function TimelineChart(props,quarter) {
 // let data= filterByValue(props.seriesData.data, props.quarter)
-
+console.log(props.seriesData)
 const [chartData, setChart] = useState([]);
 const addOneChild = () => {
     setChart(props.seriesData)
