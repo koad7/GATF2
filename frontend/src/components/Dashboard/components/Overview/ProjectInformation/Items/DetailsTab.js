@@ -78,17 +78,17 @@ else{
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-          <Grid item xs>
+          <Grid item xs={7} sm={7}>
           <Typography style={{ fontWeight: 600 }}>Assumptions</Typography>
           
           </Grid>
-          <Grid item xs>
+          <Grid item xs={5} sm={5}>
               <Typography style={{ fontWeight: 600 }}>High level project situation</Typography>
           </Grid>
          
       </Grid>
     <Grid container spacing={3}>
-          <Grid item xs={6} sm={6}>
+          <Grid item xs={7} sm={7}>
               {assumptions}<br/><br/>
               <b>Lead government agency </b><br/>  {leadGovAgency} <br/><br/>
               <b>Private sector champions </b><br/>{privateChampions}  <br/><br/>
@@ -96,7 +96,7 @@ else{
               <b>Implementer </b><br/>{implementer}<br/><br/>
               <b>Agreement </b><br/>{agreement}
           </Grid>
-          <Grid item xs={6} sm={6}>
+          <Grid item xs={5} sm={5}>
               {details ? <ProjectSituationChart props={details} quarter={props.filterObj.Quarter}/> : ''}
           </Grid>
       </Grid>

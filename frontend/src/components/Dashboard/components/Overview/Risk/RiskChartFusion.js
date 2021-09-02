@@ -225,6 +225,8 @@ export default function RiskChartFusion ({props}) {
       plotBorderThickness: "4",
       caption: "",
       subcaption: "",
+      showBorder: "0",
+      bgAlpha: "0",
       showvalues: "1",
       mapbycategory: "1",
       plottooltext:
@@ -234,9 +236,6 @@ export default function RiskChartFusion ({props}) {
 } catch (error) {
   dataSource={}
 }
-  
-
-
     return (
       <ReactFC
           type="heatmap"
@@ -246,5 +245,4 @@ export default function RiskChartFusion ({props}) {
           dataSource={dataSource}
         /> 
     );
-
 }

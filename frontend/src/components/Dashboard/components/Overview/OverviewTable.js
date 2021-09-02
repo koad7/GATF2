@@ -67,7 +67,7 @@ try{
 }catch(error){
   out.data = props.seriesData
 }
-
+console.log(initialData[0].Project);
 
   // Calculate Portfolio Total sum
   if (props){
@@ -127,9 +127,15 @@ try{
       </Grid>
       <Grid container spacing={3}>
           <Grid item xs={12}> 
-          <Typography variant="h4" gutterBottom align='right'>
-         {filteredData.filterObj.Project}        {filteredData.filterObj.Quarter? "- " + filteredData.filterObj.Quarter: '___________'}
-      </Typography>
+          {
+            filteredData.filterObj.Project ?
+            <Typography variant="h4" gutterBottom align='right'>
+              {filteredData.filterObj.Project}        {filteredData.filterObj.Quarter? "- " + filteredData.filterObj.Quarter: '___________'}
+            </Typography>:
+            <Typography variant="h4" gutterBottom align='right'>
+              {initialData[0].Project}
+            </Typography>
+          }
           </Grid>
       </Grid>
     {props.seriesData ? <>
@@ -150,14 +156,14 @@ try{
         
       </Grid>
       
-      <Grid container spacing={3}>
+      <Grid container spacing={3} style={{backgroundColor: 'white'}} >
         <Grid item xs={7}>
           <Typography style={{ color: textcolor }} variant="h5">FINANCE</Typography>
-          <Paper className={classes.paper}>
+          <>
             <Grid container spacing={3}>
              <GroupedPieCharts portfolioTotal={portfolio} props={filteredData} totalbudget={filteredData.data[0]["Project Budget"]} quarter={filteredData.Quarter} inkindEstimation={inkindEstimation}/> 
           </Grid>
-          </Paper>
+          </>
         </Grid>
         <Grid item xs={5}>
           <Typography style={{ color: textcolor }} variant="h5">CONTEXTUAL RISKS</Typography>
