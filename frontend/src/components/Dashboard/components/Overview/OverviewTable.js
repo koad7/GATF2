@@ -125,6 +125,13 @@ try{
           </FormControl>
         </Grid>
       </Grid>
+      <Grid container spacing={3}>
+          <Grid item xs={12}> 
+          <Typography variant="h4" gutterBottom align='right'>
+         {filteredData.filterObj.Project}        {filteredData.filterObj.Quarter? "- " + filteredData.filterObj.Quarter: '___________'}
+      </Typography>
+          </Grid>
+      </Grid>
     {props.seriesData ? <>
       <Grid container spacing={3}>
           <Grid item xs={12}>  
@@ -135,9 +142,7 @@ try{
           </Grid>
       </Grid>
         
-      <Typography variant="h3" gutterBottom align='right'>
-         {filteredData.filterObj.Project}        {filteredData.filterObj.Quarter? "- " + filteredData.filterObj.Quarter: '___________'}
-      </Typography>
+      
       <Grid container spacing={3}>
         <Grid item xs={12}>
          <ProjectInformation props={filteredData}/> 

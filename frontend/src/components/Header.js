@@ -2,9 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {AppBar, Toolbar,Typography} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-// import logo from "./logo.png";
 import firebase from './firebase';
-// import logo from "./Dashboard/data/logo.png";
+// import logo from ;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +40,7 @@ export default function Header(props) {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             {/* <MenuIcon /> */}
           </IconButton>
-          {/* <img src={logo} alt="GATF" className={classes.logo} /> */}
+          <img src="http://pub-engagement.s3.amazonaws.com/GATF_logo.png" alt="GATF" className={classes.logo} />
           <Typography variant="h4" align="center"  color="inherit" className={classes.title} >
           Projects Tracking Dashboard
           </Typography>
