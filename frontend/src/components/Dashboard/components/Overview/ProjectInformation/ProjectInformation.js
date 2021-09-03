@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import InformationTab from './Items/InformationTab';
@@ -54,8 +51,6 @@ const AccordionDetails = withStyles((theme) => ({
   },
 }))(MuiAccordionDetails);
 
-
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -82,7 +77,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -97,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ProjectInformation({props}) {
+export default function ProjectInformation({props,quarters}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState('panel1');
   const handleChange = (panel) => (event, newExpanded) => {
@@ -111,7 +105,7 @@ export default function ProjectInformation({props}) {
           <Typography>Project Information</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {props ? <DetailsTab props={props}/> : ''}
+          {props ? <DetailsTab props={props} quarters={quarters}/> : ''}
         </AccordionDetails>
       </Accordion>
       <Accordion square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -119,7 +113,7 @@ export default function ProjectInformation({props}) {
           <Typography>Project Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        {props ? <InformationTab props={props}/> : ''}
+        {props ? <InformationTab props={props}  /> : ''}
         </AccordionDetails>
       </Accordion>
     </div>

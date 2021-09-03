@@ -25,16 +25,14 @@ function  filterByValue (array, string) {
             
 
 
-export default function InformationTab({props}) {
+export default function InformationTab({props,quarters}) {
   
-  const localVar = {...props.data}
   const classes = useStyles();
   
 
   let initialData={data: ''}
   let out={data: ''}
   initialData.data = props.data;
-  let details=null;
   let tfaArticles='';
   let excpectedResult='';
   let scope='';

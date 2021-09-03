@@ -22,7 +22,7 @@ function  filterByValue (array, string) {
             
 
 
-export default function DetailTab({props}) {
+export default function DetailTab({props,quarters}) {
   
   const classes = useStyles();
   let initialData={data: ''}
@@ -54,6 +54,12 @@ if(props.filterObj.Project){
     }catch(error){ 
       details=''
     }
+  }else{
+    try{
+      details=filterByValue (out.data[0].Details, quarters.sort().at(-1))
+    }catch(error){ 
+      details=null
+    }
   }
 }
 else{
@@ -70,6 +76,12 @@ else{
       details=filterByValue (out.data.Details, props.filterObj.Quarter)
     }catch(error){ 
       details=''
+    }
+  }else{
+    try{
+      details=filterByValue (out.data.Details, quarters.sort().at(-1))
+    }catch(error){ 
+      details=null
     }
   }
 }

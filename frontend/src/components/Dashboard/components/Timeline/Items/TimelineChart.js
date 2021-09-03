@@ -136,6 +136,7 @@ let chartOptions ={
                 constructorType="ganttChart"
                 highcharts={Highcharts}
                 options={chartOptions}
+                allowChartUpdate="true"
                 callback={chart => setChart(chart)}
                 // callback={function(chart) {
                 //     chart.renderer

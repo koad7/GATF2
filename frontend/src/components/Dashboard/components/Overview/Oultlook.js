@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   
 
 
-export default function Outlook({props}) {
+export default function Outlook({props,quarters}) {
   const classes = useStyles();
   let initialData={data: ''}
   let outlookText;
@@ -62,20 +62,29 @@ if(props.filterObj.Project){
     }catch(error){ 
       nextstep=null
     }
+  }else{
+    
+    try{
+      nextstep=filterByValue (out.data[0].NextSteps, quarters.sort().at(-1))
+    }catch(error){ 
+      nextstep=null
+    }
   }
 }else{
   out.data = initialData.data[0]
   outlookText=out.data['Overall Outlook'];
   toBeMonitored=out.data['To be monitored'];
   // Quarter filtering of NextSteps
-  if(props.filterObj.Quarter){
+  
+    
     try{
-      nextstep=filterByValue (out.data.NextSteps, props.filterObj.Quarter)
+      nextstep=filterByValue (out.data.NextSteps, quarters.sort().at(-1))
     }catch(error){ 
       nextstep=null
     }
-  }
+  
 }
+
 
 return (
   <div className={classes.root}>

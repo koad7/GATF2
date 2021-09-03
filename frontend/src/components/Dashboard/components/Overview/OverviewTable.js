@@ -1,6 +1,6 @@
 import React,{ useContext } from "react";
+import ReactDOM from 'react-dom'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
-// import TimelineChart from '../Timeline/Items/TimelineChart'
 import Timelines from './Timeline/Timelines';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OverviewTable(props) {
-  
+
   const classes = useStyles();
   const {
     filteredData,
@@ -67,7 +67,25 @@ try{
 }catch(error){
   out.data = props.seriesData
 }
-console.log(initialData[0].Project);
+
+// To get all the quarters so we can populate the qurter drop down.
+const myQuarterSet1 = new Set() 
+initialData.forEach(function(value, index, array) {
+  for (const item of value.Finance) {
+    myQuarterSet1.add(item.Quarter);
+ }
+ for (const item of value.Risks) {
+  myQuarterSet1.add(item.Quarter);
+}
+for (const item of value.Milestones) {
+  myQuarterSet1.add(item.Quarter);
+}
+for (const item of value.NextSteps) {
+  myQuarterSet1.add(item.Quarter);
+}
+}); 
+let quarters = [...myQuarterSet1]; // qurter dorpdown values
+
 
   // Calculate Portfolio Total sum
   if (props){
@@ -82,7 +100,6 @@ console.log(initialData[0].Project);
       <Grid container spacing={3}>
         <Grid item xs={12}>
           {/* Filter */}
-          
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="project-name">Project Name</InputLabel>
             <Select
@@ -109,18 +126,11 @@ console.log(initialData[0].Project);
               inputProps={{
                 name: 'Quarter',
                 id: 'quarter',
-              }}
-            >
+              }}>
               <option aria-label="None" value="" />
-              <option aria-label="2020.Q4">2020.Q4</option>
-              <option aria-label="2021.Q1">2021.Q1</option>
-              <option aria-label="2021.Q2">2021.Q2</option>
-              <option aria-label="2021.Q3">2021.Q3</option>
-              <option aria-label="2021.Q4">2021.Q4</option>
-              {/* {yearSelect.map((select) => 
+              {quarters.map((select) => 
                 (<option value={select}>{select}</option>)
-              )} */}
-              {/* <option value="2021.Q3">2021.Q3</option> */}
+              )} 
             </NativeSelect>
           </FormControl>
         </Grid>
@@ -128,10 +138,12 @@ console.log(initialData[0].Project);
       <Grid container spacing={3}>
           <Grid item xs={12}> 
           {
-            filteredData.filterObj.Project ?
+            filteredData.filterObj.Project 
+            ?
             <Typography variant="h4" gutterBottom align='right'>
               {filteredData.filterObj.Project}        {filteredData.filterObj.Quarter? "- " + filteredData.filterObj.Quarter: '___________'}
-            </Typography>:
+            </Typography> 
+            :
             <Typography variant="h4" gutterBottom align='right'>
               {initialData[0].Project}
             </Typography>
@@ -143,7 +155,7 @@ console.log(initialData[0].Project);
           <Grid item xs={12}>  
           <Typography style={{ color: textcolor }} variant="h5">OUTLOOK</Typography>        
             <Paper className={classes.paper}>
-                 <Oultlook  props={filteredData} /> 
+                 <Oultlook  props={filteredData} quarters={quarters} /> 
             </Paper>
           </Grid>
       </Grid>
@@ -151,7 +163,7 @@ console.log(initialData[0].Project);
       
       <Grid container spacing={3}>
         <Grid item xs={12}>
-         <ProjectInformation props={filteredData}/> 
+         <ProjectInformation props={filteredData} quarters={quarters}/> 
         </Grid>
         
       </Grid>
@@ -167,7 +179,7 @@ console.log(initialData[0].Project);
         </Grid>
         <Grid item xs={5}>
           <Typography style={{ color: textcolor }} variant="h5">CONTEXTUAL RISKS</Typography>
-            <RiskChartFusion props={filteredData}/> 
+            <RiskChartFusion props={filteredData} quarters={quarters}/> 
         </Grid>
       </Grid>
    
