@@ -5,8 +5,7 @@ import ReactFC from 'react-fusioncharts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import PowerCharts from 'fusioncharts/fusioncharts.powercharts';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core'
+
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme,PowerCharts);
 
@@ -88,10 +87,6 @@ export default function RiskChartFusion ({props,quarters}) {
       selected = filterByValue(local.Risks, localQuarter)
 
   }
-
-  
- 
-console.log(localQuarter)
 
  try {
    dataSource = {

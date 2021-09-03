@@ -173,7 +173,7 @@ let quarters = [...myQuarterSet1]; // qurter dorpdown values
           <Typography style={{ color: textcolor }} variant="h5">FINANCE</Typography>
           <>
             <Grid container spacing={3}>
-             <GroupedPieCharts portfolioTotal={portfolio} props={filteredData} totalbudget={filteredData.data[0]["Project Budget"]} quarter={filteredData.Quarter} inkindEstimation={inkindEstimation}/> 
+             <GroupedPieCharts portfolioTotal={portfolio} props={filteredData} totalbudget={filteredData.data[0]["Project Budget"]} quarter={quarters} inkindEstimation={inkindEstimation}/> 
           </Grid>
           </>
         </Grid>

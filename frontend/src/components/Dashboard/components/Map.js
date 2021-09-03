@@ -49,7 +49,7 @@ tooltip: {
       point: {
         events: {
           click: function() {
-            console.log(this.keyword);
+
           }
         }
       }

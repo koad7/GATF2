@@ -54,7 +54,7 @@ export default function FinanceTable(props) {
     statusSelect,
     handleFilterSelected
   } = useFilteredData(props);
-  console.log(props)
+ 
 
   let portfolioTotal, inkindEstimation, projectBudget;
 
