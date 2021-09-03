@@ -84,6 +84,7 @@ export default function Timelines({props,quarter}) {
   let dataSource={};
   let currentData, local, local1,localMilestone;
 
+
   
 if(props.filterObj.Project){
   try{
@@ -98,9 +99,11 @@ if(props.filterObj.Project){
     localMilestone = props.data[0].Milestones
   }
 }else{
-  local = props.data[0].data;
+  local = props.data[0];
   localMilestone = props.data[0].Milestones;
 }
+
+
 
   const classes = useStyles();
 

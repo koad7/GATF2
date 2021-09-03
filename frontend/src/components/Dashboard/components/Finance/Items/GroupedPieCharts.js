@@ -40,7 +40,6 @@ export default function GroupedPieCharts({portfolioTotal, props,quarter}) {
   
 
   try{
-    
     //initialData.forEach(function(v){ delete v.Quarter }) // Delete Quarter from the main Object
     let internal1={data: ''}
     let internal2={data: ''}
@@ -49,20 +48,15 @@ export default function GroupedPieCharts({portfolioTotal, props,quarter}) {
     internal2.data=props.data.map(x=> ({ ...x,...filterByValue (x.Finance, localQuarter)[0]}));
     // internal2.data = internal1.data.map(x=> ({...x, ...x.Finance[0]}))   // Merge Fianance Objects with the main Objects
 
-    
-
     if(props.filterObj.Project){
       out.data = internal2.data.filter(item =>
         Object.entries(props.filterObj)
         .every(([k, v]) => !v.length || item[k] === v));// Final Output data 
-        console.log(out.data)
 
     }else{
       out.data = [internal2.data[0]]
-      console.log(out.data)
     }
     
-
     var_x_totalbudget = out.data.reduce(function (s, a) {
       let tmp;
       if(parseInt(a["Project Budget"])){

@@ -94,7 +94,6 @@ let quarters = [...myQuarterSet1]; // qurter dorpdown values
     }, 0);
     inkindEstimation= filteredData.data[0]['In-kind Estimation']
   }
-
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
