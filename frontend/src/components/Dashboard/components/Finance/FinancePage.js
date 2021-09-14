@@ -54,33 +54,47 @@ export default function FinanceTable(props) {
     statusSelect,
     handleFilterSelected
   } = useFilteredData(props);
- 
-
   let portfolioTotal, inkindEstimation,totalbudget;
 
+  
+
     const classes = useStyles();
+    let myLocalVar =  filteredData.data;
+    let out={};
+    // myLocalVar =  filteredData.data.filter(props =>
+    //   Object.entries(filteredData.filterObj)
+    //   .every(([k, v]) => !v.length || props[k] === v))
+
+
+       // get all quarters
+      const quaterSet = new Set();
+      myLocalVar.map(x=> (x.Finance.map(y=> quaterSet.add(y.Quarter)  )))
+       
+      let quaterArray=[]
+      let currentQuarters = [...quaterSet]; // qurter dorpdown values
+      if(filteredData.filterObj.Quarter){
+        quaterArray=[filteredData.filterObj.Quarter]
+      }else{
+        quaterArray=currentQuarters
+      }
+
     // Filter with dropdown
-    let myLocalVar =  filteredData.data.filter(props =>
+    myLocalVar.forEach(function(v){ delete v.Quarter }) // Delete Quarter from the main Object
+    
+
+    let internal1={data: ''}
+    internal1.data = myLocalVar.map(x=> ({...x, ...x.Finance[0]})) 
+     // Merge Fianance Objects with the main Objects
+    out.data = internal1.data.filter(item =>
       Object.entries(filteredData.filterObj)
-      .every(([k, v]) => !v.length || props[k] === v))
+      .every(([k, v]) => !v.length || item[k] === v));// Final Output data 
+
+      console.log(out.data ) 
 
 
     
-      // get all quarters
-    const quaterSet = new Set();
-    myLocalVar.forEach(function(value, index, array) {
-      for (const item of value.Finance) {
-        quaterSet.add(item.Quarter);
-      }
-    }); 
-    let quaterArray=[]
-    let currentQuarters = [...quaterSet]; // qurter dorpdown values
-    if(filteredData.filterObj.Quarter){
-      quaterArray=[filteredData.filterObj.Quarter]
-    }else{
-      quaterArray=currentQuarters
-    }
-
+     
+let consumedbudget,inkindContributed;
 
   let currentProject = filterByValue (filteredData.data, filteredData.filterObj.Project)
   
@@ -89,15 +103,44 @@ export default function FinanceTable(props) {
         return s + a["Project Budget"];
     }, 0);
    // Calculate In Kind Estimation
-    inkindEstimation=myLocalVar.reduce(function (a, b) {
+    inkindEstimation=out.data.reduce(function (a, b) {
       return a +b['In-kind Estimation']; // returns object with property x
     }, 0);
     // Calculate In Kind Estimation
-    totalbudget=myLocalVar.reduce(function (a, b) {
+    inkindContributed=out.data.reduce(function (a, b) {
+      return a +b['In-kind - Contributed']; // returns object with property x
+    }, 0);
+    // Calculate Project budget
+    totalbudget=out.data.reduce(function (a, b) {
       return a +b["Project Budget"]; // returns object with property x
     }, 0);
+    // Calculate Consumed Budget
+    consumedbudget=out.data.reduce(function (a, b) {
+      return a +b["Project - Consumed"]; // returns object with property x
+    }, 0);
 
-console.log(filteredData.filterObj)
+let initialData;
+
+
+
+
+
+
+
+
+
+try{
+  initialData.forEach(function(v){ delete v.Quarter }) // Delete Quarter from the main Object
+  let internal1={data: ''}
+  let internal2={data: ''}
+  internal1.data = initialData.map(x=> ({...x, Finance: x.Finance.filter(y=> y.Quarter === props.filter.Quarter)})) // Filter Finance data with Quarter
+  internal2.data = internal1.data.map(x=> ({...x, ...x.Finance[0]}))   // Merge Fianance Objects with the main Objects
+  out.data = internal2.data.filter(item =>
+    Object.entries(props.filter)
+    .every(([k, v]) => !v.length || item[k] === v));// Final Output data 
+}catch(error){
+  out.data = props.data
+}
 
 
 
@@ -220,7 +263,7 @@ console.log(filteredData.filterObj)
       <Grid container spacing={3}>
         <Grid item xs={12}>
             {/* <ProjectInformation/> */}
-          {props.seriesData ? <GroupedPieChartsFinance portfolioTotal={portfolioTotal} props={currentProject} totalbudget={totalbudget} quarters={currentQuarters} quarter={filteredData.filterObj.Quarter} inkindEstimation={inkindEstimation}/> : <CircularProgress />}
+          {props.seriesData ? <GroupedPieChartsFinance portfolioTotal={portfolioTotal} inkindEstimation={inkindEstimation} inkindContributed={inkindContributed} totalbudget={totalbudget} consumedbudget={consumedbudget} /> : <CircularProgress />}
         </Grid>
       </Grid>
     </div>

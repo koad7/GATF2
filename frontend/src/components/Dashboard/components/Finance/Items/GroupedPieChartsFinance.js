@@ -18,31 +18,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function  filterByValue (array, string) {
-  return array.filter(o =>
-      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
-}
 
-export default function GroupedPieChartsFinance({portfolioTotal, props,quarter,quarters}) {
-  let var_x_inkindEstimation;
-  let var_x_totalbudget;
-  let var_y_budget_consumed;
-  let var_y_inkind_contributed;
-  let temp;
-    if(quarter){
-      temp = filterByValue (props[0].Finance, quarter)
-    }else{
-      temp = filterByValue (props[0].Finance, quarters.sort().at(-1))
-    }
-        
-    let localData = {...temp[0],...props[0]};
 
-    var_x_totalbudget = localData["Project Budget"]
-    
-    // Setting variables by avoiding empty variables
-    localData["In-kind Estimation"] ? var_x_inkindEstimation=localData["In-kind Estimation"] : var_x_inkindEstimation=0;
-    localData["In-kind - Contributed"] ? var_y_inkind_contributed=localData["In-kind - Contributed"] : var_y_inkind_contributed=0;
-    localData['Project - Consumed'] ? var_y_budget_consumed=localData['Project - Consumed'] : var_y_budget_consumed=0;
+export default function GroupedPieChartsFinance({portfolioTotal , inkindEstimation ,inkindContributed , totalbudget,consumedbudget}) {
+  let var_x_inkindEstimation=inkindEstimation;
+  let var_x_totalbudget=totalbudget;
+  let var_y_budget_consumed=consumedbudget;
+  let var_y_inkind_contributed=inkindContributed;
   const classes = useStyles();
   return (
     <div className={classes.root}>
