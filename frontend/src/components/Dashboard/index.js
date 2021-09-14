@@ -186,10 +186,10 @@ const {projectData,
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 			  {/* Projet Finances  */}
-			  {projectData ? <FinancePage seriesData={projectData.data}/> : <CircularProgress />}
+			  {projectData ? <FinancePage seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
 			<TabPanel value={value} index={2}>			  
-			  {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <CircularProgress /> }
+			  {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <LinearBuffer /> }
 			</TabPanel>
 			</div>
 	

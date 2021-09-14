@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
       zIndex: 5,
       backgroundColor: theme.palette.background.paper,
     },
-    details: {
-        display: 'flex'
-    },
     overlookText: {
       textAlign: "left ! important",
       color: "black"
@@ -30,94 +27,56 @@ const useStyles = makeStyles((theme) => ({
       color: "red"
     }
   }));
-
+  // Filtering function
   function  filterByValue (array, string) {
     return array.filter(o =>
         Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
   }
-  
-
-
+// Main function
 export default function Outlook({props,quarters}) {
   const classes = useStyles();
-  let initialData={data: ''}
   let outlookText;
   let toBeMonitored;
-  let out={data: ''}
-  initialData.data = props.data;
   let nextstep=null;
-
-if(props.filterObj.Project){
+  outlookText=props[0]['Overall Outlook'];
+  toBeMonitored=props[0]['To be monitored'];
   try{
-    out.data = initialData.data.filter(item=> item.Project === props.filterObj.Project)
-    outlookText=out.data[0]['Overall Outlook'];
-    toBeMonitored=out.data[0]['To be monitored'];
-  }catch(error){
-    out.data=initialData.data[0]
+    nextstep=filterByValue (props[0].NextSteps, quarters.sort().at(-1))
+  }catch(error){ 
+    nextstep=null
   }
-  // Quarter filtering of NextSteps
-  if(props.filterObj.Quarter){
-    try{
-      nextstep=filterByValue (out.data[0].NextSteps, props.filterObj.Quarter)
-    }catch(error){ 
-      nextstep=null
-    }
-  }else{
-    
-    try{
-      nextstep=filterByValue (out.data[0].NextSteps, quarters.sort().at(-1))
-    }catch(error){ 
-      nextstep=null
-    }
-  }
-}else{
-  out.data = initialData.data[0]
-  outlookText=out.data['Overall Outlook'];
-  toBeMonitored=out.data['To be monitored'];
-  // Quarter filtering of NextSteps
-  
-    
-    try{
-      nextstep=filterByValue (out.data.NextSteps, quarters.sort().at(-1))
-    }catch(error){ 
-      nextstep=null
-    }
-  
-}
-
-
-return (
-  <div className={classes.root}>
-          <Grid item lg={12} className={classes.overlookText}>
-            {outlookText ?  <><b>Overall Outlook</b> <br/>  {outlookText}</> : '' }
-            <br/>
-            {toBeMonitored ?  <><b>To be monitored</b> <br/> {toBeMonitored}</> : '' }
-            <br/>
-            {nextstep ?
-            <>
-                <b style={{color:'black'}}> Next steps</b> 
-              <Grid item xs>
-                  <Table className={classes.table} stickyHeader size="small" aria-label="sticky table" >
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Deadline</TableCell>
-                          <TableCell>Next step</TableCell>
-                          <TableCell>Status</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {nextstep.map(a =>
-                        <TableRow className={classes.table}>
-                          <TableCell align="left" >{a.Deadline}</TableCell>
-                          <TableCell align="left" >{a['Next step']}</TableCell>
-                          <TableCell align="left" >{a.Status}</TableCell>
-                        </TableRow>)}
-                    </TableBody>
-                  </Table>
-              </Grid>
-            </>
-            : ''}
-        </Grid>
-      </div>
+  return (
+    <div className={classes.root}>
+      <Grid item lg={12} className={classes.overlookText}>
+        {outlookText ?  <><b>Overall Outlook</b> <br/>  {outlookText}</> : '' }
+        <br/>
+          {toBeMonitored ?  <><b>To be monitored</b> <br/> {toBeMonitored}</> : '' }
+        <br/>
+        {nextstep ?
+          <>
+              <b style={{color:'black'}}> Next steps</b> 
+            <Grid item xs>
+                <Table className={classes.table} stickyHeader size="small" aria-label="sticky table" >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Deadline</TableCell>
+                        <TableCell>Next step</TableCell>
+                        <TableCell>Status</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {nextstep.map(a =>
+                      <TableRow className={classes.table}>
+                        <TableCell align="left" >{a.Deadline}</TableCell>
+                        <TableCell align="left" >{a['Next step']}</TableCell>
+                        <TableCell align="left" >{a.Status}</TableCell>
+                      </TableRow>)}
+                  </TableBody>
+                </Table>
+            </Grid>
+          </>
+        : ''}
+      </Grid>
+    </div>
   );
 }

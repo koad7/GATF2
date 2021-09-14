@@ -23,7 +23,7 @@ function  filterByValue (array, string) {
       Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
 }
 
-export default function GroupedPieCharts({portfolioTotal, props,quarter,quarters}) {
+export default function GroupedPieChartsFinance({portfolioTotal, props,quarter,quarters}) {
   let var_x_inkindEstimation;
   let var_x_totalbudget;
   let var_y_budget_consumed;

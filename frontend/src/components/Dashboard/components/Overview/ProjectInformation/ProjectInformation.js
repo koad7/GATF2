@@ -90,6 +90,11 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex'
   }
 }));
+// Filtering function
+function  filterByValue (array, string) {
+  return array.filter(o =>
+      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
+}
 
 export default function ProjectInformation({props,quarters}) {
   const classes = useStyles();
@@ -98,22 +103,32 @@ export default function ProjectInformation({props,quarters}) {
     setExpanded(newExpanded ? panel : false);
   };
 
+ //**************Filtering 
+  // Get selected Project: currentProject
+  let currentProject = props[0]
+  // Get quarters in selected project ['Details']
+  
+  try{
+    // nextstep=filterByValue(props[0].NextSteps, quarters.sort().at(-1))
+  }catch(error){ 
+    // nextstep=null
+  } 
   return (
     <div className={classes.root}>
       <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Project Information</Typography>
+          <Typography>Project Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {props ? <DetailsTab props={props} quarters={quarters}/> : ''}
+          {props ? <DetailsTab props={currentProject} quarter={quarters.sort().at(-1)}/> : ''}
         </AccordionDetails>
       </Accordion>
       <Accordion square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Project Details</Typography>
+          <Typography>Project Information</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        {props ? <InformationTab props={props}  /> : ''}
+          {props ? <InformationTab props={props}  /> : ''}
         </AccordionDetails>
       </Accordion>
     </div>

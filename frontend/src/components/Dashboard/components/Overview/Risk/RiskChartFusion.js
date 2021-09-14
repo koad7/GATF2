@@ -186,7 +186,7 @@ export default function RiskChartFusion ({props,quarters}) {
         },
         {
           id: "CURRENT",
-          label: `Current ${props.filterObj.Quarter}` 
+          label: ` ${localQuarter}` 
         }
       ]
     },

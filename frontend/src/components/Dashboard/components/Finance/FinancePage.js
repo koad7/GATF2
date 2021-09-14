@@ -10,7 +10,7 @@ import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import useFilteredData from '../../../../filter/useFilteredData';
 // import BudgetChart from './Items/BudgetChart';
-import GroupedPieCharts from './Items/GroupedPieCharts';
+import GroupedPieChartsFinance from './Items/GroupedPieChartsFinance';
 // import useRequestData from '../../hooks/useDataFilter';
 // import TableFilter from '../../filter/TableFilter';
 
@@ -36,60 +36,71 @@ const useStyles = makeStyles((theme) => ({
   // remove selector with empty value
 
 
-
-
+// Functions
+function  filterByValue (array, string) {
+  return array.filter(o =>
+      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
+}
 
 
 
 export default function FinanceTable(props) {
-
-  const {
+    const {
     filteredData,
-    setSelected,
     projectSelect,
     projectTypeSelect,
     implementerSelect,
-    // yearSelect,
     countrySelect,
     statusSelect,
     handleFilterSelected
   } = useFilteredData(props);
  
 
-  let portfolioTotal, inkindEstimation, projectBudget;
-
-  if (props.seriesData){
-        portfolioTotal = props.seriesData.reduce(function (s, a) {
-            return s + a["Project Budget"];
-        }, 0);
-        try{
-          inkindEstimation= filteredData.data[0]['In-kind Estimation']
-        }catch(error){
-          inkindEstimation=''
-        }
-        try{
-          projectBudget=filteredData.data[0]["Project Budget"]
-        }catch(error){
-          projectBudget=''
-        }
-        
-      }
+  let portfolioTotal, inkindEstimation,totalbudget;
 
     const classes = useStyles();
+    // Filter with dropdown
+    let myLocalVar =  filteredData.data.filter(props =>
+      Object.entries(filteredData.filterObj)
+      .every(([k, v]) => !v.length || props[k] === v))
 
-    let financeData;
-    let financeQuarter=[];
-    let financeQuarterSelect ;
-    try{
-      financeData=filteredData.data[0].Finance;
-      financeData.forEach(x => {
-        financeQuarter.push(x["Quarter"]);
-     })
-     financeQuarterSelect = [...new Set(financeQuarter)].sort().filter(function (el) {return el !== "";});
-    }catch(error){
-      financeData=[]
-    }
+
     
+      // get all quarters
+    const quaterSet = new Set();
+    myLocalVar.forEach(function(value, index, array) {
+      for (const item of value.Finance) {
+        quaterSet.add(item.Quarter);
+      }
+    }); 
+    let quaterArray=[]
+    let currentQuarters = [...quaterSet]; // qurter dorpdown values
+    if(filteredData.filterObj.Quarter){
+      quaterArray=[filteredData.filterObj.Quarter]
+    }else{
+      quaterArray=currentQuarters
+    }
+
+
+  let currentProject = filterByValue (filteredData.data, filteredData.filterObj.Project)
+  
+    // Calculate Portfolio Total sum 
+    portfolioTotal = props.seriesData.reduce(function (s, a) {
+        return s + a["Project Budget"];
+    }, 0);
+   // Calculate In Kind Estimation
+    inkindEstimation=myLocalVar.reduce(function (a, b) {
+      return a +b['In-kind Estimation']; // returns object with property x
+    }, 0);
+    // Calculate In Kind Estimation
+    totalbudget=myLocalVar.reduce(function (a, b) {
+      return a +b["Project Budget"]; // returns object with property x
+    }, 0);
+
+console.log(filteredData.filterObj)
+
+
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -124,7 +135,7 @@ export default function FinanceTable(props) {
               }}
             >
               <option aria-label="None" value="" />
-              {financeQuarterSelect.sort().map((select) => 
+              {quaterArray.sort().map((select) => 
                 (<option value={select}>{select}</option>)
               )}
             </NativeSelect>
@@ -209,7 +220,7 @@ export default function FinanceTable(props) {
       <Grid container spacing={3}>
         <Grid item xs={12}>
             {/* <ProjectInformation/> */}
-          {props.seriesData ? <GroupedPieCharts portfolioTotal={portfolioTotal}  totalbudget={projectBudget}  inkindEstimation={inkindEstimation} props={filteredData}/> : <CircularProgress />}
+          {props.seriesData ? <GroupedPieChartsFinance portfolioTotal={portfolioTotal} props={currentProject} totalbudget={totalbudget} quarters={currentQuarters} quarter={filteredData.filterObj.Quarter} inkindEstimation={inkindEstimation}/> : <CircularProgress />}
         </Grid>
       </Grid>
     </div>

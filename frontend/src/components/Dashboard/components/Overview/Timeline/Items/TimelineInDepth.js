@@ -17,13 +17,7 @@ const useStyles = makeStyles({
 
 
 export default function TimelineInDepth(props) {
-  let local;
- 
-  local=props.data.sort(function (a, b) {
-    return a["Milestone number"].localeCompare(b["Milestone number"]);
-});
-
-
+props.data.sort((a, b) => a.Phase.localeCompare(b.Phase) || a['Milestone number'] -  b['Milestone number']);
 
   const classes = useStyles();
   return (
@@ -31,10 +25,10 @@ export default function TimelineInDepth(props) {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell></TableCell>
             <TableCell>Phase </TableCell>
-            <TableCell align="left"></TableCell>
+            <TableCell></TableCell>
             <TableCell align="left">Milestone </TableCell>
+            <TableCell align="left"></TableCell>
             <TableCell align="left">Planned Date</TableCell>
             <TableCell align="left">Revised Date</TableCell>
             <TableCell align="left">Under Alliance Control</TableCell>
@@ -43,7 +37,7 @@ export default function TimelineInDepth(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {local.map((row) => (
+          {props.data.map((row) => (
             <TableRow key={row["Milestone number"]}>
               <TableCell align="left">{`${row["Phase"]}`}</TableCell>
               <TableCell component="th" scope="row">

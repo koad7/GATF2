@@ -1,158 +1,75 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React, { useState,useEffect } from "react";
+import { render } from "react-dom";
+import Highcharts from "highcharts/highstock";
+import HighchartsReact from "highcharts-react-official";
 
 
 
 
+const  PieChart= ({type, var_x, var_y}) => {
 
-export default  function PieChart({type, var_x, var_y}) {
-  //type: help to differentiate the type of chart (Budget, Inkind or Portfolio)
-  // var_x: is 1st dimmension 
-  // var_y: is 2nd dimmension  
-
-  let  chartOption;
-  let series={};
-
-  
-  let project_consumed_budget_chart_options = {
-    plotOptions: {
-        pie: {
-            donut: {
-                labels: {
-                    show: true,
-                    total: {
-                        show: false,
-                        label: 'Project Budget',
-                        formatter: () => var_x    
-                    }
-                }
-            }
-        }
-    },
-      theme: {
-          monochrome: {
-              enabled: false
-          }
-      },
-      labels: ['Consumed', 'Remaining'],
-      dataLabels: {
-      showOn: "always",
-          name: {
-              show: true,
-              color: ['#00833e', '#a2d45e'],
-              fontSize: "15px"
-          }
-      },
-      fill: {
-        colors: ['#00833e', '#a2d45e']
-      },
-      legend: {
-      position: 'bottom',
-      labels: {
-        colors: ['#00833e', '#a2d45e'],
-        useSeriesColors: false
-    },
-      }
-  }
-  let in_kind_chart_options = {
-    plotOptions: {
-        pie: {
-            donut: {
-                labels: {
-                    show: true,
-                    total: {
-                        show: false,
-                        label: 'Total',
-                        formatter: () => var_x ? var_x + " kUSD" : ''
-                        
-                    }
-                }
-            }
-        }
-    },
-      theme: {
-          monochrome: {
-              enabled: false
-          }
-      },
-      labels: ['Contributed', 'Estimated'],
-      dataLabels: {
-      showOn: "always",
-          name: {
-              show: true,
-              color: ['#3288ED', '#84B8F4'],
-              fontSize: "20px"
-          }
-      },
-      fill: {
-        colors: ['#3288ED', '#84B8F4']
-      },
-      legend: {
-      position: 'bottom',
-      labels: {
-        colors: ['#3288ED', '#84B8F4'],
-        useSeriesColors: false
-    },
-      }
-  }
-  let portfolio_chart_options = {
-    plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                        total: {
-                            show: true,
-                            label: 'Total Portfolio',
-                            formatter: () => var_x
-                        }
-                    }
-                }
-            }
-    },
-    theme: {
-        monochrome: {
-            enabled: true
-        }
-    },
-    labels: ['Project Budget', 'Total Portfolio'],
-    dataLabels: {
-    showOn: "always",
-        name: {
-            show: true,
-            color: ['#3f4643', '#ff8300'],
-            fontSize: "20px"
-        }
-    },
-    fill: {
-      colors: ['#3f4643', '#ff8300']
-    },
-    legend: {
-        position: 'bottom'
-      }
-  }
-  if(type==='total budget'){
-      chartOption = project_consumed_budget_chart_options
-  }
-  else if(type==='inkind'){
-      chartOption = in_kind_chart_options
-  }else if(type==='portfolio'){
-      chartOption = portfolio_chart_options
-  }
-
-
-  if(typeof var_y === 'undefined' || typeof var_x === 'undefined') {
-    series=[]
-  }else{
-    series=[var_y, (var_x-var_y)]
-  }
-
-  return (
-      <ReactApexChart
-          options={chartOption}
-          series={series}
-          type="donut"
-          height={250}
-      />
-  );
+let dataValue = [];
+let color=[];
+if(type==='total budget') {
+    dataValue = [
+        ["Consumed", var_y],
+        ["Remaining", var_x],
+    ];
+    color=['#00833e', '#a2d45e'];
+}  else if(type==='inkind') {
+    dataValue = [
+        ["Contributed", var_y],
+        ["Estimated", (var_x)],
+    ];
+    color=['#3288ED', '#84B8F4'];
+}else if(type==='portfolio'){
+    dataValue = [
+        ["Project Budget", var_y],
+        ["Total Portfolio", var_x]];
+        color=['#3f4643', '#ff8300'];
 }
+  const chartOptions = {
+    series: [
+      {
+        data: dataValue,
+        name: "",
+      }
+    ],
+    chart: {
+        type: 'pie',
+        margin: [0, 0, 0, 0],
+        spacingTop: 0,
+        spacingBottom: 0,
+        spacingLeft: 0,
+        spacingRight: 0
+    },
+    title: {
+        text: ""
+      },
+    plotOptions: {
+      pie: {
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f} kUSD</b> <br/>'
+          },
+        size: "40%",
+        allowPointSelect: true,
+        colors: color,
+        cursor: "pointer",
+        depth: 10,
+        innerSize: 60,
+        dataLabels: {
+            format: '{point.percentage:.0f} %: {point.name}'
+        },
+        showInLegend: true
+      },
+      
+    },
+  };
+  return (
+    <div>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} onetoOne={true} />
+    </div>
+  );
+};
+export default PieChart;

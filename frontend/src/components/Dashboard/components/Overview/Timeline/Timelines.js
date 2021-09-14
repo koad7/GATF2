@@ -89,20 +89,23 @@ export default function Timelines({props,quarter}) {
 if(props.filterObj.Project){
   try{
     local1 = initialData.filter(item=> item.Project === props.filterObj.Project);
-    local = local1[0].data
+    
+    
+    
+    local={'data': local1[0].data}
+
     localMilestone = local1[0].Milestones;
     
-    // initial = filterByValue(local[0].Risks, "Initial Risk")
-    // selected = filterByValue(local[0].Risks, props.filterObj.Quarter)
+   
   }catch(error){
-    local = props.data[0].data
+    local = props.data[0]
+    
     localMilestone = props.data[0].Milestones
   }
 }else{
   local = props.data[0];
   localMilestone = props.data[0].Milestones;
 }
-
 
 
   const classes = useStyles();
@@ -117,14 +120,15 @@ if(props.filterObj.Project){
     <div className={classes.root}>
         <AppBar position="sticky" color="secondary"> 
             <Tabs value={value} style={{ background: '#0064a8' }} onChange={handleChange} aria-label="simple tabs example">
-                <Tab label="Timeline Chart" {...a11yProps(0)} />
+                
                 <Tab label="Timeline Table" {...a11yProps(1)} />
+                <Tab label="Timeline Chart" {...a11yProps(0)} />
             </Tabs>
         </AppBar>
-        <TabPanel value={value} index={0}>
-            <TimelineChart seriesData={local} quarter={quarter}/>
-        </TabPanel>
         <TabPanel value={value} index={1}>
+            {/* <TimelineChart seriesData={local} quarter={quarter}/> */}
+        </TabPanel>
+        <TabPanel value={value} index={0}>
             <TimelineInDepth  data={localMilestone} quarter={props.filterObj.Quarter}/>
         </TabPanel>
         

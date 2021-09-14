@@ -18,44 +18,21 @@ const useStyles = makeStyles({
   },
 });
 
-function  filterByValue (array, string) {
-  return array.filter(o =>
-      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
-}
-            
 
-
-export default function InformationTab({props,quarters}) {
-  
+export default function InformationTab({props}) {
   const classes = useStyles();
-  
-
-  let initialData={data: ''}
-  let out={data: ''}
-  initialData.data = props.data;
   let tfaArticles='';
   let excpectedResult='';
   let scope='';
-
-if(props.filterObj.Project){
   try{
-    out.data = initialData.data.filter(item=> item.Project === props.filterObj.Project)
-    tfaArticles=out.data[0]['TFA Articles'];
-    scope=out.data[0]["Scope"];
-    excpectedResult=out.data[0]['Expected Result'];
-  }catch(error){
-    out.data=initialData.data[0]
+    tfaArticles=props[0]['TFA Articles'];
+    scope=props[0]["Scope"];
+    excpectedResult=props[0]['Expected Result'];
+    }catch(error){
+      tfaArticles='';
+      scope='';
+      excpectedResult='';
   }
-
-}
-else{
-  out.data = initialData.data[0]
-  tfaArticles=out.data['TFA Articles'];
-  scope=out.data["Scope"];
-  excpectedResult=out.data['Expected Result'];
-}
-
-
 
   return (
     <div className={classes.root}>

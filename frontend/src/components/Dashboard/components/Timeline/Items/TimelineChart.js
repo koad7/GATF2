@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React ,{useState, useRef, useEffect} from 'react'
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highcharts-gantt";
 import HighchartMore from "highcharts/highcharts-more";
@@ -72,13 +72,13 @@ function  filterByValue (array, string) {
 export default function TimelineChart(props,quarter) {
 // let data= filterByValue(props.seriesData.data, props.quarter)
 
-console.log(props.seriesData)
 
 const [chartData, setChart] = useState([]);
-const addOneChild = () => {
-    setChart(props.seriesData)
-}
-let chartOptions ={
+// const addOneChild = () => {
+//     setChart(props.seriesData)
+// }
+const chartComponent = useRef(null);
+const [chartOptions] = useState({
     chart: {
         backgroundColor: "transparent",
         chartHeight: 100
@@ -130,23 +130,27 @@ let chartOptions ={
     }
     },
     
-}
+});
+useEffect(() => {
+    const chart = chartComponent.current.chart;
+  }, []);
     
     return (
         <div>
             <HighchartsReact
                 constructorType="ganttChart"
+                ref={chartComponent}
                 highcharts={Highcharts}
                 options={chartOptions}
                 allowChartUpdate="true"
-                // callback={chart => setChart(chart)}
-                callback={function(chart) {
-                    chart.renderer
-                      .label()
-                      .css()
-                      .attr()
-                      .add();
-                  }}
+                callback={chart => setChart(chart)}
+                // callback={function(chart) {
+                //     chart.renderer
+                //       .label()
+                //       .css()
+                //       .attr()
+                //       .add();
+                //   }}
             />
         </div>
     )
