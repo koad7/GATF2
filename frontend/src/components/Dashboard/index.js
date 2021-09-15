@@ -167,7 +167,7 @@ const {projectData,
 					{/* <Tab label="Map" {...a11yProps(0)} /> */}
 					<Tab label="Overview" {...a11yProps(0)} />
 					<Tab label="Finance" {...a11yProps(1)} /> 
-					<Tab label="Timelines" {...a11yProps(2)} />
+					{/* <Tab label="Timelines" {...a11yProps(2)} /> */}
 					</Tabs>
 					{/* <Button type="submit" fullWidth variant="contained" color="secondary" onClick={logout} className={classes.submit}>
 						Logout
@@ -189,7 +189,7 @@ const {projectData,
 			  {projectData ? <FinancePage seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
 			<TabPanel value={value} index={2}>			  
-			  {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <LinearBuffer /> }
+			  {/* {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <LinearBuffer /> } */}
 			</TabPanel>
 			</div>
 	

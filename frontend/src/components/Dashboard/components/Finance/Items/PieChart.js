@@ -59,7 +59,7 @@ if(type==='total budget') {
         depth: 10,
         innerSize: 60,
         dataLabels: {
-            format: '{point.percentage:.0f} %: {point.name}'
+            format: '{point.percentage:.0f} %'
         },
         showInLegend: true
       },

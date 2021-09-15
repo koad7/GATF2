@@ -122,7 +122,7 @@ if(props.filterObj.Project){
             <Tabs value={value} style={{ background: '#0064a8' }} onChange={handleChange} aria-label="simple tabs example">
                 
                 <Tab label="Timeline Table" {...a11yProps(1)} />
-                <Tab label="Timeline Chart" {...a11yProps(0)} />
+                {/* <Tab label="Timeline Chart" {...a11yProps(0)} /> */}
             </Tabs>
         </AppBar>
         <TabPanel value={value} index={1}>
