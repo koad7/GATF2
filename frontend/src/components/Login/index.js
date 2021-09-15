@@ -77,9 +77,9 @@ function Login(props) {
 						className={classes.submit}>
 						Log in
           			</Button>
-					<Typography variant="caption" align="center" gutterBottom>
+					{/* <Typography variant="caption" align="center" gutterBottom>
 						Need an account? <a href="/register">Sign up</a>
-					</Typography>
+					</Typography> */}
 				</form>
 			</Paper>
 		</main>
