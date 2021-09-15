@@ -40,7 +40,7 @@ function HomePage(props) {
 				<Typography component="h1" variant="h5">
 					Projects Tracking Dashboard
 				</Typography>
-				<Button
+				{/* <Button
 					type="submit"
 					fullWidth
 					variant="outlined"
@@ -49,7 +49,7 @@ function HomePage(props) {
 					to="/register"
 					className={classes.submit}>
 					Sign Up
-          		</Button>
+          		</Button> */}
 				<Button
 					type="submit"
 					fullWidth
