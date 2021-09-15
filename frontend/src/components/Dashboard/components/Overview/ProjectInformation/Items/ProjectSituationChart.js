@@ -49,99 +49,272 @@ function  filterByValue (array, string) {
 
 export default function ProjectSituationChart({props, quarter}){
   let dataSource ={}
-
-props.forEach(x => {
-    try {
-      dataSource = {
-        colorrange: {
-          gradient: "0",
-          color: [
-            colorCode['1'],
-            colorCode['2'],
-            colorCode['3'],
-            colorCode['4'],
-            colorCode['5']
-          ]
-        },
-        dataset: [
-          {
-            data: [
-              {
-                rowid: "OPASSES",
-                columnid: quarter,
-                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Assessment']].label
-              },
-              {
-                rowid: "OPR",
-                columnid: quarter,
-                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Relevance']].label
-              },
-              {
-                rowid: "OPASUM",
-                columnid: quarter,
-                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Assumptions']].label
-              },
-              {
-                rowid: "OPPAP",
-                columnid: quarter,
-                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label
-              }
-            ]
-          }
-        ],
-        columns: {
-          column: [
-           
+if(props.length !== 0){
+  props.forEach(x => {
+  try {
+    dataSource = {
+      colorrange: {
+        gradient: "0",
+        color: [
+          colorCode['1'],
+          colorCode['2'],
+          colorCode['3'],
+          colorCode['4'],
+          colorCode['5']
+        ]
+      },
+      dataset: [
+        {
+          data: [
             {
-              id: quarter,
-              label: quarter
+              rowid: "OPASSES",
+              columnid: quarter,
+              displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'],
+              colorrangelabel: colorCode[x['Overall Project Assessment']].label
+            },
+            {
+              rowid: "OPR",
+              columnid: quarter,
+              displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'],
+              colorrangelabel: colorCode[x['Overall Project Relevance']].label
+            },
+            {
+              rowid: "OPASUM",
+              columnid: quarter,
+              displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'],
+              colorrangelabel: colorCode[x['Overall Project Assumptions']].label
+            },
+            {
+              rowid: "OPPAP",
+              columnid: quarter,
+              displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
+              colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label
             }
           ]
-        },
-        rows: {
-          row: [
-            {
-              id: "OPASSES",
-              label: "Project Assessement"
-            },
-            {
-              id: "OPR",
-              label: "Project Relevance"
-            },
-            {
-              id: "OPASUM",
-              label: "Project Assumption"
-            },
-            {
-              id: "OPPAP",
-              label: "project progress according to plan"
-            }
-          ]
-        },
-        chart: {
-          theme: "fusion",
-          caption: "",
-          subcaption: "",
-          plotBorderThickness: "4",
-          showvalues: "1",
-          mapbycategory: "1",
-          showLegend: "0",
-          plottooltext:
-            "$rowlabel: $displayvalue "
         }
+      ],
+      columns: {
+        column: [
+         
+          {
+            id: quarter,
+            label: quarter
+          }
+        ]
+      },
+      rows: {
+        row: [
+          {
+            id: "OPASSES",
+            label: "Project Assessement"
+          },
+          {
+            id: "OPR",
+            label: "Project Relevance"
+          },
+          {
+            id: "OPASUM",
+            label: "Project Assumption"
+          },
+          {
+            id: "OPPAP",
+            label: "project progress according to plan"
+          }
+        ]
+      },
+      chart: {
+        theme: "fusion",
+        caption: "",
+        subcaption: "",
+        plotBorderThickness: "4",
+        showvalues: "1",
+        mapbycategory: "1",
+        showLegend: "0",
+        plottooltext:
+          "$rowlabel: $displayvalue "
       }
-    }catch(error){
-      dataSource={}
     }
-  
-  // quarter.push(x['Quarter'])
-  
-})
+  }catch(error){
+    dataSource={
+      colorrange: {
+        gradient: "0",
+        color: [
+          {
+            code:"#949090",
+            minvalue: "0",
+            maxvalue: "0",
+            label: ""
+        },{
+          code:"#949090",
+            minvalue: "0",
+            maxvalue: "0",
+            label: ""
+      }
+        ]
+      },
+      dataset: [
+        {
+          data: [
+            {
+              rowid: "OPASSES",
+              columnid: quarter,
+              displayvalue: "0",
+              colorrangelabel: ''
+            },
+            {
+              rowid: "OPR",
+              columnid: quarter,
+              displayvalue: "0",
+              colorrangelabel: ''
+            },
+            {
+              rowid: "OPASUM",
+              columnid: quarter,
+              displayvalue: "0",
+              colorrangelabel: ''
+            },
+            {
+              rowid: "OPPAP",
+              columnid: quarter,
+              displayvalue: "0",
+              colorrangelabel: ''
+            }
+          ]
+        }
+      ],
+      columns: {
+        column: [
+         
+          {
+            id: quarter,
+            label: quarter
+          }
+        ]
+      },
+      rows: {
+        row: [
+          {
+            id: "OPASSES",
+            label: "Project Assessement"
+          },
+          {
+            id: "OPR",
+            label: "Project Relevance"
+          },
+          {
+            id: "OPASUM",
+            label: "Project Assumption"
+          },
+          {
+            id: "OPPAP",
+            label: "project progress according to plan"
+          }
+        ]
+      },
+      chart: {
+        theme: "fusion",
+        caption: "",
+        subcaption: "",
+        plotBorderThickness: "4",
+        showvalues: "1",
+        mapbycategory: "1",
+        showLegend: "0",
+        plottooltext:
+          "$rowlabel: $displayvalue "
+      }
+    }
+  }
 
+  });
+}else{
+  dataSource={
+    colorrange: {
+      gradient: "0",
+      color: [{
+          code:"#949090",
+          minvalue: "0",
+          maxvalue: "1",
+          label: ""
+        },{
+        code:"#949090",
+          minvalue: "2",
+          maxvalue: "4",
+          label: ""
+      }]
+    },
+    dataset: [
+      {
+        data: [
+          {
+            rowid: "OPASSES",
+            columnid: '',
+            displayvalue: "0",
+            colorrangelabel: ''
+          },
+          {
+            rowid: "OPR",
+            columnid: '',
+            displayvalue: "0",
+            colorrangelabel: ''
+          },
+          {
+            rowid: "OPASUM",
+            columnid: '',
+            displayvalue: "0",
+            colorrangelabel: ''
+          },
+          {
+            rowid: "OPPAP",
+            columnid: '',
+            displayvalue: "0",
+            colorrangelabel: ''
+          }
+        ]
+      }
+    ],
+    columns: {
+      column: [
+       
+        {
+          id: '',
+          label: ''
+        }
+      ]
+    },
+    rows: {
+      row: [
+        {
+          id: "OPASSES",
+          label: "Project Assessement"
+        },
+        {
+          id: "OPR",
+          label: "Project Relevance"
+        },
+        {
+          id: "OPASUM",
+          label: "Project Assumption"
+        },
+        {
+          id: "OPPAP",
+          label: "project progress according to plan"
+        }
+      ]
+    },
+    chart: {
+      theme: "fusion",
+      caption: "",
+      subcaption: "",
+      plotBorderThickness: "4",
+      showvalues: "1",
+      mapbycategory: "1",
+      showLegend: "0",
+      plottooltext:
+        "$rowlabel: $displayvalue "
+    }
+  }
+}
+console.log(dataSource)
     return (
       <ReactFC
         type="heatmap"
