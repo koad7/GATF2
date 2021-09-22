@@ -79,14 +79,13 @@ try{
     return (
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table" >
+          <Table stickyHeader aria-label="sticky table"  >
             <TableHead>
-              <TableRow>
+              <TableRow style={{ backgroundColor: 'rgb(92,93,90)'}}>
                 {columns.map((column) => (
-                  <TableCell
+                  <TableCell style={{ backgroundColor: 'rgb(137,137,135	)', minWidth: column.minWidth, color:'white'}}
                     key={column.id}
                     align="left"
-                    style={{ minWidth: column.minWidth}}
                   >
                     {column.label}
                   </TableCell>

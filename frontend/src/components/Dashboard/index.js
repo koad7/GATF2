@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography} from '@material-ui/core'
 // import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
@@ -148,13 +148,13 @@ const {projectData,
     requestStatus,
     error} = useFetchApi()
 
-  if(!firebase.getCurrentUsername()) {
-	// not logged in
-	alert('Please login first')
-	props.history.replace('/login')
-	return null
-}
-  
+	if(!firebase.getCurrentUsername()) {
+		// not logged in
+		alert('Please login first')
+		props.history.replace('/login')
+		return null
+    }
+
 
 	return (
 		<div className={classes.root}>
