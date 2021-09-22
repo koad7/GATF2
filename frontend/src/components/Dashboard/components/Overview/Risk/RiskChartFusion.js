@@ -4,27 +4,10 @@ import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import PowerCharts from 'fusioncharts/fusioncharts.powercharts';
-import { makeStyles } from '@material-ui/core/styles';
 
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme,PowerCharts);
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    ...theme.typography.button,
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(1),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },chart: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    
-  },
-}));
 
 
 // Resolves charts dependancy
@@ -69,7 +52,6 @@ function  filterByValue (array, string) {
 
 export default function RiskChartFusion ({props,quarters}) {
   let initialData = props.data
-  let out={data: ''}
   let dataSource={};
   let initial, selected, local;
   let localQuarter;

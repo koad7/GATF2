@@ -42,11 +42,6 @@ const colorCode={
     }
 }
 
-function  filterByValue (array, string) {
-  return array.filter(o =>
-      Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
-}
-
 export default function ProjectSituationChart({props, quarter}){
   let dataSource ={}
 if(props.length !== 0){

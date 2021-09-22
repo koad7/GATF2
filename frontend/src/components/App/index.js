@@ -8,7 +8,7 @@ import LinearBuffer from '../LinearBuffer';
 import firebase from '../firebase'
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import { createTheme } from '@material-ui/core/styles'
-import {CssBaseline,CircularProgress} from '@material-ui/core';
+import {CssBaseline} from '@material-ui/core';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 
 /*default material-ui theme generation*/

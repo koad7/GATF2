@@ -1,5 +1,4 @@
-import React,{ useContext } from "react";
-import ReactDOM from 'react-dom'
+import React from "react";
 import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Timelines from './Timeline/Timelines';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Oultlook from './Oultlook'
+// import Footer from '../Footer/Footer'
 // DataFilterContext
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,6 @@ export default function OverviewTable(props) {
   const {
     filteredData,
     projectSelect,
-    yearSelect,
     handleFilterSelected
   } = useFilteredData(props);
   //**************Filtering 
@@ -183,6 +182,7 @@ export default function OverviewTable(props) {
               <Timelines props={filteredData} quarter={currentQuarters}/> 
           </Grid>
         </Grid> </> : <div className={classes.circular}><CircularProgress /></div>}
+        {/* <Footer/> */}
       </div>
     );
 }

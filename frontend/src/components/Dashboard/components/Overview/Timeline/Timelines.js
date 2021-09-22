@@ -2,14 +2,8 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TimelineChart from '../../Timeline/Items/TimelineChart'
 import TimelineInDepth from './Items/TimelineInDepth'
-// import useRequestData from '../../../hooks/useDataFilter';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -80,30 +74,23 @@ function a11yProps(index) {
 export default function Timelines({props,quarter}) {
   
   let initialData = props.data
-  let out={data: ''}
-  let dataSource={};
-  let currentData, local, local1,localMilestone;
+  let local1,localMilestone;
 
 
   
 if(props.filterObj.Project){
   try{
     local1 = initialData.filter(item=> item.Project === props.filterObj.Project);
-    
-    
-    
-    local={'data': local1[0].data}
+
 
     localMilestone = local1[0].Milestones;
     
    
   }catch(error){
-    local = props.data[0]
     
     localMilestone = props.data[0].Milestones
   }
 }else{
-  local = props.data[0];
   localMilestone = props.data[0].Milestones;
 }
 

@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 // import useRequestData from '../../hooks/useDataFilter';
 // import TableFilter2 from '../../filter/TableFilter';
@@ -26,13 +26,8 @@ export default function TimelinePage(props){
 
   const {
     filteredData,
-    setSelected,
     projectSelect,
-    projectTypeSelect,
-    implementerSelect,
     yearSelect,
-    countrySelect,
-    statusSelect,
     handleFilterSelected
   } = useFilteredData(props);
   

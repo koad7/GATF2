@@ -90,11 +90,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex'
   }
 }));
-// Filtering function
-function  filterByValue (array, string) {
-  return array.filter(o =>
-      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
-}
 
 export default function ProjectInformation({props,quarters}) {
   const classes = useStyles();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import FinanceResultTable from './Items/FinanceResultTable';
@@ -34,13 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
   // remove selector with empty value
-
-
-// Functions
-function  filterByValue (array, string) {
-  return array.filter(o =>
-      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
-}
 
 
 
@@ -96,7 +89,6 @@ export default function FinanceTable(props) {
      
 let consumedbudget,inkindContributed;
 
-  let currentProject = filterByValue (filteredData.data, filteredData.filterObj.Project)
   
     // Calculate Portfolio Total sum 
     portfolioTotal = props.seriesData.reduce(function (s, a) {

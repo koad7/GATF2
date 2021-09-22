@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Typography} from '@material-ui/core'
 // import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
-import withStyles from '@material-ui/core/styles/withStyles'
 import firebase from '../firebase'
 import { withRouter } from 'react-router-dom'
 // NEW IMPORT
@@ -14,8 +13,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import TimelinePage from './components/Timeline/TimelinePage.js'
-import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import useFetchApi from '../../hooks/useFetchApi';
 import Toolbar from "@material-ui/core/Toolbar";
@@ -144,9 +141,7 @@ function Dashboard(props) {
 //   },[])
   
     
-const {projectData,
-    requestStatus,
-    error} = useFetchApi()
+const {projectData} = useFetchApi()
 
 	if(!firebase.getCurrentUsername()) {
 		// not logged in

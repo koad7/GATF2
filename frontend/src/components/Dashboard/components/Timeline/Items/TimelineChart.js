@@ -1,15 +1,13 @@
-import React ,{useState, useRef, useEffect} from 'react'
+import React ,{useState, useRef} from 'react'
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highcharts-gantt";
 import HighchartMore from "highcharts/highcharts-more";
 
 
 var today = new Date(),
-  day = 1000 * 60 * 60 * 24,
   // Utility functions
   dateFormat = Highcharts.dateFormat,
-  defined = Highcharts.defined,
-  isObject = Highcharts.isObject;
+  defined = Highcharts.defined;
 
 // Set to 00:00:00:000 today
 today.setUTCHours(0);
@@ -64,10 +62,6 @@ var point = this,
         }, '');
     }
     
-function  filterByValue (array, string) {
-    return array.filter(o =>
-        Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
-    }
 
 export default function TimelineChart(props,quarter) {
 // let data= filterByValue(props.seriesData.data, props.quarter)
@@ -131,9 +125,9 @@ const [chartOptions] = useState({
     },
     
 });
-useEffect(() => {
-    const chart = chartComponent.current.chart;
-  }, []);
+// useEffect(() => {
+//     const chart = chartComponent.current.chart;
+//   }, []);
     
     return (
         <div>
