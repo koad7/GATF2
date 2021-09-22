@@ -309,7 +309,7 @@ if(props.length !== 0){
     }
   }
 }
-console.log(dataSource)
+
     return (
       <ReactFC
         type="heatmap"

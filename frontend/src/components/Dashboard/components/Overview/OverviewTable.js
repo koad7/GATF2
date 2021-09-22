@@ -14,7 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Oultlook from './Oultlook'
-// import Footer from '../Footer/Footer'
+
 // DataFilterContext
 
 const useStyles = makeStyles((theme) => ({
@@ -89,9 +89,6 @@ export default function OverviewTable(props) {
       inkindEstimation= filteredData.data[0]['In-kind Estimation']
     }
 
-   
-
-// console.log(filteredData.data.length())
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
@@ -181,8 +178,9 @@ export default function OverviewTable(props) {
             <Typography style={{ color: textcolor }} variant="h5">TIMELINE</Typography>
               <Timelines props={filteredData} quarter={currentQuarters}/> 
           </Grid>
-        </Grid> </> : <div className={classes.circular}><CircularProgress /></div>}
-        {/* <Footer/> */}
+         
+        </Grid>  </> : <div className={classes.circular}><CircularProgress /></div>}
+       
       </div>
     );
 }

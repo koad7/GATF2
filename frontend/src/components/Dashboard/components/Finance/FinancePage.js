@@ -82,10 +82,6 @@ export default function FinanceTable(props) {
       Object.entries(filteredData.filterObj)
       .every(([k, v]) => !v.length || item[k] === v));// Final Output data 
 
-      console.log(out.data ) 
-
-
-    
      
 let consumedbudget,inkindContributed;
 

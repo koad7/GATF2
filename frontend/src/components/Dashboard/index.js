@@ -17,7 +17,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import useFetchApi from '../../hooks/useFetchApi';
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from '@material-ui/core/styles';
-
+import Footer from './components/Footer/Footer'
 
 const useStyles = makeStyles((theme) => ({
 	main: {
@@ -186,6 +186,7 @@ const {projectData} = useFetchApi()
 			<TabPanel value={value} index={2}>			  
 			  {/* {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <LinearBuffer /> } */}
 			</TabPanel>
+			 <Footer/>
 			</div>
 	
 	)

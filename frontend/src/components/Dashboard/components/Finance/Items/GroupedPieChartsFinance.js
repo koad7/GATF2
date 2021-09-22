@@ -27,8 +27,7 @@ export default function GroupedPieChartsFinance({portfolioTotal , inkindEstimati
   
  
   const classes = useStyles();
-  console.log("var_y_budget_consumed")
-  console.log(new Intl.NumberFormat().format(var_y_budget_consumed))
+
   if(Number.isNaN(var_y_budget_consumed)){
     var_y_budget_consumed = 0
   }
