@@ -40,15 +40,15 @@ props.data.sort((a, b) => a.Phase.localeCompare(b.Phase) || a['Milestone number'
         <TableBody>
           {props.data.map((row) => (
             <TableRow  style={{ backgroundColor: rowColor[row["Phase"]]}}  key={row["Milestone number"]}>
-              <TableCell align="left">{`${row["Phase"]}`}</TableCell>
+              <TableCell align="left"><b>{`${row["Phase"]}`}</b></TableCell>
               <TableCell component="th" scope="row">
                 {`${row["Phase name"]}`}
               </TableCell>
-              <TableCell align="left">{`${row["Milestone number"]}`}</TableCell>
+              <TableCell align="left"><b>{`${row["Milestone number"]}`}</b></TableCell>
               <TableCell align="left">{`${row["name"]}`}</TableCell>
               {/* Remove the possibility of having: January 1, 1970  */}
-              <TableCell align="left">{moment.unix(row.start/1000).format('LL') !== 'January 1, 1970' ? moment.unix(row.start/1000).format('LL'): ''}</TableCell>
-              <TableCell align="left">{row.revisedDate}</TableCell>
+              <TableCell align="left"><small>{moment.unix(row.start/1000).format('LL') !== 'January 1, 1970' ? moment.unix(row.start/1000).format('LL'): ''}</small></TableCell>
+              <TableCell align="left"><small>{moment.unix(row.start/1000).format('LL') !== 'Invalid date' ? '': moment.unix(row.revisedDate/1000).format('LL')}</small></TableCell>
               <TableCell align="left">{row['Under Alliance control']}</TableCell>
               <TableCell align="left">{row['Reason for revision']}</TableCell>
               <TableCell align="left">{row['Specific Actions']}</TableCell>
