@@ -25,7 +25,20 @@ export default function GroupedPieChartsFinance({portfolioTotal , inkindEstimati
   let var_x_totalbudget=totalbudget;
   let var_y_budget_consumed=consumedbudget;
   let var_y_inkind_contributed=inkindContributed;
+  
+ 
   const classes = useStyles();
+  console.log("var_y_budget_consumed")
+  console.log(new Intl.NumberFormat().format(var_y_budget_consumed))
+  if(Number.isNaN(var_y_budget_consumed)){
+    var_y_budget_consumed = 0
+  }
+  if(Number.isNaN(var_y_inkind_contributed)){
+    var_y_inkind_contributed = 0
+  }
+  if(Number.isNaN(var_x_totalbudget)){
+    var_x_totalbudget = 0
+  }
   return (
     <div className={classes.root}>
         <Grid

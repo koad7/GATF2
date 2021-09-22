@@ -60,7 +60,7 @@ function HomePage(props) {
 					className={classes.submit}>
 					Login
           		</Button>
-				<Button
+				{/* <Button
 					type="submit"
 					fullWidth
 					variant="contained"
@@ -69,7 +69,7 @@ function HomePage(props) {
 					to="/dashboard"
 					className={classes.submit}>
 					Dashboard
-          		</Button>
+          		</Button> */}
 			</Paper>
 		</main>
 	)

@@ -83,7 +83,7 @@ def airtable_func():
     risks_df = table_dict['Risks'].fillna('')
     timeline_df = table_dict['Timeline'].fillna('')
     milestones_df = table_dict['Milestones'].fillna('')
-
+    print(milestones_df)
     # Project: General Information
     # Field names tidying up
     for field in information_df.columns:
@@ -221,23 +221,17 @@ def airtable_func():
     # Timeline Milestones chart
     # Get project name, Phase, and Milestone names
     try:
-        df = milestones_df_f['Milestones'].str.split(
+        milestones_df_f[[
+            'Project', 'Phase', 'Phase name', 'Milestone number',
+            'Milestone name_'
+        ]] = milestones_df_f['Milestones'].str.split(
             "|", n=5, expand=True).apply(lambda x: [e.strip() for e in x])
     except:
         pass
+    milestones_df_f.drop('Milestone name_', axis=1, inplace=True)
 
-    df.rename(columns={
-        0: 'Project',
-        1: 'Phase',
-        2: 'Phase name',
-        3: 'Milestone number',
-        4: 'Milestone name'
-    },
-              inplace=True)
     ## Merging back milestones and phases
-    milestones_df_merge = pd.merge(milestones_df_f,
-                                   df,
-                                   on=["Milestone number", "Milestone name"])
+    milestones_df_merge = milestones_df_f
     milestones_df_merge.drop(['id', 'Milestones'],
                              axis='columns',
                              inplace=True)
@@ -295,7 +289,7 @@ def airtable_func():
             try:
                 Project_timeline[key] = Project_timeline[key] + Phase_timeline[
                     key] + Milestones[key]
-            except KeyError:
+            except (KeyError, TypeError) as e:
                 Project_timeline[key] = ''
 
     OBJ_DICT = {

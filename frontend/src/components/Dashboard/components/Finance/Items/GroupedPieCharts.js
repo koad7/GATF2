@@ -44,6 +44,17 @@ export default function GroupedPieCharts({portfolioTotal, props,quarter,quarters
     localData["In-kind - Contributed"] ? var_y_inkind_contributed=localData["In-kind - Contributed"] : var_y_inkind_contributed=0;
     localData['Project - Consumed'] ? var_y_budget_consumed=localData['Project - Consumed'] : var_y_budget_consumed=0;
   const classes = useStyles();
+  console.log("var_y_budget_consumed")
+  console.log(new Intl.NumberFormat().format(var_y_budget_consumed))
+  if(Number.isNaN(var_y_budget_consumed)){
+    var_y_budget_consumed = 0
+  }
+  if(Number.isNaN(var_y_inkind_contributed)){
+    var_y_inkind_contributed = 0
+  }
+  if(Number.isNaN(var_x_totalbudget)){
+    var_x_totalbudget = 0
+  }
   return (
     <div className={classes.root}>
         <Grid
