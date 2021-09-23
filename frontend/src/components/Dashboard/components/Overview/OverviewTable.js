@@ -133,11 +133,11 @@ export default function OverviewTable(props) {
             {
               filteredData.filterObj.Project 
               ?
-              <Typography variant="h4" gutterBottom align='right'>
+              <Typography variant="h4" gutterBottom align='left'>
                 {filteredData.filterObj.Project}        {filteredData.filterObj.Quarter? "- " + filteredData.filterObj.Quarter: '___________'}
               </Typography> 
               :
-              <Typography variant="h4" gutterBottom align='right'>
+              <Typography variant="h4" gutterBottom align='left'>
                 {currentProject[0].Project}
               </Typography>
             }
