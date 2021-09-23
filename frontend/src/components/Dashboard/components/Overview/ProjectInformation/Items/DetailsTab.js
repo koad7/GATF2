@@ -26,20 +26,20 @@ export default function DetailTab({props,quarter}) {
     <div className={classes.root}>
       <Grid container spacing={3}>
           <Grid item xs={7} sm={7}>
-          <Typography style={{ fontWeight: 600 }}>Assumptions</Typography>
+          <Typography style={{ fontWeight: 600 }}>DETAILS</Typography>
           </Grid>
           <Grid item xs={5} sm={5}>
-              <Typography style={{ fontWeight: 600 }}>High level project situation</Typography>
+              <Typography style={{ fontWeight: 600 }}>HIGH LEVEL PROJECT SITUATION</Typography>
           </Grid>
       </Grid>
       <Grid container spacing={3}>
           <Grid item xs={7} sm={7}>
-              {props["Assumptions"]}<br/><br/>
-              <b>Lead government agency </b><br/>  {props["Lead government agency"]} <br/><br/>
-              <b>Private sector champions </b><br/>{props["Private sector champions"]}  <br/><br/>
-              <b>Other private sector support </b><br/>{props["Other private sector support"]}  <br/><br/>
-              <b>Implementer </b><br/>{props["Implementer"]}<br/><br/>
-              <b>Agreement </b><br/>{props["Agreement"]}
+              <b>ASSUMPTIONS </b><br/>{props["Assumptions"]}<br/><br/>
+              <b>LEAD GOVERNMENT AGENCY </b><br/>  {props["Lead government agency"]} <br/><br/>
+              <b>PRIVATE SECTOR CHAMPIONS </b><br/>{props["Private sector champions"]}  <br/><br/>
+              <b>OTHER PRIVATE SECTOR SUPPORT </b><br/>{props["Other private sector support"]}  <br/><br/>
+              <b>IMPLEMENTER </b><br/>{props["Implementer"]}<br/><br/>
+              <b>AGREEMENT </b><br/>{props["Agreement"]}
           </Grid>
           <Grid item xs={5} sm={5}>
               {details ? <ProjectSituationChart props={details} quarter={quarter}/> : ''}

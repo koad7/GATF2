@@ -46,13 +46,13 @@ export default function Outlook({props,quarters}) {
   return (
     <div className={classes.root}>
       <Grid item lg={12} className={classes.overlookText}>
-        {outlookText ?  <><b>Overall Outlook</b> <br/>  {outlookText}</> : '' }
+        {outlookText ?  <><b>OVERALL OUTLOOK</b> <br/>  {outlookText}</> : '' }
         <br/>
-          {toBeMonitored ?  <><b>To be monitored</b> <br/> {toBeMonitored}</> : '' }
+          {toBeMonitored ?  <><b>TO BE MONITORED</b> <br/> {toBeMonitored}</> : '' }
         <br/>
         {nextstep ?
           <>
-              <b style={{color:'black'}}> Next steps</b> 
+              <b style={{color:'black'}}>NEXT STEPS</b> 
             <Grid item xs>
                 <Table className={classes.table} stickyHeader size="small" aria-label="sticky table" >
                     <TableHead>

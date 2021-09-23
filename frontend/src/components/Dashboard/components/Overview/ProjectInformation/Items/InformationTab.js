@@ -38,13 +38,13 @@ export default function InformationTab({props}) {
     <div className={classes.root}>
       <Grid container spacing={3} >
             <Grid item xs>
-            <Typography style={{ fontWeight: 600 }}>Scope</Typography>
+            <Typography style={{ fontWeight: 600 }}>SCOPE</Typography>
             </Grid>
             <Grid item xs>
-                <Typography style={{ fontWeight: 600, align: 'right' }}>Expected Result</Typography>
+                <Typography style={{ fontWeight: 600, align: 'right' }}>EXPECTED RESULT</Typography>
             </Grid>
             <Grid item xs>
-            <Typography style={{ fontWeight: 600 }}>TFA Articles</Typography>
+            <Typography style={{ fontWeight: 600 }}>TFA ARTICLES</Typography>
             </Grid>
         </Grid>
       <Grid container spacing={3}>
