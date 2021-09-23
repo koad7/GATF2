@@ -66,9 +66,9 @@ export default function InformationTab({props}) {
                 <TableBody>
                   {tfaArticles.map(a =>
                   <TableRow>
-                    <TableCell align="left" >{a.split("|")[0].trim()}</TableCell>
-                    <TableCell align="left" >{a.split("|")[1].trim()}</TableCell>
-                    <TableCell align="left" >{a.split("|")[2].trim()}</TableCell>
+                    <TableCell align="left" ><small>{a.split("|")[0].trim()}</small></TableCell>
+                    <TableCell align="left" ><small>{a.split("|")[1].trim()}</small></TableCell>
+                    <TableCell align="left" ><small>{a.split("|")[2].trim()}</small></TableCell>
                   </TableRow>)}
                 </TableBody>
               </Table>

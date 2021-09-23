@@ -64,28 +64,28 @@ export default function GroupedPieCharts({portfolioTotal, props,quarter,quarters
         >
             <Grid item xs>
                     <Container className={classes.container}>
-                      <Typography variant="h6" gutterBottom>
+                      <Typography variant="h6" >
                         Budget
                       </Typography>
-                      <Typography variant="h7" gutterBottom>Total Budget: <b>{new Intl.NumberFormat().format(var_x_totalbudget)} kUSD</b><br/> Consumed budget: <b>{new Intl.NumberFormat().format(var_y_budget_consumed)} kUSD</b></Typography>
+                      <Typography variant="h7"  align="left"><small>Total Budget: </small><b>{new Intl.NumberFormat().format(var_x_totalbudget)} kUSD</b><br/><small>Consumed budget: </small><b>{new Intl.NumberFormat().format(var_y_budget_consumed)} kUSD</b></Typography>
                       <PieChart type={'total budget'} var_x={var_x_totalbudget} var_y={var_y_budget_consumed}/>
                     </Container>
             </Grid>
             <Grid item xs>
                     <Container className={classes.container}>
-                      <Typography variant="h6" gutterBottom>
+                      <Typography variant="h6" >
                         In-kind
                       </Typography>
-                      <Typography variant="h7" gutterBottom>In-Kind Estimated: <b>{new Intl.NumberFormat().format(var_x_inkindEstimation)} kUSD</b><br/> In-Kind Contributed: <b>{new Intl.NumberFormat().format(var_y_inkind_contributed)} kUSD</b></Typography>
+                      <Typography variant="h7" ><small>In-Kind Estimated: </small><b>{new Intl.NumberFormat().format(var_x_inkindEstimation)} kUSD</b><br/><small>In-Kind Contributed: </small><b>{new Intl.NumberFormat().format(var_y_inkind_contributed)} kUSD</b></Typography>
                       <PieChart type={'inkind'}  var_x={var_x_inkindEstimation} var_y={var_y_inkind_contributed}/>
                     </Container>
             </Grid>
             <Grid item xs>
                     <Container className={classes.container}>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h6" >
                           Share
                         </Typography>
-                        <Typography variant="h7" gutterBottom>Total Portfolio: <b>{new Intl.NumberFormat().format(portfolioTotal)} kUSD</b><br/> Project Budget: <b>{new Intl.NumberFormat().format(var_x_totalbudget)} kUSD</b></Typography>
+                        <Typography variant="h7" ><small>Total Portfolio: </small><b>{new Intl.NumberFormat().format(portfolioTotal)} kUSD</b><br/><small>Project Budget: </small><b>{new Intl.NumberFormat().format(var_x_totalbudget)} kUSD</b></Typography>
                         <PieChart type={'portfolio'}  var_x={portfolioTotal} var_y={var_x_totalbudget}/>
                     </Container>
             </Grid>

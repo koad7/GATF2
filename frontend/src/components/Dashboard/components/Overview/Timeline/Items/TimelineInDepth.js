@@ -17,7 +17,10 @@ const useStyles = makeStyles({
 
 let rowColor={1: 'rgb(201,	216,	208)	', 2:'rgb(241,247,237	)', 3:'rgb(248,229,204	)', 4:'rgb(196,196,194	)',5:'rgb(238,244,250	)', 6:'rgb(202,214,238	)',7:'violet'}
 export default function TimelineInDepth(props) {
-props.data.sort((a, b) => a.Phase.localeCompare(b.Phase) || a['Milestone number'] -  b['Milestone number']);
+//props.data.sort((a, b) => a.Phase.localeCompare(b.Phase) || a['Milestone number'] -  b['Milestone number']);
+props.data.sort(function(a, b) {
+  return a['Milestone number'] -  b['Milestone number'];
+});
 
   const classes = useStyles();
   return (
@@ -31,7 +34,6 @@ props.data.sort((a, b) => a.Phase.localeCompare(b.Phase) || a['Milestone number'
             <TableCell style={{ color:'white'}} align="left"></TableCell>
             <TableCell style={{ color:'white'}} align="left">Planned Date</TableCell>
             <TableCell style={{ color:'white'}} align="left">Revised Date</TableCell>
-            <TableCell style={{ color:'white'}} align="left">Under Alliance Control</TableCell>
             <TableCell style={{ color:'white'}} align="left">Reason for Revision</TableCell>
             <TableCell style={{ color:'white'}} align="left">Specific Actions (if any)</TableCell>
           </TableRow>
@@ -48,7 +50,6 @@ props.data.sort((a, b) => a.Phase.localeCompare(b.Phase) || a['Milestone number'
               {/* Remove the possibility of having: January 1, 1970  */}
               <TableCell align="left"><small>{moment.unix(row.start/1000).format('LL') !== 'January 1, 1970' ? moment.unix(row.start/1000).format('LL'): ''}</small></TableCell>
               <TableCell align="left"><small>{moment.unix(row.start/1000).format('LL') !== 'Invalid date' ? '': moment.unix(row.revisedDate/1000).format('LL')}</small></TableCell>
-              <TableCell align="left">{row['Under Alliance control']}</TableCell>
               <TableCell align="left">{row['Reason for revision']}</TableCell>
               <TableCell align="left">{row['Specific Actions']}</TableCell>
             </TableRow>

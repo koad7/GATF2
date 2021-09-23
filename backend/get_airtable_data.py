@@ -6,7 +6,6 @@ import os
 import airtable
 import pandas as pd
 from slugify import slugify
-import time
 import datetime as dt
 
 APIKEY = os.getenv('AIRTABLEAPIKEY')
