@@ -213,9 +213,8 @@ def airtable_func():
                                  inplace=True)
     milestones_df_f = milestones_df[[
         'id', 'Milestone number', 'Planned date', 'Revised date',
-        'Specific Actions(if any)', 'Reason for revision',
-        'Under Alliance control', 'Quarter', 'Milestone name', 'Milestones',
-        'Status'
+        'Specific Actions(if any)', 'Reason for revision', 'Quarter',
+        'Milestone name', 'Milestones', 'Status'
     ]]
     # Timeline Milestones chart
     # Get project name, Phase, and Milestone names
