@@ -1,4 +1,4 @@
-import React ,{useState, useRef} from 'react'
+import React ,{useState, useRef, useEffect} from 'react'
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highcharts-gantt";
 import HighchartMore from "highcharts/highcharts-more";
@@ -65,17 +65,17 @@ var point = this,
 
 export default function TimelineChart(props) {
 // let data= filterByValue(props.seriesData.data, props.quarter)
+let localFilteredData =  props.seriesData.filter(l =>
+      Object.entries(props.filters)
+      .every(([k, v]) => !v.length || l[k] === v))
 
-console.log("Pre allData")
+console.log("-----------------------------------------------------")
+console.log(localFilteredData)
 
-const allData = [];
-props.seriesData.map(x=> console.log(allData.push({data: x.data})));// x.map(y => allData.push(y.Data)));
-console.log(allData)
+// const allData = [];
+// localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.push(y.Data)));
 
-const [chartData, setChart] = useState([]);
-
-const chartComponent = useRef(null);
-const [chartOptions] = useState({
+const [chartOptions, setChart] = useState({
     chart: {
         backgroundColor: "transparent",
         chartHeight: 100
@@ -101,7 +101,7 @@ const [chartOptions] = useState({
     },
     rangeSelector: { enabled: true },
     scrollbar: { enabled: true, liveRedraw: true },
-    series: props.seriesData,
+    series: localFilteredData,
     tooltip: {
       pointFormatter: customPointFormatter
       
@@ -128,6 +128,8 @@ const [chartOptions] = useState({
     },
     
 });
+
+const chartComponent = useRef(null);
 // useEffect(() => {
 //     const chart = chartComponent.current.chart;
 //   }, []);
@@ -136,11 +138,11 @@ const [chartOptions] = useState({
         <div>
             <HighchartsReact
                 constructorType="ganttChart"
-                ref={chartComponent}
+                // ref={chartComponent}
                 highcharts={Highcharts}
                 options={chartOptions}
-                allowChartUpdate="true"
-                callback={chart => setChart(chart)}
+                // allowChartUpdate="true"
+                callback={setChart}
                 // callback={function(chart) {
                 //     chart.renderer
                 //       .label()

@@ -84,7 +84,7 @@ export default function TimelinePage(props){
         </Grid>
       </Grid>
 
-      <TimelineChart seriesData={filteredData.data}/>
+      <TimelineChart seriesData={filteredData.data} filters={filteredData.filterObj}/>
       
     </div>
   );
