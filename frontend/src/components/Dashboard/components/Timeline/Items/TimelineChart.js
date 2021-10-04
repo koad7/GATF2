@@ -78,16 +78,16 @@ localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.pu
 const [chartOptions, setChart] = useState({
     chart: {
         backgroundColor: "transparent",
-        height: 120 * localFilteredData.length 
+        height: 10*allData.length +'%'
       },
     navigator: {
       enabled: true,
       liveRedraw: true,
-      height: 50,
+      height: 100,
       series: {
         type: 'gantt',
-        pointPlacement: 0.5,
-        pointPadding: 0.25
+        pointPlacement: 0,
+        pointPadding: 0
       },
       yAxis: {
         min: 0,
@@ -101,6 +101,11 @@ const [chartOptions, setChart] = useState({
     },
     rangeSelector: { enabled: true },
     scrollbar: { enabled: true, liveRedraw: true },
+    plotOptions: {
+        series: {
+            pointWidth: 20
+        }
+    },
     series: allData,
     tooltip: {
       pointFormatter: customPointFormatter
@@ -119,11 +124,11 @@ const [chartOptions, setChart] = useState({
       type: "treegrid",
       uniqueNames: true,
       alternateGridColor: '#dfdfe047',
-    //   tickColor: '#0000000',
+      tickColor: '#0000000',
     tickPixelInterval: 10,
     tickPosition: 'inside',
     grid: {
-        cellHeight: 60
+        cellHeight: 90
     }
     },
     
@@ -141,7 +146,7 @@ const chartComponent = useRef(null);
                 ref={chartComponent}
                 highcharts={Highcharts}
                 options={chartOptions}
-                // immutable={true} 
+                immutable={true} 
                 allowChartUpdate="true"
                 // callback= {chart => setChart}
                 // callback={function(chart) {
