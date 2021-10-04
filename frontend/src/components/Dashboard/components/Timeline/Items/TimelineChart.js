@@ -68,17 +68,17 @@ export default function TimelineChart(props) {
 let localFilteredData =  props.seriesData.filter(l =>
       Object.entries(props.filters)
       .every(([k, v]) => !v.length || l[k] === v))
-
+      
 console.log("-----------------------------------------------------")
 console.log(localFilteredData)
 
-// const allData = [];
-// localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.push(y.Data)));
+const allData = [];
+localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.push(y.Data)));
 
 const [chartOptions, setChart] = useState({
     chart: {
         backgroundColor: "transparent",
-        chartHeight: 100
+        height: 120 * localFilteredData.length 
       },
     navigator: {
       enabled: true,
@@ -101,7 +101,7 @@ const [chartOptions, setChart] = useState({
     },
     rangeSelector: { enabled: true },
     scrollbar: { enabled: true, liveRedraw: true },
-    series: localFilteredData,
+    series: allData,
     tooltip: {
       pointFormatter: customPointFormatter
       
@@ -138,11 +138,12 @@ const chartComponent = useRef(null);
         <div>
             <HighchartsReact
                 constructorType="ganttChart"
-                // ref={chartComponent}
+                ref={chartComponent}
                 highcharts={Highcharts}
                 options={chartOptions}
-                // allowChartUpdate="true"
-                callback={setChart}
+                // immutable={true} 
+                allowChartUpdate="true"
+                // callback= {chart => setChart}
                 // callback={function(chart) {
                 //     chart.renderer
                 //       .label()
