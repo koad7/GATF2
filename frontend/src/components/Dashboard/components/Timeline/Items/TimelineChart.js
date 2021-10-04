@@ -63,14 +63,17 @@ var point = this,
     }
     
 
-export default function TimelineChart(props,quarter) {
+export default function TimelineChart(props) {
 // let data= filterByValue(props.seriesData.data, props.quarter)
 
+console.log("Pre allData")
+
+const allData = [];
+props.seriesData.map(x=> console.log(allData.push({data: x.data})));// x.map(y => allData.push(y.Data)));
+console.log(allData)
 
 const [chartData, setChart] = useState([]);
-// const addOneChild = () => {
-//     setChart(props.seriesData)
-// }
+
 const chartComponent = useRef(null);
 const [chartOptions] = useState({
     chart: {

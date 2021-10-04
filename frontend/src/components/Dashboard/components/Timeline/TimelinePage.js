@@ -20,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+// Functions
+function  filterByValue (array, string) {
+  return array.filter(o =>
+      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
+}
+
 
 
 export default function TimelinePage(props){
@@ -31,7 +37,7 @@ export default function TimelinePage(props){
     handleFilterSelected
   } = useFilteredData(props);
   
-  
+
   const classes = useStyles();
 
   return (
