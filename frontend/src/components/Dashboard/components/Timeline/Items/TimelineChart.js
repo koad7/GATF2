@@ -126,11 +126,11 @@ const [chartOptions, setChart] = useState({
         // tickColor: '#0000000',
         // tickPixelInterval: 30,
         // tickPosition: 'outside',
+        gridLineColor:'#556739',
         grid: {
             enabled: true,
             borderColor: 'rgba(0,0,0,0.3)',
-            borderWidth: 3,
-            cellHeight: 10
+            borderWidth: 1
         },
     },
     
