@@ -185,7 +185,7 @@ const {projectData} = useFetchApi()
 			  {projectData ? <FinancePage seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
 			<TabPanel value={value} index={2}>		
-			{/* Projet Timeline  */}	  
+			{/* Projet Tim  */}	  
 			  {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <LinearBuffer /> }
 			</TabPanel>
 			 <Footer/>

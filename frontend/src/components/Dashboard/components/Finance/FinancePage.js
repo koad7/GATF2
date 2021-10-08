@@ -109,14 +109,6 @@ let consumedbudget,inkindContributed;
 
 let initialData;
 
-
-
-
-
-
-
-
-
 try{
   initialData.forEach(function(v){ delete v.Quarter }) // Delete Quarter from the main Object
   let internal1={data: ''}

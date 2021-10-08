@@ -33,7 +33,10 @@ export default function TimelinePage(props){
   const {
     filteredData,
     projectSelect,
-    yearSelect,
+    projectTypeSelect,
+    implementerSelect,
+    countrySelect,
+    statusSelect,
     handleFilterSelected
   } = useFilteredData(props);
   
@@ -46,7 +49,7 @@ export default function TimelinePage(props){
       <Grid container spacing={3}>
         <Grid item xs={12}>
           {/* Filter */}
-          
+{/*           
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="project-name">Project Name</InputLabel>
             <Select
@@ -64,23 +67,75 @@ export default function TimelinePage(props){
               )} 
             </Select>
           </FormControl>
-          
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="quarter">Quarter</InputLabel>
-            <NativeSelect
-              value={props.seriesData.Quarter}
+            <InputLabel htmlFor="project-type">Project Type</InputLabel>
+            <Select
+              native
+              value={props.seriesData.Project}
               onChange={handleFilterSelected}
               inputProps={{
-                name: 'Quarter',
-                id: 'quarter',
+                name: 'Project Type',
+                id: 'project-type',
               }}
             >
               <option aria-label="None" value="" />
-              {yearSelect.map((select) => 
-                (<option value={select}>{select}</option>)
-              )}
-            </NativeSelect>
+              {projectTypeSelect.map((type) => 
+                (<option value={type}>{type}</option>)
+              )} 
+            </Select>
           </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="Country">Country</InputLabel>
+            <Select
+              native
+              value={props.seriesData.Project}
+              onChange={handleFilterSelected}
+              inputProps={{
+                name: 'Country',
+                id: 'Country',
+              }}
+            >
+              <option aria-label="None" value="" />
+              {countrySelect.map((type) => 
+                (<option value={type}>{type}</option>)
+              )} 
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="Status">Status</InputLabel>
+            <Select
+              native
+              value={props.seriesData.Project}
+              onChange={handleFilterSelected}
+              inputProps={{
+                name: 'Status',
+                id: 'Status',
+              }}
+            >
+              <option aria-label="None" value="" />
+              {statusSelect.map((type) => 
+                (<option value={type}>{type}</option>)
+              )} 
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="Implementer">Implementer</InputLabel>
+            <Select
+              native
+              value={props.seriesData.Project}
+              onChange={handleFilterSelected}
+              inputProps={{
+                name: 'Implementer',
+                id: 'Implementer',
+              }}
+            >
+              <option aria-label="None" value="" />
+              {implementerSelect.map((type) => 
+                (<option value={type}>{type}</option>)
+              )} 
+            </Select>
+          </FormControl> */}
+        
         </Grid>
       </Grid>
 

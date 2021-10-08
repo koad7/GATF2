@@ -1,6 +1,4 @@
 # coding: utf-8
-import airtable
-import pandas as pd
 import concurrent.futures
 import os
 import airtable

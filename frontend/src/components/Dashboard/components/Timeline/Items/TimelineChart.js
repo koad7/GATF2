@@ -73,26 +73,25 @@ console.log("-----------------------------------------------------")
 console.log(localFilteredData)
 
 const allData = [];
-localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.push(y.Data)));
+//localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.push(y.Data)));
 
 const [chartOptions, setChart] = useState({
     chart: {
         backgroundColor: "transparent",
-        height: 10*allData.length +'%'
+        height: 5*localFilteredData.length +'%'
       },
     navigator: {
       enabled: true,
       liveRedraw: true,
-      height: 100,
+      height: 75,
       series: {
         type: 'gantt',
-        pointPlacement: 0,
-        pointPadding: 0
+
       },
       yAxis: {
-        min: 0,
-        max: 3,
-        reversed: true,
+        // min: 0,
+        // max: 3,
+        reversed: false,
         categories: []
         },
       xAxis: {
@@ -106,7 +105,7 @@ const [chartOptions, setChart] = useState({
             pointWidth: 20
         }
     },
-    series: allData,
+    series: localFilteredData,
     tooltip: {
       pointFormatter: customPointFormatter
       
@@ -121,15 +120,18 @@ const [chartOptions, setChart] = useState({
         },
      
     yAxis: {
-      type: "treegrid",
-      uniqueNames: true,
-      alternateGridColor: '#dfdfe047',
-      tickColor: '#0000000',
-    tickPixelInterval: 10,
-    tickPosition: 'inside',
-    grid: {
-        cellHeight: 90
-    }
+        type: "treegrid",
+        uniqueNames: true,
+        // alternateGridColor: '#dfdfe047',
+        // tickColor: '#0000000',
+        // tickPixelInterval: 30,
+        // tickPosition: 'outside',
+        grid: {
+            enabled: true,
+            borderColor: 'rgba(0,0,0,0.3)',
+            borderWidth: 3,
+            cellHeight: 10
+        },
     },
     
 });
@@ -148,7 +150,7 @@ const chartComponent = useRef(null);
                 options={chartOptions}
                 immutable={true} 
                 allowChartUpdate="true"
-                // callback= {chart => setChart}
+                callback= {chart => setChart}
                 // callback={function(chart) {
                 //     chart.renderer
                 //       .label()
