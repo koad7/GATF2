@@ -88,7 +88,10 @@ def airtable_func():
         if (len(field.split(".")) == 2):
             information_df.rename(columns={field: field.split(".")[1]},
                                   inplace=True)
-
+    # Keep only the last entry of eac project
+    information_df = information_df.sort_values(
+        ['Project', 'createdTime']).drop_duplicates(subset=['Project'],
+                                                    keep='last')
     # Select field of interest
     information_df_f = information_df[[
         'id', 'Other private sector support', 'Agreement',
