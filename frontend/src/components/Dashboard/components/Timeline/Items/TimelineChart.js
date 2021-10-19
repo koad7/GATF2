@@ -36,13 +36,13 @@ var point = this,
             value: dateFormat(format, point.end)
         }, {
             title: 'Implementer',
-            value: options.implementer || 'NA'
+            value: options.implementer || '-'
         }, {
             title: 'Reason for Revision',
-            value: options['Reason for Revision'] || 'NA'
+            value: options['Reason for Revision'] || '-'
         }, {
             title: 'Specific Actions',
-            value: options['Specific Actions'] || 'NA'
+            value: options['Specific Actions'] || '-'
         }];
 
         return lines.reduce(function (str, line) {
@@ -69,8 +69,7 @@ let localFilteredData =  props.seriesData.filter(l =>
       Object.entries(props.filters)
       .every(([k, v]) => !v.length || l[k] === v))
       
-console.log("-----------------------------------------------------")
-console.log(localFilteredData)
+
 
 const allData = [];
 //localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.push(y.Data)));
@@ -87,15 +86,6 @@ const [chartOptions, setChart] = useState({
       series: {
         type: 'gantt',
 
-      },
-      yAxis: {
-        // min: 0,
-        // max: 3,
-        reversed: false,
-        categories: []
-        },
-      xAxis: {
-        type: "datetime"
       }
     },
     rangeSelector: { enabled: true },

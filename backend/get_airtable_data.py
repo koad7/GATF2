@@ -5,6 +5,7 @@ import airtable
 import pandas as pd
 from slugify import slugify
 import datetime as dt
+import numpy as np
 
 APIKEY = os.getenv('AIRTABLEAPIKEY')
 TABLEKEY = os.getenv('TABLEKEY')
@@ -234,8 +235,12 @@ def airtable_func():
     milestones_df_merge['parent'] = milestones_df_merge[[
         'Project', 'Phase name', 'Phase'
     ]].apply(lambda x: slugify('_'.join(x), separator="_"), axis=1)
+    # Take "Planned date" or "Revised date"
     milestones_df_merge['start'] = pd.to_datetime(
-        milestones_df_merge['Planned date'])
+        np.where(milestones_df_merge["Revised date"] != '',
+                 milestones_df_merge["Revised date"],
+                 milestones_df_merge["Planned date"]))
+    #milestones_df_merge['start'] = pd.to_datetime(milestones_df_merge['start'])
     milestones_df_merge['start'] = (milestones_df_merge['start'] - dt.datetime(
         1970, 1, 1)).dt.total_seconds() * 1e3
 
@@ -251,6 +256,9 @@ def airtable_func():
                 'Milestone name': 'name',
                 'Specific Actions(if any)': 'Specific Actions'
             })
+    milestones_df_merge_.name = 'Milestone ' + milestones_df_merge_[
+        'Milestone number'].astype(
+            str) + ': - ' + milestones_df_merge_.name.astype(str)
     pd.options.display.float_format = '{:.0f}'.format
 
     Milestones = milestones_df_merge_.groupby('Project').apply(
