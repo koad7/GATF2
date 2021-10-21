@@ -42,10 +42,23 @@ const colorCode={
     }
 }
 
+//Filtering function
+function  filterByValue (array, string) {
+  return array.filter(o =>
+      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
+}
+
 export default function ProjectSituationChart({props, quarter}){
-  let dataSource ={}
-if(props.length !== 0){
-  props.forEach(x => {
+  // Sort ny quarter 
+  props.sort((a, b) => (a.Quarter > b.Quarter) ? 1 : -1);
+  
+  let details=filterByValue (props, quarter)
+
+  let dataSource ={};
+  let localquarter;
+if(details.length !== 0){
+  localquarter=quarter;
+  details.forEach(x => {
   try {
     dataSource = {
       colorrange: {
@@ -63,25 +76,25 @@ if(props.length !== 0){
           data: [
             {
               rowid: "OPASSES",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'],
               colorrangelabel: colorCode[x['Overall Project Assessment']].label
             },
             {
               rowid: "OPR",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'],
               colorrangelabel: colorCode[x['Overall Project Relevance']].label
             },
             {
               rowid: "OPASUM",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'],
               colorrangelabel: colorCode[x['Overall Project Assumptions']].label
             },
             {
               rowid: "OPPAP",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
               colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label
             }
@@ -92,8 +105,8 @@ if(props.length !== 0){
         column: [
          
           {
-            id: quarter,
-            label: quarter
+            id: localquarter,
+            label: localquarter
           }
         ]
       },
@@ -152,25 +165,25 @@ if(props.length !== 0){
           data: [
             {
               rowid: "OPASSES",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: "0",
               colorrangelabel: ''
             },
             {
               rowid: "OPR",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: "0",
               colorrangelabel: ''
             },
             {
               rowid: "OPASUM",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: "0",
               colorrangelabel: ''
             },
             {
               rowid: "OPPAP",
-              columnid: quarter,
+              columnid: localquarter,
               displayvalue: "0",
               colorrangelabel: ''
             }
@@ -181,8 +194,8 @@ if(props.length !== 0){
         column: [
          
           {
-            id: quarter,
-            label: quarter
+            id: localquarter,
+            label: localquarter
           }
         ]
       },
@@ -221,6 +234,184 @@ if(props.length !== 0){
   }
 
   });
+}else if(details.length === 0 && props.length !== 0){
+  localquarter=props.at(-1).Quarter;
+  [props.at(-1)].forEach(x => {
+    try {
+      dataSource = {
+        colorrange: {
+          gradient: "0",
+          color: [
+            colorCode['1'],
+            colorCode['2'],
+            colorCode['3'],
+            colorCode['4'],
+            colorCode['5']
+          ]
+        },
+        dataset: [
+          {
+            data: [
+              {
+                rowid: "OPASSES",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'],
+                colorrangelabel: colorCode[x['Overall Project Assessment']].label
+              },
+              {
+                rowid: "OPR",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'],
+                colorrangelabel: colorCode[x['Overall Project Relevance']].label
+              },
+              {
+                rowid: "OPASUM",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'],
+                colorrangelabel: colorCode[x['Overall Project Assumptions']].label
+              },
+              {
+                rowid: "OPPAP",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
+                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label
+              }
+            ]
+          }
+        ],
+        columns: {
+          column: [
+           
+            {
+              id: localquarter,
+              label: localquarter
+            }
+          ]
+        },
+        rows: {
+          row: [
+            {
+              id: "OPASSES",
+              label: "Project Assessement"
+            },
+            {
+              id: "OPR",
+              label: "Project Relevance"
+            },
+            {
+              id: "OPASUM",
+              label: "Project Assumption"
+            },
+            {
+              id: "OPPAP",
+              label: "project progress according to plan"
+            }
+          ]
+        },
+        chart: {
+          theme: "fusion",
+          caption: "",
+          subcaption: "",
+          plotBorderThickness: "4",
+          showvalues: "1",
+          mapbycategory: "1",
+          showLegend: "0",
+          plottooltext:
+            "$rowlabel: $displayvalue "
+        }
+      }
+    }catch(error){
+      dataSource={
+        colorrange: {
+          gradient: "0",
+          color: [
+            {
+              code:"#949090",
+              minvalue: "0",
+              maxvalue: "0",
+              label: ""
+          },{
+            code:"#949090",
+              minvalue: "0",
+              maxvalue: "0",
+              label: ""
+        }
+          ]
+        },
+        dataset: [
+          {
+            data: [
+              {
+                rowid: "OPASSES",
+                columnid: localquarter,
+                displayvalue: "0",
+                colorrangelabel: ''
+              },
+              {
+                rowid: "OPR",
+                columnid: localquarter,
+                displayvalue: "0",
+                colorrangelabel: ''
+              },
+              {
+                rowid: "OPASUM",
+                columnid: localquarter,
+                displayvalue: "0",
+                colorrangelabel: ''
+              },
+              {
+                rowid: "OPPAP",
+                columnid: localquarter,
+                displayvalue: "0",
+                colorrangelabel: ''
+              }
+            ]
+          }
+        ],
+        columns: {
+          column: [
+           
+            {
+              id: localquarter,
+              label: localquarter
+            }
+          ]
+        },
+        rows: {
+          row: [
+            {
+              id: "OPASSES",
+              label: "Project Assessement"
+            },
+            {
+              id: "OPR",
+              label: "Project Relevance"
+            },
+            {
+              id: "OPASUM",
+              label: "Project Assumption"
+            },
+            {
+              id: "OPPAP",
+              label: "project progress according to plan"
+            }
+          ]
+        },
+        chart: {
+          theme: "fusion",
+          caption: "",
+          subcaption: "",
+          plotBorderThickness: "4",
+          showvalues: "1",
+          mapbycategory: "1",
+          showLegend: "0",
+          plottooltext:
+            "$rowlabel: $displayvalue "
+        }
+      }
+    }
+  
+    });
 }else{
   dataSource={
     colorrange: {

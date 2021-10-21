@@ -80,7 +80,7 @@ export default function OverviewTable(props) {
   }
   let portfolioTotal, inkindEstimation;
   let textcolor='darkgrey'
-
+  
     // Calculate Portfolio Total sum and  inkindEstimation
     if (props){
       portfolioTotal = props.seriesData.reduce(function (s, a) {
@@ -88,7 +88,7 @@ export default function OverviewTable(props) {
       }, 0);
       inkindEstimation= filteredData.data[0]['In-kind Estimation']
     }
-
+    
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
@@ -121,7 +121,7 @@ export default function OverviewTable(props) {
                   id: 'quarter',
                 }}>
                 <option aria-label="None" value="" />
-                {currentQuarters.map((select) => 
+                {currentQuarters.sort().map((select) => 
                   (<option value={select}>{select}</option>)
                 )} 
               </NativeSelect>

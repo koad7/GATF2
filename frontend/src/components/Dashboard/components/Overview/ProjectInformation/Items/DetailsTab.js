@@ -21,7 +21,8 @@ function  filterByValue (array, string) {
 }
 export default function DetailTab({props,quarter}) {
   const classes = useStyles();
-  let details=filterByValue (props.Details, quarter)
+  
+  
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -42,7 +43,7 @@ export default function DetailTab({props,quarter}) {
               <b>AGREEMENT </b><br/>{props["Agreement"]}
           </Grid>
           <Grid item xs={5} sm={5}>
-              {details ? <ProjectSituationChart props={details} quarter={quarter}/> : ''}
+              {props.Details ? <ProjectSituationChart props={props.Details} quarter={quarter}/> : ''}
           </Grid>
       </Grid>
     </div>

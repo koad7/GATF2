@@ -81,7 +81,7 @@ def airtable_func():
     risks_df = table_dict['Risks'].fillna('')
     timeline_df = table_dict['Timeline'].fillna('')
     milestones_df = table_dict['Milestones'].fillna('')
-    print(milestones_df)
+
     # Project: General Information
     # Field names tidying up
     for field in information_df.columns:

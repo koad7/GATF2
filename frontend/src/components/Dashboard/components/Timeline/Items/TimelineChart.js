@@ -1,20 +1,11 @@
-import React ,{useState, useRef, useEffect} from 'react'
+import React ,{useState} from 'react'
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highcharts-gantt";
 import HighchartMore from "highcharts/highcharts-more";
 
 
-var today = new Date(),
-  // Utility functions
-  dateFormat = Highcharts.dateFormat,
+var dateFormat = Highcharts.dateFormat,
   defined = Highcharts.defined;
-
-// Set to 00:00:00:000 today
-today.setUTCHours(0);
-today.setUTCMinutes(0);
-today.setUTCSeconds(0);
-today.setUTCMilliseconds(0);
-today = today.getTime();
 
 
 HighchartMore(Highcharts);
@@ -64,90 +55,71 @@ var point = this,
     
 
 export default function TimelineChart(props) {
-// let data= filterByValue(props.seriesData.data, props.quarter)
-let localFilteredData =  props.seriesData.filter(l =>
-      Object.entries(props.filters)
-      .every(([k, v]) => !v.length || l[k] === v))
-      
+    // Filter the data with dropdown output
+    let localFilteredData =  props.seriesData.filter(l =>
+        Object.entries(props.filters)
+        .every(([k, v]) => !v.length || l[k] === v))
 
 
-const allData = [];
-//localFilteredData.map(x=> allData.push({data: x.data}));// x.map(y => allData.push(y.Data)));
-
-const [chartOptions, setChart] = useState({
-    chart: {
-        backgroundColor: "transparent",
-        height: 5*localFilteredData.length +'%'
-      },
-    navigator: {
-      enabled: true,
-      liveRedraw: true,
-      height: 75,
-      series: {
-        type: 'gantt',
-
-      }
-    },
-    rangeSelector: { enabled: true },
-    scrollbar: { enabled: true, liveRedraw: true },
-    plotOptions: {
+    const [chartOptions, setChart] = useState({
+        chart: {
+            backgroundColor: "transparent",
+            height: 5*localFilteredData.length +'%'
+        },
+        navigator: {
+        enabled: true,
+        liveRedraw: true,
+        height: 75,
         series: {
-            pointWidth: 20
-        }
-    },
-    series: localFilteredData,
-    tooltip: {
-      pointFormatter: customPointFormatter
-      
-    },
-    title: {
-        text: ''
-    },
-    xAxis: {
-            currentDateIndicator: true,
-            // min: today +6 * day,
-            // max: today + 12 * day
-        },
-     
-    yAxis: {
-        type: "treegrid",
-        uniqueNames: true,
-        // alternateGridColor: '#dfdfe047',
-        // tickColor: '#0000000',
-        // tickPixelInterval: 30,
-        // tickPosition: 'outside',
-        gridLineColor:'#556739',
-        grid: {
-            enabled: true,
-            borderColor: 'rgba(0,0,0,0.3)',
-            borderWidth: 1
-        },
-    },
-    
-});
+            type: 'gantt',
 
-const chartComponent = useRef(null);
-// useEffect(() => {
-//     const chart = chartComponent.current.chart;
-//   }, []);
-    
+        }
+        },
+        rangeSelector: { enabled: true },
+        scrollbar: { enabled: true, liveRedraw: true },
+        plotOptions: {
+            series: {
+                pointWidth: 20
+            }
+        },
+        series:  localFilteredData,
+        tooltip: {
+        pointFormatter: customPointFormatter
+        
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+                currentDateIndicator: true,
+            },
+        
+        yAxis: {
+            type: "treegrid",
+            uniqueNames: true,
+            // alternateGridColor: '#dfdfe047',
+            tickColor: '#0000000',
+            tickPixelInterval: 30,
+            tickPosition: 'inside',
+            gridLineColor:'#e9e9e9',
+            grid: {
+                enabled: true,
+                borderColor: 'rgba(0,0,0,0.3)',
+                borderWidth: .5,
+                cellHeight: 120
+            },
+        },
+        
+    });
     return (
         <div>
             <HighchartsReact
                 constructorType="ganttChart"
-                ref={chartComponent}
                 highcharts={Highcharts}
                 options={chartOptions}
                 immutable={true} 
                 allowChartUpdate="true"
                 callback= {chart => setChart}
-                // callback={function(chart) {
-                //     chart.renderer
-                //       .label()
-                //       .css()
-                //       .attr()
-                //       .add();
-                //   }}
             />
         </div>
     )
