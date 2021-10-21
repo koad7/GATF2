@@ -55,25 +55,31 @@ var point = this,
     
 
 export default function TimelineChart(props) {
+    
     // Filter the data with dropdown output
-    let localFilteredData =  props.seriesData.filter(l =>
-        Object.entries(props.filters)
-        .every(([k, v]) => !v.length || l[k] === v))
+    let localFilteredData;
+    if(props.seriesData.length > 1){
+        localFilteredData =  props.seriesData.filter(l =>
+            Object.entries(props.filters)
+            .every(([k, v]) => !v.length || l[k] === v))
+    }else{
+        localFilteredData = props.seriesData;
+    }
 
-
+    console.log(localFilteredData[0].data)
     const [chartOptions, setChart] = useState({
         chart: {
             backgroundColor: "transparent",
             height: 5*localFilteredData.length +'%'
         },
         navigator: {
-        enabled: true,
-        liveRedraw: true,
-        height: 75,
-        series: {
-            type: 'gantt',
-
-        }
+            enabled: false,
+            liveRedraw: true,
+            height: 75,
+            series: {
+                type: 'gantt',
+                pointWidth: 4
+            }
         },
         rangeSelector: { enabled: true },
         scrollbar: { enabled: true, liveRedraw: true },

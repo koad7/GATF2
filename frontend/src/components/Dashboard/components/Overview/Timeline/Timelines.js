@@ -3,7 +3,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import TimelineInDepth from './Items/TimelineInDepth'
+import TimelineInDepth from './Items/TimelineInDepth'; 
+import TimelineChart from '../../Timeline/Items/TimelineChart'; 
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -74,27 +75,21 @@ function a11yProps(index) {
 export default function Timelines({props,quarter}) {
   
   let initialData = props.data
-  let local1,localMilestone;
+  let filteredproject,localMilestone;
 
 
   
 if(props.filterObj.Project){
   try{
-    local1 = initialData.filter(item=> item.Project === props.filterObj.Project);
-
-
-    localMilestone = local1[0].Milestones;
-    
-   
+    filteredproject = initialData.filter(item=> item.Project === props.filterObj.Project);
+    localMilestone = filteredproject[0].Milestones;
   }catch(error){
-    
     localMilestone = props.data[0].Milestones
   }
 }else{
   localMilestone = props.data[0].Milestones;
+  filteredproject = [initialData.at(-1)]; 
 }
-
-
   const classes = useStyles();
 
 
@@ -113,7 +108,7 @@ if(props.filterObj.Project){
             </Tabs>
         </AppBar>
         <TabPanel value={value} index={1}>
-            {/* <TimelineChart seriesData={local} quarter={quarter}/> */}
+            {/* <TimelineChart seriesData={filteredproject} quarter={props.filterObj.Quarter}/> */}
         </TabPanel>
         <TabPanel value={value} index={0}>
             <TimelineInDepth  data={localMilestone} quarter={props.filterObj.Quarter}/>
