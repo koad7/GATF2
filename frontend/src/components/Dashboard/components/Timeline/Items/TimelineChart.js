@@ -66,7 +66,7 @@ export default function TimelineChart(props) {
         localFilteredData = props.seriesData;
     }
 
-    console.log(localFilteredData[0].data)
+    // console.log(localFilteredData[0].data)
     const [chartOptions, setChart] = useState({
         chart: {
             backgroundColor: "transparent",

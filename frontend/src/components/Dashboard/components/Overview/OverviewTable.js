@@ -169,7 +169,7 @@ export default function OverviewTable(props) {
           <Grid item xs={5}>
             <Typography style={{ color: textcolor }} variant="h5">CONTEXTUAL RISKS</Typography>
             <br/>
-              <RiskChartFusion props={filteredData} quarters={currentQuarters}/> 
+              <RiskChartFusion props={currentProject[0].Risks} quarter={filteredData.filterObj.Quarter}/> 
           </Grid>
         </Grid>
         <br/>

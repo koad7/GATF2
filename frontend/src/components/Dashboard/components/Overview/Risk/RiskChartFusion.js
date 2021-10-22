@@ -50,25 +50,25 @@ function  filterByValue (array, string) {
 }
 
 
-export default function RiskChartFusion ({props,quarters}) {
-  let initialData = props.data
-  let dataSource={};
-  let initial, selected, local;
-  let localQuarter;
-  // If Quarter not select in dropdown.
-  props.filterObj.Quarter ? localQuarter=props.filterObj.Quarter : localQuarter=quarters.sort().at(-1);
-  if(props.filterObj.Project){
-      local = initialData.filter(item=> item.Project === props.filterObj.Project);
-      initial = filterByValue(local[0].Risks, "Initial Risk")
-      selected = filterByValue(local[0].Risks, localQuarter);
-
-  }else{
-      local = initialData[0];
-      localQuarter=quarters.sort().at(-1)
-      initial = filterByValue(local.Risks, "Initial Risk")
-      selected = filterByValue(local.Risks, localQuarter)
-
+export default function RiskChartFusion ({props,quarter}) {
+  // Sort by quarter 
+  let quarters = [];
+  for (let i = 0; i < props.length; i++){
+      quarters[i] = props[i]["Quarter"];
   }
+  let dataSource={};
+  let localquarter;
+  // If Quarter does exist in the list of quarters
+ if (quarters.includes(quarter)){
+    localquarter=quarter
+  }else{
+    localquarter=quarters.sort().at(-1);
+  }
+
+  // risk initial:
+  let initial = filterByValue(props, "Initial Risk")
+  let selected = filterByValue(props, localquarter);
+
 
  try {
    dataSource = {
@@ -168,7 +168,7 @@ export default function RiskChartFusion ({props,quarters}) {
         },
         {
           id: "CURRENT",
-          label: ` ${localQuarter}` 
+          label: ` ${localquarter}` 
         }
       ]
     },

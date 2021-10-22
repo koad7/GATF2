@@ -28,21 +28,37 @@ const useStyles = makeStyles((theme) => ({
   // Filtering function
   function  filterByValue (array, string) {
     return array.filter(o =>
-        Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
+        Object.keys(o).some(k => o[k].includes(string)));
   }
+  
 // Main function
 export default function Outlook({props,quarters}) {
   const classes = useStyles();
   let outlookText;
   let toBeMonitored;
-  let nextstep=null;
+  let nextstep;
   outlookText=props[0]['Overall Outlook'];
   toBeMonitored=props[0]['To be monitored'];
-  try{
-    nextstep=filterByValue (props[0].NextSteps, quarters.sort().at(-1))
-  }catch(error){ 
-    nextstep=null
+  const nextstepquartersSet = new Set();
+  for (let i = 0; i < props[0].NextSteps.length; i++){
+    nextstepquartersSet.add( props[0].NextSteps[i]["Quarter"]);
   }
+  let nextstepquarters=[...nextstepquartersSet]
+ if(quarters){
+    console.log(props);
+    console.log(quarters);
+    console.log(nextstepquarters);
+    if (nextstepquarters.includes(quarters)){
+      nextstep=filterByValue (props[0].NextSteps, quarters.sort().at(-1))
+    }else{
+      nextstep=filterByValue (props[0].NextSteps, nextstepquarters.sort().at(-1));
+    }
+ }
+  else {
+    nextstep=null;
+  
+  } 
+  
   return (
     <div className={classes.root}>
       <Grid item lg={12} className={classes.overlookText}>

@@ -14,11 +14,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-//Filtering function
-function  filterByValue (array, string) {
-  return array.filter(o =>
-      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
-}
+
 export default function DetailTab({props,quarter}) {
   const classes = useStyles();
   
