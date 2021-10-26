@@ -38,7 +38,7 @@ export default function Outlook({props,quarters}) {
   let nextstep;
   let  outlookText=props[0]['Overall Outlook'];
   let toBeMonitored=props[0]['To be monitored'];//
-  let lasMonthprogress=props[0]['Last month project progress and activities'];
+  let lastMonthprogress=props[0]['Last month project progress and activities'];
   const nextstepquartersSet = new Set();
   for (let i = 0; i < props[0].NextSteps.length; i++){
     nextstepquartersSet.add( props[0].NextSteps[i]["Quarter"]);
@@ -68,7 +68,7 @@ export default function Outlook({props,quarters}) {
           {toBeMonitored ?  <><b>TO BE MONITORED:</b> <br/> {toBeMonitored}</> : '' }
         <br/>
         <br/>
-        {lasMonthprogress ?  <><b>LAST MONTH PROJECT PROGRESS AND ACTIVITIES:</b> <br/> {lasMonthprogress}</> : '' }
+        {lastMonthprogress ?  <><b>LAST MONTH PROJECT PROGRESS AND ACTIVITIES:</b> <br/> {lastMonthprogress}</> : '' }
         <br/>
         <br/>
         {nextstep ?

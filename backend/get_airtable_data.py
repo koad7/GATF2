@@ -143,7 +143,12 @@ def airtable_func():
     nextsteps_df_f = nextsteps_df[[
         'id', 'Deadline', 'Next step', 'Status', 'Quarter', 'Project'
     ]]
-
+    # Filter out Completed and Cancelled
+    nextsteps_df_f = nextsteps_df_f.drop(
+        nextsteps_df_f[nextsteps_df_f.Status == "Cancelled"].index)
+    nextsteps_df_f = nextsteps_df_f.drop(
+        nextsteps_df_f[nextsteps_df_f.Status == "Completed"].index)
+    print(nextsteps_df_f['Status'])
     nextsteps_df_f.loc[:, 'Project'] = nextsteps_df_f['Project'].apply(
         lambda x: x.split('_')[0].strip())
     nextsteps_df_f.drop('id', axis='columns', inplace=True)
