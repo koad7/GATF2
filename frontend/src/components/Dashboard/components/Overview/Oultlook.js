@@ -34,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
 // Main function
 export default function Outlook({props,quarters}) {
   const classes = useStyles();
-  let outlookText;
-  let toBeMonitored;
+ 
   let nextstep;
-  outlookText=props[0]['Overall Outlook'];
-  toBeMonitored=props[0]['To be monitored'];
+  let  outlookText=props[0]['Overall Outlook'];
+  let toBeMonitored=props[0]['To be monitored'];//
+  let lasMonthprogress=props[0]['Last month project progress and activities'];
   const nextstepquartersSet = new Set();
   for (let i = 0; i < props[0].NextSteps.length; i++){
     nextstepquartersSet.add( props[0].NextSteps[i]["Quarter"]);
@@ -62,13 +62,18 @@ export default function Outlook({props,quarters}) {
   return (
     <div className={classes.root}>
       <Grid item lg={12} className={classes.overlookText}>
-        {outlookText ?  <><b>OVERALL OUTLOOK</b> <br/>  {outlookText}</> : '' }
+        {outlookText ?  <><b>OVERALL OUTLOOK:</b> <br/>  {outlookText}</> : '' }
         <br/>
-          {toBeMonitored ?  <><b>TO BE MONITORED</b> <br/> {toBeMonitored}</> : '' }
+        <br/>
+          {toBeMonitored ?  <><b>TO BE MONITORED:</b> <br/> {toBeMonitored}</> : '' }
+        <br/>
+        <br/>
+        {lasMonthprogress ?  <><b>LAST MONTH PROJECT PROGRESS AND ACTIVITIES:</b> <br/> {lasMonthprogress}</> : '' }
+        <br/>
         <br/>
         {nextstep ?
           <>
-              <b style={{color:'black'}}>NEXT STEPS</b> 
+              <b style={{color:'black'}}>NEXT STEPS:</b> 
             <Grid item xs>
                 <Table className={classes.table} stickyHeader size="small" aria-label="sticky table" >
                     <TableHead>

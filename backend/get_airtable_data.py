@@ -95,10 +95,12 @@ def airtable_func():
     # Select field of interest
     information_df_f = information_df[[
         'id', 'Other private sector support', 'Agreement',
-        'Lead government agency', 'To be monitored', 'Scope', 'Project Budget',
-        'Expected Result', 'Project Type', 'TFA Articles', 'Status',
-        'Private sector champions', 'Assumptions', 'Implementer', 'Project',
-        'Country-Region', 'Quarter', 'Overall Outlook', 'In-kind Estimation'
+        'Lead government agency', 'To be monitored',
+        'Last month project progress and activities', 'Scope',
+        'Project Budget', 'Expected Result', 'Project Type', 'TFA Articles',
+        'Status', 'Private sector champions', 'Assumptions', 'Implementer',
+        'Project', 'Country-Region', 'Quarter', 'Overall Outlook',
+        'In-kind Estimation'
     ]]
     # Split columns 'Country-Region' to 'Country' and 'Region'
     information_df_f[['Country', 'Region'
