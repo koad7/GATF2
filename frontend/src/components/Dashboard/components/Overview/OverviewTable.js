@@ -54,6 +54,7 @@ export default function OverviewTable(props) {
   } = useFilteredData(props);
   //**************Filtering 
   // Get selected Project: currentProject
+ 
   let currentProject = filterByValue (filteredData.data, filteredData.filterObj.Project)
   // Get quarters in selected project
   const quaterSet = new Set();
@@ -121,7 +122,7 @@ export default function OverviewTable(props) {
                   id: 'quarter',
                 }}>
                 <option aria-label="None" value="" />
-                {currentQuarters.sort().map((select) => 
+                {currentQuarters.sort().reverse().map((select) => 
                   (<option value={select}>{select}</option>)
                 )} 
               </NativeSelect>

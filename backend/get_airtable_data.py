@@ -239,6 +239,7 @@ def airtable_func():
         'Project', 'Phase name', 'Phase'
     ]].apply(lambda x: slugify('_'.join(x), separator="_"), axis=1)
     # Take "Planned date" or "Revised date"
+    milestones_df_merge['planned_date'] = milestones_df_merge['Planned date']
     milestones_df_merge['start'] = pd.to_datetime(
         np.where(milestones_df_merge["Revised date"] != '',
                  milestones_df_merge["Revised date"],

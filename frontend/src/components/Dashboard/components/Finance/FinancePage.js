@@ -158,7 +158,7 @@ try{
               }}
             >
               <option aria-label="None" value="" />
-              {quaterArray.sort().map((select) => 
+              {quaterArray.sort().reverse().map((select) => 
                 (<option value={select}>{select}</option>)
               )}
             </NativeSelect>
