@@ -35,7 +35,8 @@ props.data.sort(function(a, b) {
             <TableCell style={{ color:'white'}} align="left">Planned Date</TableCell>
             <TableCell style={{ color:'white'}} align="left">Revised Date</TableCell>
             <TableCell style={{ color:'white'}} align="left">Reason for Revision</TableCell>
-            <TableCell style={{ color:'white'}} align="left">Specific Actions (if any)</TableCell>
+            <TableCell style={{ color:'white'}} align="left">Specific Actions</TableCell>
+            <TableCell style={{ color:'white'}} align="left">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -52,6 +53,8 @@ props.data.sort(function(a, b) {
               <TableCell align="left"><small>{row['Revised date']  }</small></TableCell>
               <TableCell align="left"><small>{row['Reason for revision']}</small></TableCell>
               <TableCell align="left"><small>{row['Specific Actions']}</small></TableCell>
+              <TableCell align="left"><small>{row['Status']}</small></TableCell>
+              
             </TableRow>
           ))}
         </TableBody>
