@@ -81,6 +81,18 @@ def airtable_func():
     risks_df = table_dict['Risks'].fillna('')
     timeline_df = table_dict['Timeline'].fillna('')
     milestones_df = table_dict['Milestones'].fillna('')
+    # Insert column if doest exist, Avoid not having column in dataset
+    details_cols = [
+        'fields.Overall Project Relevance', 'fields.Quarter',
+        'fields.Overall Project Assessment',
+        'fields.Overall Project Progress According to Plan',
+        'fields.Covid Impact Assesment', 'fields.Overall Project Assumptions',
+        'fields.Project'
+    ]
+    details_df = details_df.reindex(details_df.columns.union(details_cols,
+                                                             sort=False),
+                                    axis=1,
+                                    fill_value="0")
 
     # Project: General Information
     # Field names tidying up
@@ -306,7 +318,6 @@ def airtable_func():
                     key] + Milestones[key]
             except (KeyError, TypeError) as e:
                 Project_timeline[key] = ''
-    print(Details)
     OBJ_DICT = {
         "Details": Details,
         "NextSteps": NextSteps,

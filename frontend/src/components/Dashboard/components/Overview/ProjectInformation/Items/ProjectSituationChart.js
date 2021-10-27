@@ -9,10 +9,10 @@ ReactFC.fcRoot(FusionCharts, Charts, FusionTheme,PowerCharts);
 
 // Resolves charts dependancy
 const colorCode={
-  "":{
+  "0":{
       code:"#bdbdbd",
-      minvalue: "0",
-      maxvalue: "0",
+      minvalue: "-",
+      maxvalue: "-",
       label: "Nil"
   },
   "1":{
@@ -93,7 +93,7 @@ if(details.length !== 0){
       colorrange: {
         gradient: "0",
         color: [
-          colorCode[''],
+          colorCode['0'],
           colorCode['1'],
           colorCode['2'],
           colorCode['3'],
@@ -107,26 +107,26 @@ if(details.length !== 0){
               {
                 rowid: "OPASSES",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'] ? colorCode[x['Overall Project Assessment']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Assessment']].label ? colorCode[x['Overall Project Assessment']].label : "0"
+                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'] ,
+                colorrangelabel: colorCode[x['Overall Project Assessment']].label 
               },
               {
                 rowid: "OPR",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'] ? colorCode[x['Overall Project Relevance']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Relevance']].label ? colorCode[x['Overall Project Relevance']].label : "0",
+                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'] ,
+                colorrangelabel: colorCode[x['Overall Project Relevance']].label ,
               },
               {
                 rowid: "OPASUM",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'] ? colorCode[x['Overall Project Assumptions']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Assumptions']].label ? colorCode[x['Overall Project Assumptions']].label : "0"
+                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'] ,
+                colorrangelabel: colorCode[x['Overall Project Assumptions']].label 
               },
               {
                 rowid: "OPPAP",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'] ? colorCode[x['Overall Project Progress According to Plan']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label ? colorCode[x['Overall Project Progress According to Plan']].label : "0"
+                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
+                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label 
               },
               {
                 rowid: "CIA",
@@ -271,7 +271,7 @@ if(details.length !== 0){
         colorrange: {
           gradient: "0",
           color: [
-            colorCode[''],
+            colorCode['0'],
             colorCode['1'],
             colorCode['2'],
             colorCode['3'],
@@ -285,26 +285,26 @@ if(details.length !== 0){
               {
                 rowid: "OPASSES",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'] ? colorCode[x['Overall Project Assessment']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Assessment']].label ? colorCode[x['Overall Project Assessment']].label : "0"
+                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'] ,
+                colorrangelabel: colorCode[x['Overall Project Assessment']].label 
               },
               {
                 rowid: "OPR",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'] ? colorCode[x['Overall Project Relevance']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Relevance']].label ? colorCode[x['Overall Project Relevance']].label : "0",
+                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'] ,
+                colorrangelabel: colorCode[x['Overall Project Relevance']].label ,
               },
               {
                 rowid: "OPASUM",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'] ? colorCode[x['Overall Project Assumptions']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Assumptions']].label ? colorCode[x['Overall Project Assumptions']].label : "0"
+                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'] ,
+                colorrangelabel: colorCode[x['Overall Project Assumptions']].label 
               },
               {
                 rowid: "OPPAP",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'] ? colorCode[x['Overall Project Progress According to Plan']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label ? colorCode[x['Overall Project Progress According to Plan']].label : "0"
+                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
+                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label 
               },
               {
                 rowid: "CIA",
