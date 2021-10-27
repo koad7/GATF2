@@ -45,9 +45,6 @@ export default function Outlook({props,quarters}) {
   }
   let nextstepquarters=[...nextstepquartersSet]
  if(quarters){
-    console.log(props);
-    console.log(quarters);
-    console.log(nextstepquarters);
     if (nextstepquarters.includes(quarters)){
       nextstep=filterByValue (props[0].NextSteps, quarters.sort().at(-1))
     }else{

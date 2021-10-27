@@ -9,11 +9,17 @@ ReactFC.fcRoot(FusionCharts, Charts, FusionTheme,PowerCharts);
 
 // Resolves charts dependancy
 const colorCode={
+  "":{
+      code:"#bdbdbd",
+      minvalue: "0",
+      maxvalue: "0",
+      label: "Nil"
+  },
   "1":{
           code:"#00833e",
           minvalue: "1",
           maxvalue: "1",
-          label: "Nil"
+          label: "Really Low"
         },
       
     "2":{
@@ -51,9 +57,32 @@ function  filterByValue (array, string) {
 export default function ProjectSituationChart({props, quarter}){
   // Sort ny quarter 
   props.sort((a, b) => (a.Quarter > b.Quarter) ? 1 : -1);
+
+  const dataRows=[
+    {
+      id: "OPASSES",
+      label: "Project Assessement"
+    },
+    {
+      id: "OPR",
+      label: "Project Relevance"
+    },
+    {
+      id: "OPASUM",
+      label: "Project Assumption"
+    },
+    {
+      id: "OPPAP",
+      label: "Project Progress According to Alan"
+    },
+    {
+      id: "CIA",
+      label: "Covid Impact Assesment"
+    }
+  ]
   
   let details=filterByValue (props, quarter)
-
+console.log(props)
   let dataSource ={};
   let localquarter;
 if(details.length !== 0){
@@ -64,6 +93,7 @@ if(details.length !== 0){
       colorrange: {
         gradient: "0",
         color: [
+          colorCode[''],
           colorCode['1'],
           colorCode['2'],
           colorCode['3'],
@@ -74,31 +104,37 @@ if(details.length !== 0){
       dataset: [
         {
           data: [
-            {
-              rowid: "OPASSES",
-              columnid: localquarter,
-              displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'],
-              colorrangelabel: colorCode[x['Overall Project Assessment']].label
-            },
-            {
-              rowid: "OPR",
-              columnid: localquarter,
-              displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'],
-              colorrangelabel: colorCode[x['Overall Project Relevance']].label
-            },
-            {
-              rowid: "OPASUM",
-              columnid: localquarter,
-              displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'],
-              colorrangelabel: colorCode[x['Overall Project Assumptions']].label
-            },
-            {
-              rowid: "OPPAP",
-              columnid: localquarter,
-              displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
-              colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label
-            }
-          ]
+              {
+                rowid: "OPASSES",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'] ? colorCode[x['Overall Project Assessment']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Assessment']].label ? colorCode[x['Overall Project Assessment']].label : "0"
+              },
+              {
+                rowid: "OPR",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'] ? colorCode[x['Overall Project Relevance']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Relevance']].label ? colorCode[x['Overall Project Relevance']].label : "0",
+              },
+              {
+                rowid: "OPASUM",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'] ? colorCode[x['Overall Project Assumptions']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Assumptions']].label ? colorCode[x['Overall Project Assumptions']].label : "0"
+              },
+              {
+                rowid: "OPPAP",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'] ? colorCode[x['Overall Project Progress According to Plan']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label ? colorCode[x['Overall Project Progress According to Plan']].label : "0"
+              },
+              {
+                rowid: "CIA",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Covid Impact Assesment']]['minvalue'] ? colorCode[x['Covid Impact Assesment']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Covid Impact Assesment']].label ? colorCode[x['Covid Impact Assesment']].label  : "0"
+              }
+            ]
         }
       ],
       columns: {
@@ -126,7 +162,11 @@ if(details.length !== 0){
           },
           {
             id: "OPPAP",
-            label: "project progress according to plan"
+            label: "Project Progress According to Plan"
+          },
+          {
+            id: "CIA",
+            label: "Covid Impact Assesment"
           }
         ]
       },
@@ -186,6 +226,12 @@ if(details.length !== 0){
               columnid: localquarter,
               displayvalue: "0",
               colorrangelabel: ''
+            },
+            {
+              rowid: "CIA",
+              columnid: localquarter,
+              displayvalue: "0",
+              colorrangelabel: ''
             }
           ]
         }
@@ -200,24 +246,7 @@ if(details.length !== 0){
         ]
       },
       rows: {
-        row: [
-          {
-            id: "OPASSES",
-            label: "Project Assessement"
-          },
-          {
-            id: "OPR",
-            label: "Project Relevance"
-          },
-          {
-            id: "OPASUM",
-            label: "Project Assumption"
-          },
-          {
-            id: "OPPAP",
-            label: "project progress according to plan"
-          }
-        ]
+        row: dataRows
       },
       chart: {
         theme: "fusion",
@@ -242,6 +271,7 @@ if(details.length !== 0){
         colorrange: {
           gradient: "0",
           color: [
+            colorCode[''],
             colorCode['1'],
             colorCode['2'],
             colorCode['3'],
@@ -255,26 +285,32 @@ if(details.length !== 0){
               {
                 rowid: "OPASSES",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Assessment']].label
+                displayvalue: colorCode[x['Overall Project Assessment']]['minvalue'] ? colorCode[x['Overall Project Assessment']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Assessment']].label ? colorCode[x['Overall Project Assessment']].label : "0"
               },
               {
                 rowid: "OPR",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Relevance']].label
+                displayvalue: colorCode[x['Overall Project Relevance']]['minvalue'] ? colorCode[x['Overall Project Relevance']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Relevance']].label ? colorCode[x['Overall Project Relevance']].label : "0",
               },
               {
                 rowid: "OPASUM",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Assumptions']].label
+                displayvalue: colorCode[x['Overall Project Assumptions']]['minvalue'] ? colorCode[x['Overall Project Assumptions']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Assumptions']].label ? colorCode[x['Overall Project Assumptions']].label : "0"
               },
               {
                 rowid: "OPPAP",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'],
-                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label
+                displayvalue: colorCode[x['Overall Project Progress According to Plan']]['minvalue'] ? colorCode[x['Overall Project Progress According to Plan']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Overall Project Progress According to Plan']].label ? colorCode[x['Overall Project Progress According to Plan']].label : "0"
+              },
+              {
+                rowid: "CIA",
+                columnid: localquarter,
+                displayvalue: colorCode[x['Covid Impact Assesment']]['minvalue'] ? colorCode[x['Covid Impact Assesment']]['minvalue'] : "0",
+                colorrangelabel: colorCode[x['Covid Impact Assesment']].label ? colorCode[x['Covid Impact Assesment']].label  : "0"
               }
             ]
           }
@@ -289,24 +325,7 @@ if(details.length !== 0){
           ]
         },
         rows: {
-          row: [
-            {
-              id: "OPASSES",
-              label: "Project Assessement"
-            },
-            {
-              id: "OPR",
-              label: "Project Relevance"
-            },
-            {
-              id: "OPASUM",
-              label: "Project Assumption"
-            },
-            {
-              id: "OPPAP",
-              label: "project progress according to plan"
-            }
-          ]
+          row: dataRows
         },
         chart: {
           theme: "fusion",
@@ -364,6 +383,12 @@ if(details.length !== 0){
                 columnid: localquarter,
                 displayvalue: "0",
                 colorrangelabel: ''
+              },
+              {
+                rowid: "CIA",
+                columnid: localquarter,
+                displayvalue: "0",
+                colorrangelabel: ''
               }
             ]
           }
@@ -378,24 +403,7 @@ if(details.length !== 0){
           ]
         },
         rows: {
-          row: [
-            {
-              id: "OPASSES",
-              label: "Project Assessement"
-            },
-            {
-              id: "OPR",
-              label: "Project Relevance"
-            },
-            {
-              id: "OPASUM",
-              label: "Project Assumption"
-            },
-            {
-              id: "OPPAP",
-              label: "project progress according to plan"
-            }
-          ]
+          row: dataRows
         },
         chart: {
           theme: "fusion",
@@ -454,6 +462,12 @@ if(details.length !== 0){
             columnid: '',
             displayvalue: "0",
             colorrangelabel: ''
+          },
+          {
+            rowid: "CIA",
+            columnid: '',
+            displayvalue: "0",
+            colorrangelabel: ''
           }
         ]
       }
@@ -468,24 +482,7 @@ if(details.length !== 0){
       ]
     },
     rows: {
-      row: [
-        {
-          id: "OPASSES",
-          label: "Project Assessement"
-        },
-        {
-          id: "OPR",
-          label: "Project Relevance"
-        },
-        {
-          id: "OPASUM",
-          label: "Project Assumption"
-        },
-        {
-          id: "OPPAP",
-          label: "project progress according to plan"
-        }
-      ]
+      row: dataRows
     },
     chart: {
       theme: "fusion",

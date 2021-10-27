@@ -125,7 +125,7 @@ def airtable_func():
 
     details_df_f = details_df[[
         'Overall Project Relevance', 'Quarter', 'Overall Project Assessment',
-        'Overall Project Progress According to Plan',
+        'Overall Project Progress According to Plan', 'Covid Impact Assesment',
         'Overall Project Assumptions', 'Project'
     ]]
 
@@ -148,7 +148,7 @@ def airtable_func():
         nextsteps_df_f[nextsteps_df_f.Status == "Cancelled"].index)
     nextsteps_df_f = nextsteps_df_f.drop(
         nextsteps_df_f[nextsteps_df_f.Status == "Completed"].index)
-    print(nextsteps_df_f['Status'])
+
     nextsteps_df_f.loc[:, 'Project'] = nextsteps_df_f['Project'].apply(
         lambda x: x.split('_')[0].strip())
     nextsteps_df_f.drop('id', axis='columns', inplace=True)
@@ -306,7 +306,7 @@ def airtable_func():
                     key] + Milestones[key]
             except (KeyError, TypeError) as e:
                 Project_timeline[key] = ''
-
+    print(Details)
     OBJ_DICT = {
         "Details": Details,
         "NextSteps": NextSteps,

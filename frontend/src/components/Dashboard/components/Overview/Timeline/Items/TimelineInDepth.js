@@ -17,7 +17,6 @@ const useStyles = makeStyles({
 
 let rowColor={1: 'rgb(201,	216,	208)	', 2:'rgb(241,247,237	)', 3:'rgb(248,229,204	)', 4:'rgb(196,196,194	)',5:'rgb(238,244,250	)', 6:'rgb(202,214,238	)',7:'violet'}
 export default function TimelineInDepth(props) {
-  console.log(props)
 // SOrt by Milestone only
 props.data.sort(function(a, b) {
   return a['Milestone number'] -  b['Milestone number'];
