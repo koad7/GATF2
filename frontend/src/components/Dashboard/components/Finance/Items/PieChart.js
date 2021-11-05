@@ -50,6 +50,9 @@ if(type==='total budget') {
         spacingLeft: 0,
         spacingRight: 0
     },
+    credits: {
+      enabled: false
+  },
     title: {
         text: ""
       },

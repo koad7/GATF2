@@ -5,6 +5,7 @@ import ReactFC from 'react-fusioncharts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import PowerCharts from 'fusioncharts/fusioncharts.powercharts';
 
+
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme,PowerCharts);
 
 // Resolves charts dependancy
@@ -82,7 +83,6 @@ export default function ProjectSituationChart({props, quarter}){
   ]
   
   let details=filterByValue (props, quarter)
-console.log(props)
   let dataSource ={};
   let localquarter;
 if(details.length !== 0){
@@ -131,8 +131,8 @@ if(details.length !== 0){
               {
                 rowid: "CIA",
                 columnid: localquarter,
-                displayvalue: colorCode[x['Covid Impact Assesment']]['minvalue'] ? colorCode[x['Covid Impact Assesment']]['minvalue'] : "0",
-                colorrangelabel: colorCode[x['Covid Impact Assesment']].label ? colorCode[x['Covid Impact Assesment']].label  : "0"
+                displayvalue: colorCode[x['Covid Impact Assesment']]['minvalue'],
+                colorrangelabel: colorCode[x['Covid Impact Assesment']].label
               }
             ]
         }
@@ -205,33 +205,33 @@ if(details.length !== 0){
           data: [
             {
               rowid: "OPASSES",
-              columnid: localquarter,
-              displayvalue: "0",
-              colorrangelabel: ''
+              columnid: '',
+              displayvalue: "-",
+              colorrangelabel: colorCode['0']
             },
             {
               rowid: "OPR",
-              columnid: localquarter,
-              displayvalue: "0",
-              colorrangelabel: ''
+              columnid: '',
+              displayvalue: "-",
+              colorrangelabel: colorCode['0']
             },
             {
               rowid: "OPASUM",
-              columnid: localquarter,
-              displayvalue: "0",
-              colorrangelabel: ''
+              columnid: '',
+              displayvalue: "-",
+              colorrangelabel: colorCode['0']
             },
             {
               rowid: "OPPAP",
-              columnid: localquarter,
-              displayvalue: "0",
-              colorrangelabel: ''
+              columnid: '',
+              displayvalue: "-",
+              colorrangelabel: colorCode['0']
             },
             {
               rowid: "CIA",
-              columnid: localquarter,
-              displayvalue: "0",
-              colorrangelabel: ''
+              columnid: '',
+              displayvalue: "-",
+              colorrangelabel: colorCode['0']
             }
           ]
         }
@@ -362,33 +362,33 @@ if(details.length !== 0){
             data: [
               {
                 rowid: "OPASSES",
-                columnid: localquarter,
-                displayvalue: "0",
-                colorrangelabel: ''
+                columnid: '',
+                displayvalue: "-",
+                colorrangelabel: colorCode['0']
               },
               {
                 rowid: "OPR",
-                columnid: localquarter,
-                displayvalue: "0",
-                colorrangelabel: ''
+                columnid: '',
+                displayvalue: "-",
+                colorrangelabel: colorCode['0']
               },
               {
                 rowid: "OPASUM",
-                columnid: localquarter,
-                displayvalue: "0",
-                colorrangelabel: ''
+                columnid: '',
+                displayvalue: "-",
+                colorrangelabel: colorCode['0']
               },
               {
                 rowid: "OPPAP",
-                columnid: localquarter,
-                displayvalue: "0",
-                colorrangelabel: ''
+                columnid: '',
+                displayvalue: "-",
+                colorrangelabel: colorCode['0']
               },
               {
                 rowid: "CIA",
-                columnid: localquarter,
-                displayvalue: "0",
-                colorrangelabel: ''
+                columnid: '',
+                displayvalue: "-",
+                colorrangelabel: colorCode['0']
               }
             ]
           }
@@ -442,32 +442,32 @@ if(details.length !== 0){
           {
             rowid: "OPASSES",
             columnid: '',
-            displayvalue: "0",
-            colorrangelabel: ''
+            displayvalue: "-",
+            colorrangelabel: colorCode['0']
           },
           {
             rowid: "OPR",
             columnid: '',
-            displayvalue: "0",
-            colorrangelabel: ''
+            displayvalue: "-",
+            colorrangelabel: colorCode['0']
           },
           {
             rowid: "OPASUM",
             columnid: '',
-            displayvalue: "0",
-            colorrangelabel: ''
+            displayvalue: "-",
+            colorrangelabel: colorCode['0']
           },
           {
             rowid: "OPPAP",
             columnid: '',
-            displayvalue: "0",
-            colorrangelabel: ''
+            displayvalue: "-",
+            colorrangelabel: colorCode['0']
           },
           {
             rowid: "CIA",
             columnid: '',
-            displayvalue: "0",
-            colorrangelabel: ''
+            displayvalue: "-",
+            colorrangelabel: colorCode['0']
           }
         ]
       }

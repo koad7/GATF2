@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 
-const API_URL="/api/"
+const API_URL = "/api/"
 export const REQUEST_STATUS = {
   LOADING: "loading",
   SUCCESS: "success",

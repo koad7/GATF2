@@ -40,7 +40,10 @@ export default function TimelinePage(props){
     handleFilterSelected
   } = useFilteredData(props);
   
+  let chartData = filteredData.data.filter(l => Object.entries(filteredData.filterObj) .every(([k, v]) => !v.length || l[k] === v))
 
+  console.log("chartData");
+  console.log(chartData);
   const classes = useStyles();
 
   return (
@@ -49,7 +52,7 @@ export default function TimelinePage(props){
       <Grid container spacing={3}>
         <Grid item xs={12}>
           {/* Filter */}
-{/*           
+          
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="project-name">Project Name</InputLabel>
             <Select
@@ -134,12 +137,12 @@ export default function TimelinePage(props){
                 (<option value={type}>{type}</option>)
               )} 
             </Select>
-          </FormControl> */}
+          </FormControl>
         
         </Grid>
       </Grid>
 
-      <TimelineChart seriesData={filteredData.data} filters={filteredData.filterObj}/>
+      <TimelineChart seriesData={chartData} />
       
     </div>
   );

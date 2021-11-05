@@ -311,7 +311,7 @@ def airtable_func():
         lambda x: x.to_dict(orient='records')).to_dict()
 
     # Merging all project timeline informations by project
-    for p in [Project_timeline, Phase_timeline, Milestones]:
+    for p in [Project_timeline]:
         for key in p:
             try:
                 Project_timeline[key] = Project_timeline[key] + Phase_timeline[

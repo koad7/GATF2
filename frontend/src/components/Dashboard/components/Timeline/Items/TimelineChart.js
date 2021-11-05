@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React , {useState, useEffect} from 'react'
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highcharts-gantt";
 import HighchartMore from "highcharts/highcharts-more";
@@ -53,80 +53,81 @@ var point = this,
         }, '');
     }
     
-
-export default function TimelineChart(props) {
+const generateOptions = (data) =>{
+ return {
+    chart: {
+        backgroundColor: "transparent",
+        // height: 10*data.length +'%'
+    },
+    credits: {
+      enabled: false
+  },
+    navigator: {
+        enabled: false,
+        liveRedraw: true,
+        // height: 75,
+        series: {
+            type: 'gantt',
+            pointWidth: 4
+        }
+    },
+    rangeSelector: { enabled: true },
+    scrollbar: { enabled: true, liveRedraw: true },
+    plotOptions: {
+        series: {
+            pointWidth: 20
+        }
+    },
+    series: data,
+    tooltip: {
+    pointFormatter: customPointFormatter
     
-    // Filter the data with dropdown output
-    let localFilteredData;
-    if(props.seriesData.length > 1){
-        localFilteredData =  props.seriesData.filter(l =>
-            Object.entries(props.filters)
-            .every(([k, v]) => !v.length || l[k] === v))
-    }else{
-        localFilteredData = props.seriesData;
-    }
-
-    // console.log(localFilteredData[0].data)
-    const [chartOptions, setChart] = useState({
-        chart: {
-            backgroundColor: "transparent",
-            height: 5*localFilteredData.length +'%'
+    },
+    title: {
+        text: ''
+    },
+    xAxis: {
+            currentDateIndicator: true,
         },
-        navigator: {
-            enabled: false,
-            liveRedraw: true,
-            height: 75,
-            series: {
-                type: 'gantt',
-                pointWidth: 4
-            }
+    
+    yAxis: {
+        type: "treegrid",
+        // uniqueNames: true,
+        // alternateGridColor: '#dfdfe047',
+        tickColor: '#0000000',
+        tickPixelInterval: 30,
+        tickPosition: 'inside',
+        gridLineColor:'#e9e9e9',
+        grid: {
+            enabled: true,
+            borderColor: 'rgba(0,0,0,0.3)',
+            borderWidth: .5,
+            // cellHeight: 120
         },
-        rangeSelector: { enabled: true },
-        scrollbar: { enabled: true, liveRedraw: true },
-        plotOptions: {
-            series: {
-                pointWidth: 20
-            }
-        },
-        series:  localFilteredData,
-        tooltip: {
-        pointFormatter: customPointFormatter
-        
-        },
-        title: {
-            text: ''
-        },
-        xAxis: {
-                currentDateIndicator: true,
-            },
-        
-        yAxis: {
-            type: "treegrid",
-            uniqueNames: true,
-            // alternateGridColor: '#dfdfe047',
-            tickColor: '#0000000',
-            tickPixelInterval: 30,
-            tickPosition: 'inside',
-            gridLineColor:'#e9e9e9',
-            grid: {
-                enabled: true,
-                borderColor: 'rgba(0,0,0,0.3)',
-                borderWidth: .5,
-                cellHeight: 120
-            },
-        },
-        
-    });
+    },
+    
+}
+}
+export default function TimelineChart(props) {
+    const [chartOptions, setChartOptions] = useState();
+    
+    useEffect(() => {
+        setChartOptions(generateOptions(props.seriesData));
+          
+      }, [props.seriesData]);
+   
+    
     return (
         <div>
+            {chartOptions?
             <HighchartsReact
-                constructorType="ganttChart"
-                highcharts={Highcharts}
-                options={chartOptions}
-                immutable={true} 
-                allowChartUpdate="true"
-                callback= {chart => setChart}
-            />
+            constructorType="ganttChart"
+            highcharts={Highcharts}
+            options={chartOptions}
+            immutable={true} 
+            allowChartUpdate="true"
+            callback= {chart => setChartOptions}
+        />:''}
         </div>
     )
 }

@@ -15,16 +15,31 @@ const useStyles = makeStyles({
   },
 });
 
+// Row coloring
 let rowColor={1: 'rgb(201,	216,	208)	', 2:'rgb(241,247,237	)', 3:'rgb(248,229,204	)', 4:'rgb(196,196,194	)',5:'rgb(238,244,250	)', 6:'rgb(202,214,238	)',7:'violet'}
+
+
+
 export default function TimelineInDepth(props) {
-// SOrt by Milestone only
-props.data.sort(function(a, b) {
-  return a['Milestone number'] -  b['Milestone number'];
-});
+  
+let seenNames = {};
+// Sort by Milestone number and by quarter then filter out the older quarter of same Milestone  
+let arrFiltered = props.data.sort(function(a, b) {
+  return  parseInt(a['Milestone number']) - parseInt(b['Milestone number']) || b['Quarter'].localeCompare(a['Quarter']) ; //Get highest quarte
+}).filter(function(currentObject) {
+  if (currentObject.name in seenNames) {
+      return false;
+  } else {
+      seenNames[currentObject.name] = true;
+      return true;
+  }
+})
+
+
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
-      <Table   className={classes.table} size="small" >
+      <Table  className={classes.table} size="small" >
         <TableHead >
           <TableRow  style={{ backgroundColor: 'rgb(137,137,135	)', color:'white'}}>
             <TableCell style={{ color:'white'}} align="left">Phase </TableCell>
@@ -36,10 +51,11 @@ props.data.sort(function(a, b) {
             <TableCell style={{ color:'white'}} align="left">Reason for Revision</TableCell>
             <TableCell style={{ color:'white'}} align="left">Specific Actions</TableCell>
             <TableCell style={{ color:'white'}} align="left">Status</TableCell>
+            <TableCell style={{ color:'white'}} align="left">Quarter</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data.map((row) => (
+          {arrFiltered.map((row) => (
             <TableRow  style={{ backgroundColor: rowColor[row["Phase"]]}}  key={row["Milestone number"]}>
               <TableCell align="left"><b>{`${row["Phase"]}`}</b></TableCell>
               <TableCell component="th" scope="row">
@@ -53,6 +69,7 @@ props.data.sort(function(a, b) {
               <TableCell align="left"><small>{row['Reason for revision']}</small></TableCell>
               <TableCell align="left"><small>{row['Specific Actions']}</small></TableCell>
               <TableCell align="left"><small>{row['Status']}</small></TableCell>
+              <TableCell align="left"><small>{row['Quarter']}</small></TableCell>
               
             </TableRow>
           ))}
