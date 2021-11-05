@@ -82,6 +82,8 @@ export default function Timelines({props,quarter}) {
 if(props.filterObj.Project){
   try{
     filteredproject = initialData.filter(item=> item.Project === props.filterObj.Project);
+    console.log("filteredproject 1");
+  console.log(filteredproject);
     localMilestone = filteredproject[0].Milestones;
   }catch(error){
     localMilestone = props.data[0].Milestones
@@ -98,17 +100,20 @@ if(props.filterObj.Project){
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  console.log("filteredproject 2");
+  console.log(filteredproject);
+  
   return (
     <div className={classes.root}>
         <AppBar position="sticky" color="secondary"> 
             <Tabs value={value} style={{ background: '#0064a8' }} onChange={handleChange} aria-label="simple tabs example">
                 
                 <Tab label="Timeline Table" {...a11yProps(1)} />
-                {/* <Tab label="Timeline Chart" {...a11yProps(0)} /> */}
+                <Tab label="Timeline Chart" {...a11yProps(0)} />
             </Tabs>
         </AppBar>
         <TabPanel value={value} index={1}>
-            {/* <TimelineChart seriesData={filteredproject} quarter={props.filterObj.Quarter}/> */}
+            <TimelineChart seriesData={filteredproject} />
         </TabPanel>
         <TabPanel value={value} index={0}>
             <TimelineInDepth  data={localMilestone} quarter={props.filterObj.Quarter}/>

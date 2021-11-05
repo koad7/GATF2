@@ -93,7 +93,7 @@ const generateOptions = (data) =>{
     yAxis: {
         type: "treegrid",
         // uniqueNames: true,
-        // alternateGridColor: '#dfdfe047',
+        alternateGridColor: '#dfdfe047',
         tickColor: '#0000000',
         tickPixelInterval: 30,
         tickPosition: 'inside',

@@ -42,8 +42,6 @@ export default function TimelinePage(props){
   
   let chartData = filteredData.data.filter(l => Object.entries(filteredData.filterObj) .every(([k, v]) => !v.length || l[k] === v))
 
-  console.log("chartData");
-  console.log(chartData);
   const classes = useStyles();
 
   return (
@@ -141,9 +139,7 @@ export default function TimelinePage(props){
         
         </Grid>
       </Grid>
-
       <TimelineChart seriesData={chartData} />
-      
     </div>
   );
 };
