@@ -71,7 +71,6 @@ function a11yProps(index) {
 }
 
 
-//filteredQuarter={filteredData.Quarter}
 export default function Timelines({props,quarter}) {
   
   let initialData = props.data

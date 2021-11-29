@@ -75,9 +75,16 @@ const generateOptions = (data) =>{
     scrollbar: { enabled: true, liveRedraw: true },
     plotOptions: {
         series: {
-            pointWidth: 20
-        }
-    },
+          point: {
+            events: {
+              click: function () {
+                // Modal creation
+                console.log("Data");
+              },
+            },
+          },
+        },
+      },
     series: data,
     tooltip: {
     pointFormatter: customPointFormatter

@@ -63,7 +63,6 @@ let arrFiltered = props.data.sort(function(a, b) {
               </TableCell>
               <TableCell align="left"><b>{`${row["Milestone number"]}`}</b></TableCell>
               <TableCell align="left"><small>{`${row["name"]}`}</small></TableCell>
-              {/* Remove the possibility of having: January 1, 1970  */}
               <TableCell align="left"><small>{row['planned_date']}</small></TableCell>
               <TableCell align="left"><small>{row['Revised date']  }</small></TableCell>
               <TableCell align="left"><small>{row['Reason for revision']}</small></TableCell>

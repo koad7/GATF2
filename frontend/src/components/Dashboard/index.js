@@ -5,7 +5,7 @@ import firebase from '../firebase'
 import { withRouter } from 'react-router-dom'
 // NEW IMPORT
 import Header from '../Header';
-// import Map from './components/Map';
+import Map from './components/Map';
 import OverviewTable from './components/Overview/OverviewTable';
 import FinancePage from './components/Finance/FinancePage';
 import TimelinePage from './components/Timeline/TimelinePage';
@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
     return (
       <div
         role="tabpanel"
@@ -134,13 +133,6 @@ function Dashboard(props) {
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	  };
-//     const [fruit, setFruit] = useState('')
-
-//     useEffect(() => {
-//     //getting firestore data
-//     firebase.getCurrentUserFruit().then(setFruit)
-//   },[])
-  
     
 const {projectData} = useFetchApi()
 
@@ -155,36 +147,34 @@ const {projectData} = useFetchApi()
 	return (
 		<div className={classes.root}>
 		<Header/>
-		
-
 			<AppBar position="static" style={{ background: '#3f4643' }} className={classes.appbar}>
 				<Toolbar>
 					<Tabs value={value} indicatorColor="secondary" onChange={handleChange} aria-label="simple tabs example">
-					{/* <Tab label="Map" {...a11yProps(0)} /> */}
-					<Tab label="Overview" {...a11yProps(0)} />
-					<Tab label="Finance" {...a11yProps(1)} /> 
-					<Tab label="Timelines" {...a11yProps(2)} />
+					<Tab label="Map" {...a11yProps(0)} />
+					<Tab label="Overview" {...a11yProps(1)} />
+					<Tab label="Finance" {...a11yProps(2)} /> 
+					<Tab label="Timelines" {...a11yProps(3)} />
 					</Tabs>
 					{/* <Button type="submit" fullWidth variant="contained" color="secondary" onClick={logout} className={classes.submit}>
 						Logout
 					</Button> */}
 				</Toolbar>
 			</AppBar>      
-{/* 			
+			{projectData ? 			
 			<TabPanel value={value} index={0}>
-			  {/* <Map/> }
-			</TabPanel> 
-			*/}
+			  <Map/> 	
+			</TabPanel> : <LinearBuffer />
+			}
 
-			<TabPanel value={value} index={0}>
+			<TabPanel value={value} index={1}>
 			  {/* Projet Overviews  */}
 			  {projectData ? <OverviewTable seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
-			<TabPanel value={value} index={1}>
+			<TabPanel value={value} index={2}>
 			  {/* Projet Finances  */}
 			  {projectData ? <FinancePage seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
-			<TabPanel value={value} index={2}>		
+			<TabPanel value={value} index={3}>		
 			{/* Projet Tim  */}	  
 			  {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <LinearBuffer /> }
 			</TabPanel>

@@ -309,13 +309,20 @@ def airtable_func():
         lambda x: slugify(x, separator="_"))
     Phase_timeline = Phase_timeline_.groupby('Project').apply(
         lambda x: x.to_dict(orient='records')).to_dict()
-
+    # Select only latest
+    milestones_df_merge_2 = milestones_df_merge_[
+        milestones_df_merge_.sort_values(
+            by='Quarter', ascending=True).duplicated(
+                subset=['name', 'Project', 'Phase', 'Milestone number'],
+                keep='first')]
+    Milestones2 = milestones_df_merge_2.groupby('Project').apply(
+        lambda x: x.to_dict(orient='records')).to_dict()
     # Merging all project timeline informations by project
     for p in [Project_timeline]:
         for key in p:
             try:
                 Project_timeline[key] = Project_timeline[key] + Phase_timeline[
-                    key] + Milestones[key]
+                    key] + Milestones2[key]
             except (KeyError, TypeError) as e:
                 Project_timeline[key] = ''
     OBJ_DICT = {
