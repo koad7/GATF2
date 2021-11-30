@@ -310,12 +310,25 @@ def airtable_func():
     Phase_timeline = Phase_timeline_.groupby('Project').apply(
         lambda x: x.to_dict(orient='records')).to_dict()
     # Select only latest
+    # Tidy up for Timeline chart
     milestones_df_merge_2 = milestones_df_merge_[
         milestones_df_merge_.sort_values(
             by='Quarter', ascending=True).duplicated(
                 subset=['name', 'Project', 'Phase', 'Milestone number'],
                 keep='first')]
-    Milestones2 = milestones_df_merge_2.groupby('Project').apply(
+    intermediary = milestones_df_merge_.drop_duplicates(
+        ['name', 'Project', 'Phase', 'Milestone number'],
+        keep=False,
+        ignore_index=True)
+    final_milestones = pd.concat([milestones_df_merge_2, intermediary])
+    # Convert to numeric
+    final_milestones['Milestone number'] = pd.to_numeric(
+        final_milestones['Milestone number'], errors='coerce')
+    final_milestones['Phase'] = pd.to_numeric(final_milestones['Phase'],
+                                              errors='coerce')
+    final_milestones = final_milestones.sort_values(
+        by=['Project', 'Phase', 'Milestone number'])
+    Milestones2 = final_milestones.groupby('Project').apply(
         lambda x: x.to_dict(orient='records')).to_dict()
     # Merging all project timeline informations by project
     for p in [Project_timeline]:
