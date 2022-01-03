@@ -99,8 +99,6 @@ if(props.filterObj.Project){
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log("filteredproject 2");
-  console.log(filteredproject);
   
   return (
     <div className={classes.root}>

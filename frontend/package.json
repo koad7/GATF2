@@ -15,7 +15,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.6.0",
     "firebase": "^8.4.2",
-    "fusioncharts": "^3.17.0",
+    "fusioncharts": "^3.18.0",
     "highcharts": "^9.0.1",
     "highcharts-react-official": "^3.0.0",
     "material-ui-icons": "^1.0.0-beta.36",

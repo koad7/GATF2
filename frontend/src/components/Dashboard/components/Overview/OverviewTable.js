@@ -54,7 +54,6 @@ export default function OverviewTable(props) {
   } = useFilteredData(props);
   //**************Filtering 
   // Get selected Project: currentProject
- 
   let currentProject = filterByValue (filteredData.data, filteredData.filterObj.Project)
   // Get quarters in selected project
   const quaterSet = new Set();

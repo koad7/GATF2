@@ -134,8 +134,8 @@ function Dashboard(props) {
 		setValue(newValue);
 	  };
     
-const {projectData} = useFetchApi()
-
+const {projectData, mapData} = useFetchApi()
+	
 	if(!firebase.getCurrentUsername()) {
 		// not logged in
 		alert('Please login first')
@@ -150,31 +150,31 @@ const {projectData} = useFetchApi()
 			<AppBar position="static" style={{ background: '#3f4643' }} className={classes.appbar}>
 				<Toolbar>
 					<Tabs value={value} indicatorColor="secondary" onChange={handleChange} aria-label="simple tabs example">
-					{/* <Tab label="Map" {...a11yProps(0)} /> */}
-					<Tab label="Overview" {...a11yProps(0)} />
-					<Tab label="Finance" {...a11yProps(1)} /> 
-					<Tab label="Timelines" {...a11yProps(2)} />
+					<Tab label="Map" {...a11yProps(0)} />
+					<Tab label="Overview" {...a11yProps(1)} />
+					<Tab label="Finance" {...a11yProps(2)} /> 
+					<Tab label="Timelines" {...a11yProps(3)} />
 					</Tabs>
 					{/* <Button type="submit" fullWidth variant="contained" color="secondary" onClick={logout} className={classes.submit}>
 						Logout
 					</Button> */}
 				</Toolbar>
 			</AppBar>      
-			{/* {projectData ? 			
+			{mapData ? 			
 			<TabPanel value={value} index={0}>
-			  <Map/> 	
+			  <Map mapData={mapData}/> 	
 			</TabPanel> : <LinearBuffer />
-			} */}
+			}
 
-			<TabPanel value={value} index={0}>
+			<TabPanel value={value} index={1}>
 			  {/* Projet Overviews  */}
 			  {projectData ? <OverviewTable seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
-			<TabPanel value={value} index={1}>
+			<TabPanel value={value} index={2}>
 			  {/* Projet Finances  */}
 			  {projectData ? <FinancePage seriesData={projectData.data}/> : <LinearBuffer />}
 			</TabPanel>
-			<TabPanel value={value} index={2}>		
+			<TabPanel value={value} index={3}>		
 			{/* Projet Tim  */}	  
 			  {projectData  ? <TimelinePage seriesData={projectData.data}/> :  <LinearBuffer /> }
 			</TabPanel>

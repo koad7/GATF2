@@ -1,10 +1,13 @@
 import React from 'react';
-import FusionCharts from 'fusioncharts';
-import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
-import PowerCharts from 'fusioncharts/fusioncharts.powercharts';
 
+import FusionCharts from "fusioncharts";
+
+import Charts from "fusioncharts/fusioncharts.charts";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import * as PowerCharts from 'fusioncharts/fusioncharts.powercharts'
+
+// import PowerCharts from '../../../../../libs/fusioncharts/js/fusioncharts.powercharts';
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme,PowerCharts);
 

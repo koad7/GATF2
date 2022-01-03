@@ -6,7 +6,20 @@ import HighchartMore from "highcharts/highcharts-more";
 
 var dateFormat = Highcharts.dateFormat,
   defined = Highcharts.defined;
+// Date 
+var today = new Date(),
+  day = 1000 * 60 * 60 * 24,
+  // Utility functions
+  dateFormat = Highcharts.dateFormat,
+  defined = Highcharts.defined,
+  isObject = Highcharts.isObject;
 
+// Set to 00:00:00:000 today
+today.setUTCHours(0);
+today.setUTCMinutes(0);
+today.setUTCSeconds(0);
+today.setUTCMilliseconds(0);
+today = today.getTime();
 
 HighchartMore(Highcharts);
 
@@ -26,14 +39,14 @@ var point = this,
             title: 'End',
             value: dateFormat(format, point.end)
         }, {
-            title: 'Implementer',
-            value: options.implementer || '-'
+            title: options.implementer ? 'Implementer' :'',
+            value: options.implementer || ''
         }, {
-            title: 'Reason for Revision',
-            value: options['Reason for Revision'] || '-'
+            title: options['Reason for Revision'] ? 'Reason for Revision' : '',
+            value: options['Reason for Revision'] || ''
         }, {
-            title: 'Specific Actions',
-            value: options['Specific Actions'] || '-'
+            title: options['Specific Actions'] ? 'Specific Actions' : '',
+            value: options['Specific Actions'] || ''
         }];
 
         return lines.reduce(function (str, line) {
@@ -62,24 +75,34 @@ const generateOptions = (data) =>{
     credits: {
       enabled: false
   },
-    navigator: {
-        enabled: false,
-        liveRedraw: true,
-        // height: 75,
-        series: {
-            type: 'gantt',
-            pointWidth: 4
-        }
+  navigator: {
+    enabled: false,
+    liveRedraw: true,
+    series: {
+      type: 'gantt',
+      pointPlacement: .005,
+      pointPadding: .003
     },
-    rangeSelector: { enabled: true },
-    scrollbar: { enabled: true, liveRedraw: true },
+    yAxis: {
+      min: 1,
+      max: 25,
+      reversed: false,
+      categories: []
+    }
+  },
+  scrollbar: {
+    enabled: true
+  },
+  rangeSelector: {
+    enabled: true,
+    selected: 0
+  },
     plotOptions: {
         series: {
           point: {
             events: {
               click: function () {
                 // Modal creation
-                console.log("Data");
               },
             },
           },
@@ -95,6 +118,8 @@ const generateOptions = (data) =>{
     },
     xAxis: {
             currentDateIndicator: true,
+            // min: today - 30 * day,
+            // max: today + 15 * day
         },
     
     yAxis: {
@@ -109,7 +134,6 @@ const generateOptions = (data) =>{
             enabled: true,
             borderColor: 'rgba(0,0,0,0.3)',
             borderWidth: .5,
-            // cellHeight: 120
         },
     },
     
@@ -120,7 +144,6 @@ export default function TimelineChart(props) {
     
     useEffect(() => {
         setChartOptions(generateOptions(props.seriesData));
-          
       }, [props.seriesData]);
    
     

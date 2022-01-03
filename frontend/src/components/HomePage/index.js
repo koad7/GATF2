@@ -1,6 +1,5 @@
 import React from 'react'
 import { Typography, Paper, Button } from '@material-ui/core'
-// import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 

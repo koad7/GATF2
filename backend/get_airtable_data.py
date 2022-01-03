@@ -6,6 +6,7 @@ import pandas as pd
 from slugify import slugify
 import datetime as dt
 import numpy as np
+import countrynames
 
 APIKEY = os.getenv('AIRTABLEAPIKEY')
 TABLEKEY = os.getenv('TABLEKEY')
@@ -338,6 +339,18 @@ def airtable_func():
                     key] + Milestones2[key]
             except (KeyError, TypeError) as e:
                 Project_timeline[key] = ''
+
+    information_df_f['hc-key'] = information_df_f.Country.apply(
+        lambda x: countrynames.to_code(x).lower())
+    MapData = information_df_f.groupby(['hc-key']).sum()[[
+        'Project Budget', 'In-kind Estimation'
+    ]].merge(information_df_f.groupby(['hc-key'])['Project'].count(),
+             left_on='hc-key',
+             right_on='hc-key').reset_index().rename(columns={'Project Budget':'value'}).to_dict(orient="records")
+    print(
+        "------------------------------------------------------------------------------------------------"
+    )
+
     OBJ_DICT = {
         "Details": Details,
         "NextSteps": NextSteps,
@@ -351,4 +364,5 @@ def airtable_func():
     finalJson = []
     for key in fJson_:
         finalJson.append(fJson_[key][0])
-    return finalJson
+    print(finalJson)
+    return {'data': finalJson, 'mapdata': MapData}

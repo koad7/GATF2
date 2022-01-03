@@ -10,6 +10,7 @@ export const REQUEST_STATUS = {
 
 export default function useFetchApi() {
   const [projectData, setProjectData] = useState(null);
+  const [mapData, setMapData] = useState(null);
   const [requestStatus, setRequestStatus] = useState(REQUEST_STATUS.LOADING);
   const [error, setError] = useState("");
 
@@ -24,7 +25,8 @@ export default function useFetchApi() {
         .then((res) => res.json())
         .then((data) => {
           setRequestStatus(REQUEST_STATUS.SUCCESS);
-          setProjectData(data);
+          setProjectData({'data':data.data['data']});
+          setMapData(data.data['mapdata']);
         })
         .catch((error) => {
           setRequestStatus(REQUEST_STATUS.FAILURE);
@@ -34,9 +36,9 @@ export default function useFetchApi() {
     getProjectData();
   }, []);
 
-
   return {
     projectData,
+    mapData,
     requestStatus,
     error
   }
