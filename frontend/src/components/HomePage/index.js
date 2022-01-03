@@ -29,6 +29,7 @@ const styles = theme => ({
 	},
 })
 
+const LOGIN = false
 function HomePage(props) {
 	const { classes } = props
 
@@ -39,7 +40,9 @@ function HomePage(props) {
 				<Typography component="h1" variant="h5">
 					Projects Tracking Dashboard
 				</Typography>
-				{/* <Button
+				{
+					LOGIN ?
+					<Button
 					type="submit"
 					fullWidth
 					variant="outlined"
@@ -48,7 +51,9 @@ function HomePage(props) {
 					to="/register"
 					className={classes.submit}>
 					Sign Up
-          		</Button> */}
+          		</Button>
+				  :''
+				}
 				<Button
 					type="submit"
 					fullWidth
@@ -59,7 +64,9 @@ function HomePage(props) {
 					className={classes.submit}>
 					Login
           		</Button>
-				{/* <Button
+				{
+					LOGIN ?
+					<Button
 					type="submit"
 					fullWidth
 					variant="contained"
@@ -68,7 +75,9 @@ function HomePage(props) {
 					to="/dashboard"
 					className={classes.submit}>
 					Dashboard
-          		</Button> */}
+          		</Button>
+				  :''
+				}
 			</Paper>
 		</main>
 	)
