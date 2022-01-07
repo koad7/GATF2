@@ -97,7 +97,6 @@ function createOption(data){
     legend:{
       enabled: false
     },
-    borderColor: "#343a40",
     mapNavigation: {
       enabled: true,
       enableDoubleClickZoomTo: true,
@@ -171,18 +170,15 @@ function createOption(data){
         },
       },
     },
-    colorAxis: {
-      min: 1,
-      max: 3000,
-      type: 'linear',
-      minColor: '#84B8F4',
-      maxColor: '#174B88'
-  },
+   
     series: [{
       // Use the gb-all map with no data as a basemap
-      name: 'Basemap',
+      // type:'mapbubble',
+      // name: 'Basemap',
       data: data,
-      borderColor: '#A0A0A0',
+      borderColor: 'rgba(200, 200, 200, 0.3)',
+      borderWidth:0,
+      // lineWidth: 0,
       nullColor: 'rgba(200, 200, 200, 0.3)',
       showInLegend: false,
       joinBy: 'hc-key',
