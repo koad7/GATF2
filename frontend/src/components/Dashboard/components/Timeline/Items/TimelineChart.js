@@ -7,12 +7,10 @@ import HighchartMore from "highcharts/highcharts-more";
 var dateFormat = Highcharts.dateFormat,
   defined = Highcharts.defined;
 // Date 
-var today = new Date(),
-  day = 1000 * 60 * 60 * 24,
+var today = new Date();
+  // day = 1000 * 60 * 60 * 24,
   // Utility functions
-  dateFormat = Highcharts.dateFormat,
-  defined = Highcharts.defined,
-  isObject = Highcharts.isObject;
+  // isObject = Highcharts.isObject;
 
 // Set to 00:00:00:000 today
 today.setUTCHours(0);

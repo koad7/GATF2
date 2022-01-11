@@ -35,7 +35,7 @@ function App(props){
                <Switch>
                    {/* Routing according to the path entered */}
                    <Route exact path='/' component={HomePage} />
-                   <Route exact path='/register' component={Register} />
+                   {/* <Route exact path='/register' component={Register} /> */}
                    <Route exact path='/login' component={Login} />
                    <Route exact path='/dashboard' component={Dashboard} />
                </Switch>

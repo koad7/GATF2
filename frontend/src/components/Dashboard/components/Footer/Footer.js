@@ -5,10 +5,10 @@ import Container from '@material-ui/core/Container';
 
 export default function Footer() {
     return (
-        <AppBar position="static" color="grey">
+        <AppBar position="static" color="inherit">
           <Container maxWidth="lg">
             <Toolbar>
-              <Typography variant="body1" color="black">
+              <Typography variant="body1" color="inherit">
                 <small>© {new Date().getFullYear()} Global Alliance For Trade Facilitation </small>
               </Typography>
             </Toolbar>

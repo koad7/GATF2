@@ -7,7 +7,6 @@ import TimelineChart from "./Items/TimelineChart"
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import Grid from '@material-ui/core/Grid';
 import useFilteredData from '../../../../filter/useFilteredData';
 
@@ -20,11 +19,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
-// Functions
-function  filterByValue (array, string) {
-  return array.filter(o =>
-      Object.keys(o).some(k => String(o[k]).toLowerCase().includes(string.toLowerCase())));
-}
 
 
 
@@ -39,11 +33,10 @@ export default function TimelinePage(props){
     statusSelect,
     handleFilterSelected
   } = useFilteredData(props);
-  
-  let chartData = filteredData.data.filter(l => Object.entries(filteredData.filterObj) .every(([k, v]) => !v.length || l[k] === v))
 
+  let chartData = filteredData.data.filter(l =>Object.entries(filteredData.filterObj).every(([k, v]) => !v.length || l[k] === v));
   const classes = useStyles();
-
+  
   return (
     <div className={classes.root}>
       

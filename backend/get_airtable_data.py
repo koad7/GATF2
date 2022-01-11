@@ -346,10 +346,9 @@ def airtable_func():
         'Project Budget', 'In-kind Estimation'
     ]].merge(information_df_f.groupby(['hc-key'])['Project'].count(),
              left_on='hc-key',
-             right_on='hc-key').reset_index().rename(columns={'Project Budget':'value'}).to_dict(orient="records")
-    print(
-        "------------------------------------------------------------------------------------------------"
-    )
+             right_on='hc-key').reset_index().rename(columns={
+                 'Project Budget': 'value'
+             }).to_dict(orient="records")
 
     OBJ_DICT = {
         "Details": Details,
@@ -364,5 +363,4 @@ def airtable_func():
     finalJson = []
     for key in fJson_:
         finalJson.append(fJson_[key][0])
-    print(finalJson)
     return {'data': finalJson, 'mapdata': MapData}

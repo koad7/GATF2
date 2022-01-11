@@ -1,58 +1,42 @@
 import React from 'react';
 import Highcharts from "highcharts";
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-
+import { renderToStaticMarkup } from 'react-dom/server';
 import HighchartsReact from "highcharts-react-official";
 import highchartsMap from "highcharts/modules/map";
 import proj4 from "proj4";
-
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     maxWidth: 345,
+//   },
+//   media: {
+//     height: 0,
+//     paddingTop: '56.25%', // 16:9
+//   },
+//   expand: {
+//     transform: 'rotate(0deg)',
+//     marginLeft: 'auto',
+//     transition: theme.transitions.create('transform', {
+//       duration: theme.transitions.duration.shortest,
+//     }),
+//   },
+//   expandOpen: {
+//     transform: 'rotate(180deg)',
+//   },
+//   avatar: {
+//     backgroundColor: red[500],
+//   },
+// }));
 
 function MapTooltipCard(props) {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(true);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // const classes = useStyles();
+  // const [expanded, setExpanded] = React.useState(true);
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
 
   return (
     <>
@@ -72,7 +56,6 @@ function MapTooltipCard(props) {
 }
 
 
-
 highchartsMap(Highcharts);
 
 const mapDataIE = require('@highcharts/map-collection/custom/world.geo.json');
@@ -86,7 +69,7 @@ function createOption(data){
   const mapOptions = {
     chart: {
         map: mapDataIE,
-        borderWidth: 0
+        borderWidth: 0 
     },
     title: {
       text: ''
@@ -127,24 +110,21 @@ function createOption(data){
         }
       }
     },
-
-    tooltip: {
-      stickOnContact: true,
-      stickyTracking:false,
-
-
-      useHTML: true,
-        positioner: function () {
-          return { x: 0, y: 0 };
-      },
-      formatter: function(){
-        return  renderToStaticMarkup(<MapTooltipCard name={this.point.name} budget={this.point.options['value']} project={this.point.options['Project']} inkind={this.point.options['In-kind Estimation']}/>)
-      },
+    // tooltip: {
+    //   stickOnContact: true,
+    //   stickyTracking:false,
+    //   useHTML: true,
+    //     positioner: function () {
+    //       return { x: 0, y: 0 };
+    //   },
+    //   formatter: function(){
+    //     return  renderToStaticMarkup(<MapTooltipCard name={this.point.name} budget={this.point.options['value']} project={this.point.options['Project']} inkind={this.point.options['In-kind Estimation']}/>)
+    //   },
      
-      style: {
-        width: "500px",
-      },
-    },
+    //   style: {
+    //     width: "500px",
+    //   },
+    // },
     plotOptions: {
       series: {
         point: {
@@ -163,27 +143,54 @@ function createOption(data){
               // modal.style.display = "block";
               // modal.style.opacity = 1;
               // updatecountrycard(this.region, this.name, this.code3);
-              return this.y +
-          '<br/>Some text.<br/><a href="http://www.highcharts.com"/>Click here to read more</a>'
+              return ''
             },
           },
         },
       },
+      mapbubble: {
+        color: 'yellow',
+        joinBy: ['hc-key'],
+
+      }
     },
    
     series: [{
-      // Use the gb-all map with no data as a basemap
-      // type:'mapbubble',
-      // name: 'Basemap',
+      name: 'Countries',
+      color: '#E0E0E0',
+      enableMouseTracking: false
+  },{
+    // type: 'mapbubble',
+      // borderWidth:0,
+      // borderColor: '#848484',
+      // nullColor: '#848484',
+      joinBy: ['hc-key'],
       data: data,
-      borderColor: 'rgba(200, 200, 200, 0.3)',
-      borderWidth:0,
-      // lineWidth: 0,
-      nullColor: 'rgba(200, 200, 200, 0.3)',
-      showInLegend: false,
-      joinBy: 'hc-key',
+      minSize: 9,
+      maxSize: 9,
+      cursor: 'pointer' ,
+      tooltip: {
+                pointFormat: 'yep {point.In-kind Estimation}: {point.Project} '
+            }
     }]
   }
+//   {
+//     name: 'Countries',
+//     color: 'red',
+//     enableMouseTracking: false
+// }, {
+//     allowPointSelect: true,
+//     cursor: 'pointer',
+//     type: 'mapbubble',
+//     name: 'Population 2010',
+//     joinBy: ['iso-a2', 'code'],
+//     data: data,
+//     minSize: 4,
+//     maxSize: '12%',
+//     tooltip: {
+//         pointFormat: '{point.code}: {point.z} thousands'
+//     }
+// }
   return mapOptions
 }
 export default  function Map(props) {

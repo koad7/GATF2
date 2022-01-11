@@ -24,13 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    'dsa-gatf.herokuapp.com', '127.0.0.1', 'localhost', '0.0.0.0',
-    'www.alliance-project-dashboards.weforum.org',
-    'alliance-project-dashboards.weforum.org/'
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -57,6 +53,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# Force Heroku to use SSL/TLS
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 
 ROOT_URLCONF = 'core.urls'
 

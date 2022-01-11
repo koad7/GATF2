@@ -183,13 +183,13 @@ const {projectData, mapData} = useFetchApi()
 	
 	)
 
-	async function logout() {
-		await firebase.logout()
-		//use for routing
-		props.history.push('/')
-		//
-		//
-	}
+	// async function logout() {
+	// 	await firebase.logout()
+	// 	//use for routing
+	// 	props.history.push('/')
+	// 	//
+	// 	//
+	// }
 }
 
 export default withRouter((Dashboard))
