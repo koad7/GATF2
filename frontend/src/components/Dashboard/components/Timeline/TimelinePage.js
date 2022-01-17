@@ -132,7 +132,7 @@ export default function TimelinePage(props){
         
         </Grid>
       </Grid>
-      {/* <TimelineChart seriesData={chartData} /> */}
+      <TimelineChart seriesData={chartData} />
     </div>
   );
 };
