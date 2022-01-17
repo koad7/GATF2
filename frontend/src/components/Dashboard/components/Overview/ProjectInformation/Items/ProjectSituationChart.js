@@ -74,7 +74,7 @@ export default function ProjectSituationChart({props, quarter}){
     },
     {
       id: "OPPAP",
-      label: "Project Progress According to Alan"
+      label: "Project Progress According to Plan"
     },
     {
       id: "CIA",

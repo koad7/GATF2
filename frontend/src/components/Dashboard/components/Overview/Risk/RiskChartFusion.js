@@ -72,6 +72,7 @@ export default function RiskChartFusion ({props,quarter}) {
   let initial = filterByValue(props, "Initial Risk")
   let selected = filterByValue(props, localquarter);
 
+  console.log(selected);////----------------------------------------
 
  try {
    dataSource = {
@@ -97,8 +98,8 @@ export default function RiskChartFusion ({props,quarter}) {
           {
             rowid: "CP",
             columnid: "CURRENT",
-            displayvalue: colorCode[selected[0]['Country political']].minvalue,
-            colorrangelabel: colorCode[selected[0]['Country political']].label
+            displayvalue: colorCode[selected[1]['Country political']].minvalue,
+            colorrangelabel: colorCode[selected[1]['Country political']].label
           },
           {
             rowid: "PT",
@@ -109,8 +110,8 @@ export default function RiskChartFusion ({props,quarter}) {
           {
             rowid: "PT",
             columnid: "CURRENT",
-            displayvalue: colorCode[selected[0]['Project technical']].minvalue,
-            colorrangelabel: colorCode[selected[0]['Project technical']].label
+            displayvalue: colorCode[selected[1]['Project technical']].minvalue,
+            colorrangelabel: colorCode[selected[1]['Project technical']].label
           },
           {
             rowid: "PSS",
@@ -121,8 +122,8 @@ export default function RiskChartFusion ({props,quarter}) {
           {
             rowid: "PSS",
             columnid: "CURRENT",
-            displayvalue: colorCode[selected[0]['Private sector support']].minvalue,
-            colorrangelabel: colorCode[selected[0]['Private sector support']].label
+            displayvalue: colorCode[selected[1]['Private sector support']].minvalue,
+            colorrangelabel: colorCode[selected[1]['Private sector support']].label
           },
           {
             rowid: "GC",
@@ -133,8 +134,8 @@ export default function RiskChartFusion ({props,quarter}) {
           {
             rowid: "GC",
             columnid: "CURRENT",
-            displayvalue: colorCode[selected[0]['Government commitment']].minvalue,
-            colorrangelabel: colorCode[selected[0]['Government commitment']].label
+            displayvalue: colorCode[selected[1]['Government commitment']].minvalue,
+            colorrangelabel: colorCode[selected[1]['Government commitment']].label
           },
           {
             rowid: "PB",
@@ -145,8 +146,8 @@ export default function RiskChartFusion ({props,quarter}) {
           {
             rowid: "PB",
             columnid: "CURRENT",
-            displayvalue: colorCode[selected[0]['Project budget']].minvalue,
-            colorrangelabel: colorCode[selected[0]['Project budget']].label
+            displayvalue: colorCode[selected[1]['Project budget']].minvalue,
+            colorrangelabel: colorCode[selected[1]['Project budget']].label
           },
           {
             rowid: "PTL",
@@ -157,8 +158,8 @@ export default function RiskChartFusion ({props,quarter}) {
           {
             rowid: "PTL",
             columnid: "CURRENT",
-            displayvalue: colorCode[selected[0]['Project timelines']].minvalue,
-            colorrangelabel: colorCode[selected[0]['Project timelines']].label
+            displayvalue: colorCode[selected[1]['Project timelines']].minvalue,
+            colorrangelabel: colorCode[selected[1]['Project timelines']].label
           }
         ]
       }

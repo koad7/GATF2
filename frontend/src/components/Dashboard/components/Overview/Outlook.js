@@ -6,7 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -55,18 +55,31 @@ export default function Outlook({props,quarters}) {
     nextstep=null;
   
   } 
-  
+  //nextstep ordering
+  nextstep.sort(function(a, b) {
+      return  new Date(b.Deadline) - new Date(a.Deadline);
+  });
   return (
     <div className={classes.root}>
       <Grid item lg={12} className={classes.overlookText}>
-        {outlookText ?  <><b>OVERALL OUTLOOK:</b> <br/>  {outlookText}</> : '' }
+        <Typography
+          variant="body2"
+          style={{whiteSpace: 'pre-line'}}
+        >{outlookText ?  <><b>OVERALL OUTLOOK:</b> <br/>  
+          {outlookText}</> : '' }
+        </Typography>
         <br/>
+        <Typography
+          variant="body2"
+          style={{whiteSpace: 'pre-line'}}
+        >
+            {toBeMonitored ?  <><b>TO BE MONITORED:</b> <br/> {toBeMonitored}</> : '' }
+        </Typography>
         <br/>
-          {toBeMonitored ?  <><b>TO BE MONITORED:</b> <br/> {toBeMonitored}</> : '' }
-        <br/>
-        <br/>
-        {lastMonthprogress ?  <><b>LAST MONTH PROJECT PROGRESS AND ACTIVITIES:</b> <br/> {lastMonthprogress}</> : '' }
-        <br/>
+        <Typography
+          variant="body2"
+          style={{whiteSpace: 'pre-line'}}
+        >{lastMonthprogress ?  <><b>LAST MONTH PROJECT PROGRESS AND ACTIVITIES:</b> <br/> {lastMonthprogress}</> : '' }</Typography>
         <br/>
         {nextstep ?
           <>

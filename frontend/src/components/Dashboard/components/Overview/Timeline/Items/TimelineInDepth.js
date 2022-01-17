@@ -21,9 +21,7 @@ const useStyles = makeStyles({
 });
 
 // Row coloring
-let rowColor={1: 'rgb(201,	216,	208)	', 2:'rgb(241,247,237	)', 3:'rgb(248,229,204	)', 4:'rgb(196,196,194	)',5:'rgb(238,244,250	)', 6:'rgb(202,214,238	)',7:'violet'}
-
-
+let rowColor={'Completed':'#8bc34a','Dates pending':'#c2c1c1de','In progress':'#ffffff' }
 
 export default function TimelineInDepth(props) {
   
@@ -61,7 +59,7 @@ let arrFiltered = props.data.sort(function(a, b) {
           </TableHead>
           <TableBody>
             {arrFiltered.map((row) => (
-              <TableRow  style={{ backgroundColor: rowColor[row["Phase"]]}}  key={row["Milestone number"]}>
+              <TableRow  style={{ backgroundColor: rowColor[row["Status"]]}}  key={row["Milestone number"]}>
                 <TableCell align="left"><b>{`${row["Phase"]}`}</b></TableCell>
                 <TableCell component="th" scope="row">
                 <small>{`${row["Phase name"]}`}</small>

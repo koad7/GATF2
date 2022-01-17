@@ -122,6 +122,11 @@ def airtable_func():
                               0: 'Country',
                               1: 'Region'
                           })
+    information_df_f[['Overall Outlook']] = information_df_f[[
+        'Overall Outlook'
+    ]].replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"],
+               value=["\n", "\n"],
+               regex=True)
     information_df_f = information_df_f.drop(columns=['Country-Region'])
     information_df_f["id"] = information_df_f.index  # Create a numerical id
 
