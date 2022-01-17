@@ -36,7 +36,7 @@ export default function TimelinePage(props){
 
   let chartData = filteredData.data.filter(l =>Object.entries(filteredData.filterObj).every(([k, v]) => !v.length || l[k] === v));
   const classes = useStyles();
-  
+  console.log(chartData)
   return (
     <div className={classes.root}>
       
@@ -132,7 +132,7 @@ export default function TimelinePage(props){
         
         </Grid>
       </Grid>
-      <TimelineChart seriesData={chartData} />
+      {/* <TimelineChart seriesData={chartData} /> */}
     </div>
   );
 };
