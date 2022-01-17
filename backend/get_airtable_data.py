@@ -82,6 +82,24 @@ def airtable_func():
     risks_df = table_dict['Risks'].fillna('')
     timeline_df = table_dict['Timeline'].fillna('')
     milestones_df = table_dict['Milestones'].fillna('')
+
+    information_df[['fields.Project'
+                    ]] = information_df[['fields.Project'
+                                         ]].apply(lambda x: x.str.strip())
+    details_df[['fields.Project'
+                ]] = details_df[['fields.Project'
+                                 ]].apply(lambda x: x.str.strip())
+    nextsteps_df[['fields.Project'
+                  ]] = nextsteps_df[['fields.Project'
+                                     ]].apply(lambda x: x.str.strip())
+    finance_df[['fields.Project'
+                ]] = finance_df[['fields.Project'
+                                 ]].apply(lambda x: x.str.strip())
+    risks_df[['fields.Project']] = risks_df[['fields.Project'
+                                             ]].apply(lambda x: x.str.strip())
+    timeline_df[['fields.Project'
+                 ]] = timeline_df[['fields.Project'
+                                   ]].apply(lambda x: x.str.strip())
     # Insert column if doest exist, Avoid not having column in dataset
     details_cols = [
         'fields.Overall Project Relevance', 'fields.Quarter',

@@ -80,8 +80,6 @@ export default function Timelines({props,quarter}) {
 if(props.filterObj.Project){
   try{
     filteredproject = initialData.filter(item=> item.Project === props.filterObj.Project);
-    console.log("filteredproject 1");
-  console.log(filteredproject);
     localMilestone = filteredproject[0].Milestones;
   }catch(error){
     localMilestone = props.data[0].Milestones

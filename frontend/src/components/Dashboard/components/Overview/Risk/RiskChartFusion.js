@@ -72,7 +72,6 @@ export default function RiskChartFusion ({props,quarter}) {
   let initial = filterByValue(props, "Initial Risk")
   let selected = filterByValue(props, localquarter);
 
-  console.log(selected);////----------------------------------------
 
  try {
    dataSource = {
