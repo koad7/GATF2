@@ -13,7 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import Oultlook from './Oultlook'
+import Outlook from './Outlook';
 
 // DataFilterContext
 
@@ -56,27 +56,28 @@ export default function OverviewTable(props) {
   // Get selected Project: currentProject
   let currentProject = filterByValue (filteredData.data, filteredData.filterObj.Project)
   // Get quarters in selected project
-  const quaterSet = new Set();
-  let quaterArray=[]
+  const quarterSet = new Set();
+  let quarterArray=[]
   currentProject.forEach(function(value, index, array) {
     for (const item of value.Finance) {
-      quaterSet.add(item.Quarter);
+      quarterSet.add(item.Quarter);
     }
     for (const item of value.Risks) {
-      quaterSet.add(item.Quarter);
+      quarterSet.add(item.Quarter);
     }
     for (const item of value.Milestones) {
-      quaterSet.add(item.Quarter);
+      quarterSet.add(item.Quarter);
     }
     for (const item of value.NextSteps) {
-      quaterSet.add(item.Quarter);
+      quarterSet.add(item.Quarter);
     }
   }); 
-  let currentQuarters = [...quaterSet]; // qurter dorpdown values
+
+  let currentQuarters = [...quarterSet]; // quarter dropdown values
   if(filteredData.filterObj.Quarter){
-    quaterArray=[filteredData.filterObj.Quarter]
+    quarterArray=[filteredData.filterObj.Quarter]
   }else{
-    quaterArray=currentQuarters
+    quarterArray=currentQuarters
   }
   let portfolioTotal, inkindEstimation;
   let textcolor='darkgrey'
@@ -88,7 +89,8 @@ export default function OverviewTable(props) {
       }, 0);
       inkindEstimation= filteredData.data[0]['In-kind Estimation']
     }
-    
+    console.log(currentProject[0].Project); ///------------------------------
+    console.log(props.seriesData.Project);
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
@@ -98,7 +100,7 @@ export default function OverviewTable(props) {
               <InputLabel htmlFor="project-name">Project Name</InputLabel>
               <Select
                 native
-                value={props.seriesData.Project}
+                value={props.seriesData.Project ? props.seriesData.Project :currentProject[0].Project}
                 onChange={handleFilterSelected}
                 inputProps={{
                   name: 'Project',
@@ -128,7 +130,7 @@ export default function OverviewTable(props) {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
             <Grid item xs={12}> 
             {
               filteredData.filterObj.Project 
@@ -142,19 +144,19 @@ export default function OverviewTable(props) {
               </Typography>
             }
             </Grid>
-        </Grid>
+        </Grid> */}
       {props.seriesData ? <>
         <Grid container spacing={3}>
             <Grid item xs={12}>  
             <Typography style={{ color: textcolor }} variant="h5">OUTLOOK</Typography>        
               <Paper className={classes.paper}>
-                <Oultlook key={12}  props={currentProject} quarters={quaterArray} />
+                <Outlook key={12}  props={currentProject} quarters={quarterArray} />
               </Paper>
             </Grid>
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <ProjectInformation props={currentProject} quarters={quaterArray}/> 
+            <ProjectInformation props={currentProject} quarters={quarterArray}/> 
           </Grid>
         </Grid>
         <Grid container spacing={3} style={{backgroundColor: 'white'}} >
