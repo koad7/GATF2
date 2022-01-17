@@ -8,10 +8,16 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-    align: 'left'
+  root: {
+    width: '100%',
   },
+  container: {
+    maxHeight: 440,
+  },
+  tableCell:{
+    backgroundColor: 'rgb(137,137,135)',
+    color:'white'
+  }
 });
 
 // Row coloring
@@ -37,42 +43,44 @@ let arrFiltered = props.data.sort(function(a, b) {
 
   const classes = useStyles();
   return (
-    <TableContainer component={Paper}>
-      <Table  className={classes.table} size="small" >
-        <TableHead >
-          <TableRow  style={{ backgroundColor: 'rgb(137,137,135	)', color:'white'}}>
-            <TableCell style={{ color:'white'}} align="left">Phase </TableCell>
-            <TableCell></TableCell>
-            <TableCell style={{ color:'white'}} align="left">Milestone </TableCell>
-            <TableCell style={{ color:'white'}} align="left"></TableCell>
-            <TableCell style={{ color:'white'}} align="left">Planned Date</TableCell>
-            <TableCell style={{ color:'white'}} align="left">Revised Date</TableCell>
-            <TableCell style={{ color:'white'}} align="left">Reason for Revision</TableCell>
-            <TableCell style={{ color:'white'}} align="left">Specific Actions</TableCell>
-            <TableCell style={{ color:'white'}} align="left">Status</TableCell>
-            <TableCell style={{ color:'white'}} align="left">Quarter</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {arrFiltered.map((row) => (
-            <TableRow  style={{ backgroundColor: rowColor[row["Phase"]]}}  key={row["Milestone number"]}>
-              <TableCell align="left"><b>{`${row["Phase"]}`}</b></TableCell>
-              <TableCell component="th" scope="row">
-              <small>{`${row["Phase name"]}`}</small>
-              </TableCell>
-              <TableCell align="left"><b>{`${row["Milestone number"]}`}</b></TableCell>
-              <TableCell align="left"><small>{`${row["name"]}`}</small></TableCell>
-              <TableCell align="left"><small>{row['planned_date']}</small></TableCell>
-              <TableCell align="left"><small>{row['Revised date']  }</small></TableCell>
-              <TableCell align="left"><small>{row['Reason for revision']}</small></TableCell>
-              <TableCell align="left"><small>{row['Specific Actions']}</small></TableCell>
-              <TableCell align="left"><small>{row['Status']}</small></TableCell>
-              <TableCell align="left"><small>{row['Quarter']}</small></TableCell>
-              
+      <TableContainer  className={classes.container}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead >
+            <TableRow style={{ backgroundColor: 'rgb(137,137,135)', color:'white'}}>
+              <TableCell className={classes.tableCell} align="left">Phase </TableCell>
+              <TableCell className={classes.tableCell}></TableCell>
+              <TableCell className={classes.tableCell} align="left">Milestone </TableCell>
+              <TableCell className={classes.tableCell} align="left"></TableCell>
+              <TableCell className={classes.tableCell} align="left">Planned Date</TableCell>
+              <TableCell className={classes.tableCell} align="left">Revised Date</TableCell>
+              <TableCell className={classes.tableCell} align="left">Reason for Revision</TableCell>
+              <TableCell className={classes.tableCell} align="left">Specific Actions</TableCell>
+              <TableCell className={classes.tableCell} align="left">Status</TableCell>
+              <TableCell className={classes.tableCell} align="left">Quarter</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {arrFiltered.map((row) => (
+              <TableRow  style={{ backgroundColor: rowColor[row["Phase"]]}}  key={row["Milestone number"]}>
+                <TableCell align="left"><b>{`${row["Phase"]}`}</b></TableCell>
+                <TableCell component="th" scope="row">
+                <small>{`${row["Phase name"]}`}</small>
+                </TableCell>
+                <TableCell align="left"><b>{`${row["Milestone number"]}`}</b></TableCell>
+                <TableCell align="left"><small>{`${row["name"]}`}</small></TableCell>
+                <TableCell align="left"><small>{row['planned_date']}</small></TableCell>
+                <TableCell align="left"><small>{row['Revised date']  }</small></TableCell>
+                <TableCell align="left"><small>{row['Reason for revision']}</small></TableCell>
+                <TableCell align="left"><small>{row['Specific Actions']}</small></TableCell>
+                <TableCell align="left"><small>{row['Status']}</small></TableCell>
+                <TableCell align="left"><small>{row['Quarter']}</small></TableCell>
+                
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    
   );
 }
+           

@@ -14,7 +14,6 @@ import Box from '@material-ui/core/Box';
 const useStyles = makeStyles((theme) => ({
   
   heading: {
-    
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
@@ -104,7 +103,6 @@ if(props.filterObj.Project){
     <div className={classes.root}>
         <AppBar position="sticky" color="secondary"> 
             <Tabs value={value} style={{ background: '#0064a8' }} onChange={handleChange} aria-label="simple tabs example">
-                
                 <Tab label="Timeline Table" {...a11yProps(1)} />
                 <Tab label="Timeline Chart" {...a11yProps(0)} />
             </Tabs>

@@ -89,8 +89,7 @@ export default function OverviewTable(props) {
       }, 0);
       inkindEstimation= filteredData.data[0]['In-kind Estimation']
     }
-    console.log(currentProject[0].Project); ///------------------------------
-    console.log(props.seriesData.Project);
+   
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
