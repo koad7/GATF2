@@ -1,0 +1,20 @@
+{
+    "name": "GATF",
+    "version": "1.0.1",
+    "description": "GATF",
+    "main": "index.js",
+    "repository": "git@github.com:koad7/GATF2.git",
+    "author": "K. Adanledji",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "heroku-prebuild": "NODE_ENV=production cd frontend/ && yarn install && yarn build && cd .."
+    },
+    "cacheDirectories": [
+        "frontend/node_modules"
+    ],
+    "engines": {
+        "node": "10.20.1",
+        "npm": "6.14.5"
+    }
+}
