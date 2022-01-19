@@ -8,10 +8,6 @@ var dateFormat = Highcharts.dateFormat,
   defined = Highcharts.defined;
 // Date 
 var today = new Date();
-  // day = 1000 * 60 * 60 * 24,
-  // Utility functions
-  // isObject = Highcharts.isObject;
-
 // Set to 00:00:00:000 today
 today.setUTCHours(0);
 today.setUTCMinutes(0);
@@ -22,77 +18,67 @@ today = today.getTime();
 HighchartMore(Highcharts);
 
 var customPointFormatter = function () {
-var point = this,
-            format = '%e. %b',
-            options = point.options,lines;
+  var point = this,
+              format = '%e. %b',
+              options = point.options,lines;
 
-        lines = [{
-            value: point.name,
-            style: 'font-weight: bold;'
-        }, {
-            title: 'Start',
-            value: dateFormat(format, point.start)
-        }, {
-            visible: !options.milestone,
-            title: 'End',
-            value: dateFormat(format, point.end)
-        }, {
-            title: options.implementer ? 'Implementer' :'',
-            value: options.implementer || ''
-        }, {
-            title: options['Reason for Revision'] ? 'Reason for Revision' : '',
-            value: options['Reason for Revision'] || ''
-        }, {
-            title: options['Specific Actions'] ? 'Specific Actions' : '',
-            value: options['Specific Actions'] || ''
-        }];
+          lines = [{
+              value: point.name,
+              style: 'font-weight: bold;'
+          }, {
+              title: 'Start',
+              value: dateFormat(format, point.start)
+          }, {
+              visible: !options.milestone,
+              title: 'End',
+              value: dateFormat(format, point.end)
+          }, {
+              title: options.implementer ? 'Implementer' :'',
+              value: options.implementer || ''
+          }, {
+              title: options['Reason for Revision'] ? 'Reason for Revision' : '',
+              value: options['Reason for Revision'] || ''
+          }, {
+              title: options['Specific Actions'] ? 'Specific Actions' : '',
+              value: options['Specific Actions'] || ''
+          }];
 
-        return lines.reduce(function (str, line) {
-            var s = '',
-                style = (
-                    defined(line.style) ? line.style : 'font-size: 0.8em;'
-                );
-            if (line.visible !== false) {
-                s = (
-                    '<span style="' + style + '">' +
-                    (defined(line.title) ? line.title + ': ' : '') +
-                    (defined(line.value) ? line.value : '') +
-                    '</span><br/>'
-                );
-            }
-            return str + s;
-        }, '');
-    }
+          return lines.reduce(function (str, line) {
+              var s = '',
+                  style = (
+                      defined(line.style) ? line.style : 'font-size: 0.8em;'
+                  );
+              if (line.visible !== false) {
+                  s = (
+                      '<span style="' + style + '">' +
+                      (defined(line.title) ? line.title + ': ' : '') +
+                      (defined(line.value) ? line.value : '') +
+                      '</span><br/>'
+                  );
+              }
+              return str + s;
+          }, '');
+}
     
 const generateOptions = (data) =>{
  return {
     chart: {
         backgroundColor: "transparent",
-        // height: 10*data.length +'%'
     },
     credits: {
-      enabled: false
-  },
-  navigator: {
-    enabled: false,
-    liveRedraw: true,
-    series: {
-      type: 'gantt',
-      pointPlacement: .005,
-      pointPadding: .003
+        enabled: false
     },
-    yAxis: {
-      min: 1,
-      max: 25,
-      reversed: false,
-      categories: []
-    }
+    
+  navigator: {
+    enabled: true,
+    adaptToUpdatedData:false,
+    height: 20
   },
   scrollbar: {
     enabled: true
   },
   rangeSelector: {
-    enabled: true,
+    enabled: false,
     selected: 0
   },
     plotOptions: {
