@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 
 import HomePage from '../HomePage';
 import Dashboard from '../Dashboard';
-import Register from '../Register';
+// import Register from '../Register';
 import Login from '../Login';
 import LinearBuffer from '../LinearBuffer';
 import firebase from '../firebase'

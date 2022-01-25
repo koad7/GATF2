@@ -1,4 +1,10 @@
 {
   "python.formatting.provider": "yapf",
-  "cSpell.words": ["dotenv", "Highcharts", "inplace", "mapbubble"]
+  "cSpell.words": [
+    "Airatable",
+    "dotenv",
+    "Highcharts",
+    "inplace",
+    "mapbubble"
+  ]
 }

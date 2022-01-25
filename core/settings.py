@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from dotenv import load_dotenv
-import mimetypes
 
-mimetypes.add_type("text/javascript", ".js", True)
 
 load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

@@ -68,7 +68,7 @@ const mapDataIE = require('@highcharts/map-collection/custom/world.geo.json');
 
 if (typeof window !== "undefined") {
     window.proj4 = window.proj4 || proj4;
-  }
+}
 
   
 function createOption(data){

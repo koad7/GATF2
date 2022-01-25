@@ -81,7 +81,6 @@ export default function OverviewTable(props) {
   }
   let portfolioTotal, inkindEstimation;
   let textcolor='darkgrey'
-  
     // Calculate Portfolio Total sum and  inkindEstimation
     if (props){
       portfolioTotal = props.seriesData.reduce(function (s, a) {

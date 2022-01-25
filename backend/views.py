@@ -4,7 +4,6 @@ from django.conf import settings
 from django.http import HttpResponse
 import os
 import logging
-import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from backend.get_airtable_data import airtable_func
