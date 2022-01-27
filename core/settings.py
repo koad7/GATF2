@@ -90,7 +90,6 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', )
 }
 
-
 import dj_database_url
 
 db_from_env = dj_database_url.config()
@@ -141,15 +140,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(REACT_APP_DIR, 'build', 'static'), )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# STATICFILES_DIRS = (os.path.join(REACT_APP_DIR, 'build', 'static'), )
-# STATIC_ROOT = 'static/'
 
-CORS_ALLOW_HEADERS = [
-    'accept', 'accept-encoding', 'authorization', 'content-type', 'origin',
-    'user-agent', 'x-csrftoken', 'x-requested-with', 'x-csrf-token'
-]
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-]
+# CORS_ALLOW_HEADERS = [
+#     'accept', 'accept-encoding', 'authorization', 'content-type', 'origin',
+#     'user-agent', 'x-csrftoken', 'x-requested-with', 'x-csrf-token'
+# ]
+# CORS_ALLOW_METHODS = [
+#     'GET',
+#     'POST',
+# ]
 CORS_ORIGIN_ALLOW_ALL = True  # added to solve CORS
