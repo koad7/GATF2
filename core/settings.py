@@ -150,3 +150,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #     'POST',
 # ]
 CORS_ORIGIN_ALLOW_ALL = True  # added to solve CORS
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
