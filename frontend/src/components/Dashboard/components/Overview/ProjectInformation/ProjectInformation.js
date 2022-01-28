@@ -102,7 +102,6 @@ export default function ProjectInformation({props,quarters}) {
   // Get selected Project: currentProject
   let currentProject = props[0]
   // Get quarters in selected project ['Details']
-  
   try{
     // nextstep=filterByValue(props[0].NextSteps, quarters.sort().at(-1))
   }catch(error){ 

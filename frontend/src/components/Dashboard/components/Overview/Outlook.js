@@ -57,7 +57,7 @@ export default function Outlook({props,quarters}) {
   } 
   //nextstep ordering
   nextstep.sort(function(a, b) {
-      return  new Date(b.Deadline) - new Date(a.Deadline);
+    return  new Date(a.Deadline)-new Date(b.Deadline);
   });
   return (
     <div className={classes.root}>
