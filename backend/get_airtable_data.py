@@ -363,14 +363,14 @@ def airtable_func():
             except (KeyError, TypeError) as e:
                 Project_timeline[key] = ''
 
-    information_df_f['hc-key'] = information_df_f.Country.apply(
-        lambda x: countrynames.to_code(x).lower())
-    MapData = information_df_f.groupby(['hc-key']).sum()[[
+    information_df_f['code3'] = information_df_f.Country.apply(
+        lambda x: countrynames.to_code_3(x))
+    MapData = information_df_f.groupby(['code3']).sum()[[
         'Project Budget', 'In-kind Estimation'
-    ]].merge(information_df_f.groupby(['hc-key'])['Project'].count(),
-             left_on='hc-key',
-             right_on='hc-key').reset_index().rename(columns={
-                 'Project Budget': 'value'
+    ]].merge(information_df_f.groupby(['code3'])['Project'].count(),
+             left_on='code3',
+             right_on='code3').reset_index().rename(columns={
+                 'Project Budget': 'z'
              }).to_dict(orient="records")
 
     OBJ_DICT = {
