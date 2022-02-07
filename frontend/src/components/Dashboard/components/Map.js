@@ -135,31 +135,31 @@ function createOption(data){
         width: "500px",
       },
     },
-    plotOptions: {
-      series: {
-        point: {
-          events: {
-            click: function () {
-              // Modal creation
-              // let modal = document.getElementById("map-width-modal");
-              // const close = document.querySelector('[data-dismiss="modal"]');
-              // close.addEventListener(
-              //   "click",
-              //   () => (modal.style.display = "none")
-              // );
-              // let countrydata = CountryTablejson(this.options);
-              // createCountryTable(countrydata); // Build Table
-              // countrychart(countrydata); // Draw map
-              // modal.style.display = "block";
-              // modal.style.opacity = 1;
-              // updatecountrycard(this.region, this.name, this.code3);
-              return this.y +
-          '<br/>Some text.<br/><a href="http://www.highcharts.com"/>Click here to read more</a>'
-            },
-          },
-        },
-      },
-    },
+    // plotOptions: {
+    //   series: {
+    //     point: {
+    //       events: {
+    //         click: function () {
+    //           // Modal creation
+    //           // let modal = document.getElementById("map-width-modal");
+    //           // const close = document.querySelector('[data-dismiss="modal"]');
+    //           // close.addEventListener(
+    //           //   "click",
+    //           //   () => (modal.style.display = "none")
+    //           // );
+    //           // let countrydata = CountryTablejson(this.options);
+    //           // createCountryTable(countrydata); // Build Table
+    //           // countrychart(countrydata); // Draw map
+    //           // modal.style.display = "block";
+    //           // modal.style.opacity = 1;
+    //           // updatecountrycard(this.region, this.name, this.code3);
+    //           return this.y +
+    //       '<br/>Some text.<br/><a href="http://www.highcharts.com"/>Click here to read more</a>'
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
     
   series: [{
     name: 'Countries',
