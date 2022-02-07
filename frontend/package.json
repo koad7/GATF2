@@ -18,7 +18,7 @@
     "fusioncharts": "^3.18.0",
     "highcharts": "^9.0.1",
     "highcharts-react-official": "^3.0.0",
-    "material-ui-icons": "^1.1.0-1",
+    "material-ui-icons": "^1.0.0-beta.36",
     "moment": "^2.29.1",
     "proj4": "^2.7.0",
     "react": "^16.0.0",
