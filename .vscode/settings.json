@@ -5,6 +5,7 @@
     "dotenv",
     "Highcharts",
     "inplace",
-    "mapbubble"
+    "mapbubble",
+    "tobemonitored"
   ]
 }
