@@ -72,7 +72,6 @@ export default function OverviewTable(props) {
       quarterSet.add(item.Quarter);
     }
   }); 
-
   let currentQuarters = [...quarterSet]; // quarter dropdown values
   if(filteredData.filterObj.Quarter){
     quarterArray=[filteredData.filterObj.Quarter]

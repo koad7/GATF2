@@ -17,7 +17,6 @@ const colorCode={
           maxvalue: "1",
           label: "Nil"
         },
-      
     "2":{
           code: "#a2d45e",
           minvalue: "2",
@@ -215,10 +214,7 @@ export default function RiskChartFusion ({props,quarter}) {
   };
 } catch (error) {
   dataSource={}
-  console.log(colorCode[selected[0]['Country political']].minvalue)
-}//selected[0]['Government commitment']
-  
-  
+} 
     return (
       <ReactFC
           type="heatmap"
