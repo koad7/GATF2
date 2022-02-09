@@ -119,7 +119,10 @@ def airtable_func():
         if (len(field.split(".")) == 2):
             information_df.rename(columns={field: field.split(".")[1]},
                                   inplace=True)
-
+    # Keep only the last entry of eac project
+    information_df = information_df.sort_values(
+        ['Project', 'createdTime']).drop_duplicates(subset=['Project'],
+                                                    keep='last')
     # Select field of interest
     information_df_f = information_df[[
         'id', 'Other private sector support', 'Agreement',
@@ -148,25 +151,7 @@ def airtable_func():
     # Final information dict building
     INFORMATION = information_df_f.groupby('Project').apply(
         lambda x: x.to_dict(orient='records')).to_dict()
-    # Project information
-    tobemonitored_df = information_df[[
-        'To be monitored', 'Project', 'Quarter', 'Updated at'
-    ]].sort_values(['Project', 'Updated at']).drop_duplicates(
-        subset=['Project', 'To be monitored'],
-        keep='last')[['To be monitored', 'Project', 'Quarter']]
-    tobemonitored_df.set_index('Project', inplace=True)
-    tobemonitored = tobemonitored_df.groupby('Project').apply(
-        lambda x: x.to_dict(orient='records')).to_dict()
-    progress_activities_df = information_df[[
-        'Last month project progress and activities', 'Project', 'Quarter',
-        'Updated at'
-    ]].sort_values(['Project', 'Quarter', 'Updated at']).drop_duplicates(
-        subset=['Project', 'Quarter'], keep='last')[[
-            'Last month project progress and activities', 'Project', 'Quarter'
-        ]]
-    progress_activities_df.set_index('Project', inplace=True)
-    progress_activities = progress_activities_df.groupby('Project').apply(
-        lambda x: x.to_dict(orient='records')).to_dict()
+
     # Project: Details
     # Field names tidying up
     for field in details_df.columns:
@@ -293,24 +278,22 @@ def airtable_func():
     milestones_df_merge.drop(['id', 'Milestones'],
                              axis='columns',
                              inplace=True)
-    milestones_df_merge.loc[:, 'parent'] = milestones_df_merge[[
+    milestones_df_merge['parent'] = milestones_df_merge[[
         'Project', 'Phase name', 'Phase'
     ]].apply(lambda x: slugify('_'.join(x), separator="_"), axis=1)
     # Take "Planned date" or "Revised date"
-    milestones_df_merge.loc[:, 'planned_date'] = milestones_df_merge[
-        'Planned date']
-    milestones_df_merge.loc[:, 'start'] = pd.to_datetime(
+    milestones_df_merge['planned_date'] = milestones_df_merge['Planned date']
+    milestones_df_merge['start'] = pd.to_datetime(
         np.where(milestones_df_merge["Revised date"] != '',
                  milestones_df_merge["Revised date"],
                  milestones_df_merge["Planned date"]))
     #milestones_df_merge['start'] = pd.to_datetime(milestones_df_merge['start'])
-    milestones_df_merge.loc[:, 'start'] = (
-        milestones_df_merge['start'] -
-        dt.datetime(1970, 1, 1)).dt.total_seconds() * 1e3
+    milestones_df_merge['start'] = (milestones_df_merge['start'] - dt.datetime(
+        1970, 1, 1)).dt.total_seconds() * 1e3
 
-    milestones_df_merge.loc[:,
-                            'milestone'] = True  # Adding new variables for the chart to use
-    milestones_df_merge.loc[:, 'collapsed'] = True
+    milestones_df_merge[
+        'milestone'] = True  # Adding new variables for the chart to use
+    milestones_df_merge['collapsed'] = True
 
     milestones_df_merge = milestones_df_merge.fillna('')
 
@@ -320,7 +303,7 @@ def airtable_func():
                 'Milestone name': 'name',
                 'Specific Actions(if any)': 'Specific Actions'
             })
-    milestones_df_merge_.loc[:, 'name'] = 'Milestone ' + milestones_df_merge_[
+    milestones_df_merge_.name = 'Milestone ' + milestones_df_merge_[
         'Milestone number'].astype(
             str) + ': - ' + milestones_df_merge_.name.astype(str)
     pd.options.display.float_format = '{:.0f}'.format
@@ -380,14 +363,14 @@ def airtable_func():
             except (KeyError, TypeError) as e:
                 Project_timeline[key] = ''
 
-    information_df_f['code3'] = information_df_f.Country.apply(
-        lambda x: countrynames.to_code_3(x))
-    MapData = information_df_f.groupby(['code3']).sum()[[
+    information_df_f['hc-key'] = information_df_f.Country.apply(
+        lambda x: countrynames.to_code(x).lower())
+    MapData = information_df_f.groupby(['hc-key']).sum()[[
         'Project Budget', 'In-kind Estimation'
-    ]].merge(information_df_f.groupby(['code3'])['Project'].count(),
-             left_on='code3',
-             right_on='code3').reset_index().rename(columns={
-                 'Project Budget': 'z'
+    ]].merge(information_df_f.groupby(['hc-key'])['Project'].count(),
+             left_on='hc-key',
+             right_on='hc-key').reset_index().rename(columns={
+                 'Project Budget': 'value'
              }).to_dict(orient="records")
 
     OBJ_DICT = {
@@ -396,14 +379,11 @@ def airtable_func():
         "Finance": Finance,
         "Risks": Risks,
         "data": Project_timeline,
-        "Milestones": Milestones,
-        "tobemonitored": tobemonitored,
-        "progressactivities": progress_activities
+        "Milestones": Milestones
     }
     # Return final data from airtable
     fJson_ = build_final_ouput(OBJ_DICT, INFORMATION)
     finalJson = []
     for key in fJson_:
         finalJson.append(fJson_[key][0])
-    
     return {'data': finalJson, 'mapdata': MapData}
