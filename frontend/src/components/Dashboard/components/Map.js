@@ -74,8 +74,6 @@ if (typeof window !== "undefined") {
 }
 
 export default  function Map(props) {
-
-  
     const mapOptions = {
       chart: {
           map: map,
@@ -90,7 +88,6 @@ export default  function Map(props) {
       legend:{
         enabled: false
       },
-      // borderColor: "#343a40",
       mapNavigation: {
         enabled: true,
         enableDoubleClickZoomTo: true,
@@ -142,7 +139,7 @@ export default  function Map(props) {
       borderWidth:0,
       borderColor: '#a8a8a8',
       // nullColor: '#a8a8a8',
-      enableMouseTracking: false
+      enableMouseTracking: true
   },{
       type: "mapbubble",
       joinBy: ["iso-a3", "code3"],
