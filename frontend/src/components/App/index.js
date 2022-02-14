@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 
 import HomePage from '../HomePage';
 import Dashboard from '../Dashboard';
-import Register from '../Register';
+// import Register from '../Register';
 import Login from '../Login';
 import LinearBuffer from '../LinearBuffer';
 import firebase from '../firebase'
@@ -35,7 +35,7 @@ function App(props){
                <Switch>
                    {/* Routing according to the path entered */}
                    <Route exact path='/' component={HomePage} />
-                   <Route exact path='/register' component={Register} />
+                   {/* <Route exact path='/register' component={Register} /> */}
                    <Route exact path='/login' component={Login} />
                    <Route exact path='/dashboard' component={Dashboard} />
                </Switch>

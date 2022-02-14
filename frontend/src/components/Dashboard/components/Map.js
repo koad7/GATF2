@@ -138,7 +138,7 @@ export default  function Map(props) {
       },
     series: [{
       name: 'Countries',
-      color: '#E0E0E0',
+      color: '#162c40',
       borderWidth:0,
       borderColor: '#a8a8a8',
       // nullColor: '#a8a8a8',

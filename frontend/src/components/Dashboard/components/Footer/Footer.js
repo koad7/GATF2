@@ -2,6 +2,7 @@ import { Typography} from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from "@material-ui/core/Toolbar";
 import Container from '@material-ui/core/Container';
+import React from 'react';
 
 export default function Footer() {
     return (

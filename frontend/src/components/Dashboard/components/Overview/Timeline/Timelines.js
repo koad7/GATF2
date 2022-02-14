@@ -96,7 +96,7 @@ if(props.filterObj.Project){
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+  console.log(filteredproject);
   return (
     <div className={classes.root}>
         <AppBar position="sticky" color="secondary"> 

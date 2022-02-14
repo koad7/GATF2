@@ -331,7 +331,7 @@ def airtable_func():
     # Timleine Project objects
     Project_timeline_ = information_df_f[[
         'Project', 'Implementer'
-    ]].rename(columns={
+    ]].drop_duplicates().rename(columns={
         'Project': 'name',
         'Implementer': 'implementer'
     })
